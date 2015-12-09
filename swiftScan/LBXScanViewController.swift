@@ -54,6 +54,10 @@ class LBXScanViewController: UIViewController,AVCaptureMetadataOutputObjectsDele
 
     }
     
+    override func viewWillDisappear(animated: Bool) {
+        
+        self.session.stopRunning()
+    }
     
     
     func setupCamera(){
@@ -93,19 +97,15 @@ class LBXScanViewController: UIViewController,AVCaptureMetadataOutputObjectsDele
             stringValue = metadataObject.stringValue
         }
         session.stopRunning()
-        print("code is \(stringValue)")
         
-        //        let alertController = UIAlertController(title: "二维码", message: "扫到的二维码内容为:\(stringValue)", preferredStyle: UIAlertControllerStyle.Alert)
-        //        alertController.addAction(UIAlertAction(title: "确认", style: UIAlertActionStyle.Default, handler: nil))
-        //        self.presentViewController(alertController, animated: true, completion: nil)
-        let alertView = UIAlertView()
-        alertView.delegate=self
-        alertView.title = "二维码"
-        alertView.message = "扫到的二维码内容为:\(stringValue)"
-        alertView.addButtonWithTitle("确认")
-        alertView.show()
         
-        performSelector( "restartRun", withObject: nil, afterDelay: 3.0);
+        let alertController = UIAlertController(title: "xxx码", message: stringValue, preferredStyle: UIAlertControllerStyle.Alert)
+        alertController.addAction(UIAlertAction(title: "知道了", style: UIAlertActionStyle.Default, handler: nil))
+        self.presentViewController(alertController, animated: true, completion: nil)
+
+        
+        session.performSelector("startRunning", withObject: nil, afterDelay: 3.0)
+       // performSelector( "restartRun", withObject: nil, afterDelay: 3.0);
     }
 
     func restartRun()
