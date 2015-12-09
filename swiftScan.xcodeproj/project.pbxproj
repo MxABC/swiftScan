@@ -11,16 +11,12 @@
 		48B143C61C18095500B2E7D5 /* LBXScanLineAnimation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48B143C51C18095500B2E7D5 /* LBXScanLineAnimation.swift */; };
 		48B143C81C1809CA00B2E7D5 /* LBXScanNetAnimation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48B143C71C1809CA00B2E7D5 /* LBXScanNetAnimation.swift */; };
 		48B143CA1C1809E700B2E7D5 /* CodeScan.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 48B143C91C1809E700B2E7D5 /* CodeScan.bundle */; };
-		48B1544C1C06E302003503ED /* SecondViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48B1544A1C06E302003503ED /* SecondViewController.swift */; };
-		48B1544D1C06E302003503ED /* SecondViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 48B1544B1C06E302003503ED /* SecondViewController.xib */; };
-		48B3E3471C0D78DE005FF8F8 /* testSwiftContent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48B3E3461C0D78DE005FF8F8 /* testSwiftContent.swift */; };
 		48BE28941C16D16A0051EA4C /* LBXScanViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48BE28931C16D16A0051EA4C /* LBXScanViewController.swift */; };
 		7D42B9B01C05EE9A0084D045 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D42B9AF1C05EE9A0084D045 /* AppDelegate.swift */; };
 		7D42B9B21C05EE9A0084D045 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D42B9B11C05EE9A0084D045 /* ViewController.swift */; };
 		7D42B9B51C05EE9A0084D045 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7D42B9B31C05EE9A0084D045 /* Main.storyboard */; };
 		7D42B9B71C05EE9A0084D045 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7D42B9B61C05EE9A0084D045 /* Assets.xcassets */; };
 		7D42B9BA1C05EE9A0084D045 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7D42B9B81C05EE9A0084D045 /* LaunchScreen.storyboard */; };
-		7D42B9C21C05EFAA0084D045 /* MainController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D42B9C11C05EFAA0084D045 /* MainController.swift */; };
 		7D98F5DD1C170BF000602D59 /* LBXScanView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D98F5DC1C170BF000602D59 /* LBXScanView.swift */; };
 		7D98F5DF1C1710A800602D59 /* LBXScanViewStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D98F5DE1C1710A800602D59 /* LBXScanViewStyle.swift */; };
 /* End PBXBuildFile section */
@@ -30,9 +26,6 @@
 		48B143C51C18095500B2E7D5 /* LBXScanLineAnimation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LBXScanLineAnimation.swift; sourceTree = "<group>"; };
 		48B143C71C1809CA00B2E7D5 /* LBXScanNetAnimation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LBXScanNetAnimation.swift; sourceTree = "<group>"; };
 		48B143C91C1809E700B2E7D5 /* CodeScan.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = CodeScan.bundle; sourceTree = "<group>"; };
-		48B1544A1C06E302003503ED /* SecondViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SecondViewController.swift; sourceTree = "<group>"; };
-		48B1544B1C06E302003503ED /* SecondViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SecondViewController.xib; sourceTree = "<group>"; };
-		48B3E3461C0D78DE005FF8F8 /* testSwiftContent.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = testSwiftContent.swift; sourceTree = "<group>"; };
 		48BE28931C16D16A0051EA4C /* LBXScanViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LBXScanViewController.swift; sourceTree = "<group>"; };
 		7D42B9AC1C05EE9A0084D045 /* swiftScan.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = swiftScan.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7D42B9AF1C05EE9A0084D045 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -41,7 +34,6 @@
 		7D42B9B61C05EE9A0084D045 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		7D42B9B91C05EE9A0084D045 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		7D42B9BB1C05EE9A0084D045 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		7D42B9C11C05EFAA0084D045 /* MainController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainController.swift; sourceTree = "<group>"; };
 		7D46320C1C18683A00D70CF1 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Main.strings"; sourceTree = "<group>"; };
 		7D46320D1C18683A00D70CF1 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/LaunchScreen.strings"; sourceTree = "<group>"; };
 		7D98F5DC1C170BF000602D59 /* LBXScanView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LBXScanView.swift; sourceTree = "<group>"; };
@@ -85,10 +77,6 @@
 				7D42B9B61C05EE9A0084D045 /* Assets.xcassets */,
 				7D42B9B81C05EE9A0084D045 /* LaunchScreen.storyboard */,
 				7D42B9BB1C05EE9A0084D045 /* Info.plist */,
-				7D42B9C11C05EFAA0084D045 /* MainController.swift */,
-				48B1544A1C06E302003503ED /* SecondViewController.swift */,
-				48B1544B1C06E302003503ED /* SecondViewController.xib */,
-				48B3E3461C0D78DE005FF8F8 /* testSwiftContent.swift */,
 				48BE28931C16D16A0051EA4C /* LBXScanViewController.swift */,
 				7D98F5DC1C170BF000602D59 /* LBXScanView.swift */,
 				7D98F5DE1C1710A800602D59 /* LBXScanViewStyle.swift */,
@@ -159,7 +147,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				48B143CA1C1809E700B2E7D5 /* CodeScan.bundle in Resources */,
-				48B1544D1C06E302003503ED /* SecondViewController.xib in Resources */,
 				7D42B9BA1C05EE9A0084D045 /* LaunchScreen.storyboard in Resources */,
 				7D42B9B71C05EE9A0084D045 /* Assets.xcassets in Resources */,
 				7D42B9B51C05EE9A0084D045 /* Main.storyboard in Resources */,
@@ -175,13 +162,10 @@
 			files = (
 				48B143C61C18095500B2E7D5 /* LBXScanLineAnimation.swift in Sources */,
 				7D98F5DF1C1710A800602D59 /* LBXScanViewStyle.swift in Sources */,
-				48B3E3471C0D78DE005FF8F8 /* testSwiftContent.swift in Sources */,
 				7D98F5DD1C170BF000602D59 /* LBXScanView.swift in Sources */,
-				48B1544C1C06E302003503ED /* SecondViewController.swift in Sources */,
 				48B143C41C17C98B00B2E7D5 /* MainTableViewController.swift in Sources */,
 				48BE28941C16D16A0051EA4C /* LBXScanViewController.swift in Sources */,
 				7D42B9B21C05EE9A0084D045 /* ViewController.swift in Sources */,
-				7D42B9C21C05EFAA0084D045 /* MainController.swift in Sources */,
 				48B143C81C1809CA00B2E7D5 /* LBXScanNetAnimation.swift in Sources */,
 				7D42B9B01C05EE9A0084D045 /* AppDelegate.swift in Sources */,
 			);
