@@ -21,6 +21,8 @@ class LBXScanViewController: UIViewController,AVCaptureMetadataOutputObjectsDele
     
     var qRScanView:LBXScanView?
     
+    //启动区域识别功能
+    var isOpenInterestRect = false
 
     
     override func viewDidLoad() {
@@ -85,6 +87,11 @@ class LBXScanViewController: UIViewController,AVCaptureMetadataOutputObjectsDele
         if session.canAddOutput(output) {
             session.addOutput(output)
             output.metadataObjectTypes = [AVMetadataObjectTypeQRCode];
+        }
+        
+        if isOpenInterestRect
+        {            
+            output.rectOfInterest = LBXScanView.getScanRectWithPreView(self.view, style:scanStyle! )
         }
         
         session.startRunning()

@@ -252,6 +252,8 @@ class MainTableViewController: UITableViewController {
         let vc = LBXScanViewController();
         vc.scanStyle = style
         
+        
+        vc.isOpenInterestRect = true
         //TODO:待设置框内识别
         self.navigationController?.pushViewController(vc, animated: true)
         
