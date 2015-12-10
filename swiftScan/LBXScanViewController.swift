@@ -11,7 +11,7 @@ import Foundation
 import AVFoundation
 
 
-class LBXScanViewController: UIViewController {
+class LBXScanViewController: UIViewController,UIImagePickerControllerDelegate,UINavigationControllerDelegate {
     
     var scanObj:LBXScanWrapper?
     
@@ -130,16 +130,7 @@ class LBXScanViewController: UIViewController {
         
         let result:LBXScanResult = arrayResult[0]
         
-        let alertController = UIAlertController(title: result.strBarCodeType, message: result.strScanned, preferredStyle: UIAlertControllerStyle.Alert)
-        
-        let alertAction = UIAlertAction(title:  "知道了", style: UIAlertActionStyle.Default) { (alertAction) -> Void in
-            
-            self.restartScan()
-        }
-        
-        alertController.addAction(alertAction)
-        
-        presentViewController(alertController, animated: true, completion: nil)
+        showMsg(result.strBarCodeType, message: result.strScanned)
     }
     
     override func viewWillDisappear(animated: Bool) {
@@ -149,6 +140,69 @@ class LBXScanViewController: UIViewController {
         qRScanView?.stopScanAnimation()
         
         scanObj?.stop()
+    }
+    
+    func openPhotoAlbum()
+    {
+        let picker = UIImagePickerController()
+        
+        picker.sourceType = UIImagePickerControllerSourceType.PhotoLibrary
+        
+        picker.delegate = self;
+        
+        picker.allowsEditing = true
+        
+        presentViewController(picker, animated: true, completion: nil)
+    }
+    
+    //MARK: -----相册选择图片识别二维码 （条形码没有找到系统方法）
+    func imagePickerController(picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : AnyObject])
+    {
+        picker.dismissViewControllerAnimated(true, completion: nil)
+        
+        var image:UIImage? = info[UIImagePickerControllerEditedImage] as? UIImage
+        
+        if (image == nil )
+        {
+            image = info[UIImagePickerControllerOriginalImage] as? UIImage
+        }
+        
+        if(image == nil)
+        {
+            return
+        }
+        
+        let detector:CIDetector = CIDetector(ofType: CIDetectorTypeQRCode, context: nil, options: [CIDetectorAccuracy:CIDetectorAccuracyHigh])
+        
+        let features:[CIQRCodeFeature]? = detector.featuresInImage(image!.CIImage!, options: [CIDetectorAccuracy:CIDetectorAccuracyHigh]) as? [CIQRCodeFeature]
+        
+        if( features != nil && features?.count > 0)
+        {
+            let feature = features![0]
+            let scanResult = feature.messageString
+            
+            let result = LBXScanResult(str: scanResult, img: image!, barCodeType: AVMetadataObjectTypeQRCode)
+            
+            handleCodeResult([result])
+        }
+        else
+        {
+            showMsg("", message: "识别失败")
+        }
+    }
+    
+    func showMsg(title:String?,message:String?)
+    {
+        let alertController = UIAlertController(title: title, message:message, preferredStyle: UIAlertControllerStyle.Alert)
+        
+        let alertAction = UIAlertAction(title:  "知道了", style: UIAlertActionStyle.Default) { (alertAction) -> Void in
+            
+            self.restartScan()
+        }
+        
+        alertController.addAction(alertAction)
+        
+        presentViewController(alertController, animated: true, completion: nil)
     }
     
 }
