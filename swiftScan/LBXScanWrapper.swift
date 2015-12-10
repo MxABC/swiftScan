@@ -47,7 +47,14 @@ class LBXScanWrapper: NSObject,AVCaptureMetadataOutputObjectsDelegate {
     //存储返回结果
     var arrayResult:[LBXScanResult] = [];
     
+    //扫码结果返回block
+    var successBlock:([LBXScanResult]) -> Void
+    
+    //是否需要拍照
     var isNeedCaptureImage:Bool
+    
+    //当前扫码结果是否处理
+    var isNeedScanResult:Bool = true
     
     /**
      初始化设备
@@ -76,25 +83,9 @@ class LBXScanWrapper: NSObject,AVCaptureMetadataOutputObjectsDelegate {
         
         isNeedCaptureImage = isCaptureImg
         
+        successBlock = success
+        
         super.init()
-        
-        
-        let outputSettings:Dictionary = [AVVideoCodecJPEG:AVVideoCodecKey]
-        stillImageOutput?.outputSettings = outputSettings
-        
-        //参数设置
-        output.setMetadataObjectsDelegate(self, queue: dispatch_get_main_queue())
-        
-        
-        output.metadataObjectTypes = objType
-       
-        if CGRectEqualToRect(cropRect, CGRectZero)
-        {
-            //启动相机后，直接修改该参数无效
-            output.rectOfInterest = cropRect
-        }
-        
-        session.sessionPreset = AVCaptureSessionPresetHigh
         
         if session.canAddInput(input)
         {
@@ -108,6 +99,27 @@ class LBXScanWrapper: NSObject,AVCaptureMetadataOutputObjectsDelegate {
         {
             session.addOutput(stillImageOutput)
         }
+        
+        let outputSettings:Dictionary = [AVVideoCodecJPEG:AVVideoCodecKey]
+        stillImageOutput?.outputSettings = outputSettings
+        
+        
+        session.sessionPreset = AVCaptureSessionPresetHigh
+        
+        //参数设置
+        output.setMetadataObjectsDelegate(self, queue: dispatch_get_main_queue())
+        
+        
+        output.metadataObjectTypes = objType
+        
+        //output.metadataObjectTypes = [AVMetadataObjectTypeQRCode]
+        
+        if !CGRectEqualToRect(cropRect, CGRectZero)
+        {
+            //启动相机后，直接修改该参数无效
+            output.rectOfInterest = cropRect
+        }
+
         
         
         previewLayer = AVCaptureVideoPreviewLayer(session: session)
@@ -142,6 +154,7 @@ class LBXScanWrapper: NSObject,AVCaptureMetadataOutputObjectsDelegate {
     {
         if !session.running
         {
+            isNeedScanResult = true
             session.startRunning()
         }
     }
@@ -149,14 +162,20 @@ class LBXScanWrapper: NSObject,AVCaptureMetadataOutputObjectsDelegate {
     {
         if session.running
         {
+            isNeedScanResult = false
             session.stopRunning()
         }
     }
     
     func captureOutput(captureOutput: AVCaptureOutput!, didOutputMetadataObjects metadataObjects: [AnyObject]!, fromConnection connection: AVCaptureConnection!)
     {
-        stop()
+        if !isNeedScanResult
+        {
+            //上一帧处理中
+            return
+        }
         
+        isNeedScanResult = false
         
         arrayResult.removeAll()
         
@@ -172,16 +191,55 @@ class LBXScanWrapper: NSObject,AVCaptureMetadataOutputObjectsDelegate {
                 let codeContent = (current as! AVMetadataMachineReadableCodeObject).stringValue
                 print("code string:%@",codeContent)
                 
-                arrayResult.append(LBXScanResult(str: codeType, img: UIImage(), barCodeType: codeContent))
-                
+                arrayResult.append(LBXScanResult(str: codeContent, img: UIImage(), barCodeType: codeType))
             }
         }
+        
+        if arrayResult.count > 0
+        {
+            if isNeedCaptureImage
+            {
+                captureImage()
+            }
+            else
+            {
+                stop()
+                successBlock(arrayResult)
+            }
+            
+        }
+        else
+        {
+            isNeedScanResult = true
+        }
+        
     }
     
     
+    //MARK: ----拍照
     func captureImage()
     {
-        //var stillImageConnection:AVCaptureConnection
+        let stillImageConnection:AVCaptureConnection? = connectionWithMediaType(AVMediaTypeVideo, connections: (stillImageOutput?.connections)!)
+        
+        
+        stillImageOutput?.captureStillImageAsynchronouslyFromConnection(stillImageConnection, completionHandler: { (imageDataSampleBuffer, error) -> Void in
+            
+            self.stop()
+            if imageDataSampleBuffer != nil
+            {
+                let imageData:NSData = AVCaptureStillImageOutput.jpegStillImageNSDataRepresentation(imageDataSampleBuffer)
+                let scanImg:UIImage? = UIImage(data: imageData)
+                
+                
+                for idx in 0...self.arrayResult.count
+                {
+                    self.arrayResult[idx].imgScanned = scanImg
+                }
+            }
+            
+            self.successBlock(self.arrayResult)
+            
+        })
     }
     
     func connectionWithMediaType(mediaType:String,connections:[AnyObject]) -> AVCaptureConnection?
@@ -198,26 +256,11 @@ class LBXScanWrapper: NSObject,AVCaptureMetadataOutputObjectsDelegate {
                     {
                         return connectionTmp
                     }
-                    
                 }
             }
         }
         return nil
     }
-  
-    /*
-    + (AVCaptureConnection *)connectionWithMediaType:(NSString *)mediaType fromConnections:(NSArray *)connections
-    {
-    for ( AVCaptureConnection *connection in connections ) {
-    for ( AVCaptureInputPort *port in [connection inputPorts] ) {
-    if ( [[port mediaType] isEqual:mediaType] ) {
-				return connection;
-    }
-    }
-    }
-    return nil;
-    }
-    */
     
     
     //MARK:切换识别区域
@@ -288,7 +331,7 @@ class LBXScanWrapper: NSObject,AVCaptureMetadataOutputObjectsDelegate {
     }
     
     //MARK: ------获取系统默认支持的码的类型
-    func defaultMetaDataObjectTypes() ->[String]
+    static func defaultMetaDataObjectTypes() ->[String]
     {
         var types =
            [AVMetadataObjectTypeQRCode,
@@ -306,7 +349,7 @@ class LBXScanWrapper: NSObject,AVCaptureMetadataOutputObjectsDelegate {
             AVMetadataObjectTypeDataMatrixCode
         ];
         
-        if (floor(NSFoundationVersionNumber) > NSFoundationVersionNumber_iOS_7_1)
+        if (floor(NSFoundationVersionNumber) > NSFoundationVersionNumber_iOS_8_0)
         {
             types.append(AVMetadataObjectTypeInterleaved2of5Code)
             types.append(AVMetadataObjectTypeITF14Code)

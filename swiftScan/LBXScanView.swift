@@ -25,31 +25,15 @@ class LBXScanView: UIView
     //线条在中间位置，不移动
     var scanLineStill:UIImageView?
     
-    /*
+    //启动相机时 菊花等待
+    var activityView:UIActivityIndicatorView?
     
-    //线条扫码动画封装
-    @property (nonatomic,strong)LBXScanLineAnimation *scanLineAnimation;
+    //启动相机中的提示文字
+    var labelReadying:UILabel?
     
-    @property (nonatomic,strong)LBXScanNetAnimation *scanNetAnimation;
-    
-    //线条在中间位置，不移动
-    @property (nonatomic,strong)UIImageView *scanLineStill;
-    
-    /**
-    @brief  启动相机时 菊花等待
-    */
-    @property(nonatomic,strong)UIActivityIndicatorView* activityView;
-    
-    /**
-    @brief  启动相机中的提示文字
-    */
-    @property(nonatomic,strong)UILabel *labelReadying;
-    
-    */
     
     /**
     初始化扫描界面
-    
     - parameter frame:  界面大小，一般为视频显示区域
     - parameter vstyle: 界面效果参数
     
@@ -118,34 +102,15 @@ class LBXScanView: UIView
     */
     func startScanAnimation()
     {
-//        switch (viewStyle.anmiationStyle)
-//        {
-//        case LBXScanViewAnimationStyle.LineMove:
-//            
-//            //线动画
-//            if (!_scanLineAnimation)
-//            self.scanLineAnimation = [[LBXScanLineAnimation alloc]init];
-//            [_scanLineAnimation startAnimatingWithRect:_scanRetangleRect
-//            InView:self
-//            Image:_viewStyle.animationImage];
-//            
-//        case LBXScanViewAnimationStyle.NetGrid:
-//        case LBXScanViewAnimationStyle.LineStill:
-//        case LBXScanViewAnimationStyle.None:
-//            
-//        default:
-//            break
-//            
-//        }
         let cropRect:CGRect = getScanRectForAnimation()
         
         switch viewStyle.anmiationStyle
         {
         case LBXScanViewAnimationStyle.LineMove:
-                        
+            
             print(NSStringFromCGRect(cropRect))
             
-             scanLineAnimation!.startAnimatingWithRect(cropRect, parentView: self, image:viewStyle.animationImage )
+            scanLineAnimation!.startAnimatingWithRect(cropRect, parentView: self, image:viewStyle.animationImage )
             break
         case LBXScanViewAnimationStyle.NetGrid:
             
@@ -160,21 +125,40 @@ class LBXScanView: UIView
             self.scanLineStill?.frame = stillRect
             
             self.addSubview(scanLineStill!)
+            self.scanLineStill?.hidden = false
             
             break
             
         default: break
             
+        }
+    }
+    
+    /**
+     *  开始扫描动画
+     */
+    func stopScanAnimation()
+    {  
+        switch viewStyle.anmiationStyle
+        {
+        case LBXScanViewAnimationStyle.LineMove:
+            
+            scanLineAnimation?.stopStepAnimating()
+            break
+        case LBXScanViewAnimationStyle.NetGrid:
+            
+            scanNetAnimation?.stopStepAnimating()
+            break
+        case LBXScanViewAnimationStyle.LineStill:
+             self.scanLineStill?.hidden = true
+            
+            break
+            
+        default: break
             
         }
-        
-        
-       
-        
-
     }
 
-    
     
     
     // Only override drawRect: if you perform custom drawing.
@@ -412,7 +396,72 @@ class LBXScanView: UIView
         
         return rectOfInterest;
     }
-
-
+    
+    func getRetangeSize()->CGSize
+    {
+        let XRetangleLeft = viewStyle.xScanRetangleOffset;
+        
+        var sizeRetangle = CGSizeMake(self.frame.size.width - XRetangleLeft*2, self.frame.size.width - XRetangleLeft*2);
+        
+        let w = sizeRetangle.width;
+        var h = w / viewStyle.whRatio;
+        
+        
+        let hInt:Int = Int(h)
+        h = CGFloat(hInt)
+        
+        sizeRetangle = CGSizeMake(w, h);
+        
+        return sizeRetangle
+    }
+    
+    func deviceStartReadying(readyStr:String)
+    {
+        let XRetangleLeft = viewStyle.xScanRetangleOffset;
+        
+        let sizeRetangle = getRetangeSize()
+        
+        //扫码区域Y轴最小坐标
+        let YMinRetangle = self.frame.size.height / 2.0 - sizeRetangle.height/2.0 - viewStyle.centerUpOffset;
+        
+        //设备启动状态提示
+        if (activityView == nil)
+        {
+            self.activityView = UIActivityIndicatorView(frame: CGRectMake(0, 0, 30, 30))
+            
+            activityView?.center = CGPointMake(XRetangleLeft +  sizeRetangle.width/2 - 50, YMinRetangle + sizeRetangle.height/2)
+            activityView?.activityIndicatorViewStyle = UIActivityIndicatorViewStyle.WhiteLarge
+            
+            addSubview(activityView!)
+            
+            
+            let labelReadyRect = CGRectMake(activityView!.frame.origin.x + activityView!.frame.size.width + 10, activityView!.frame.origin.y, 100, 30);
+            //print("%@",NSStringFromCGRect(labelReadyRect))
+            self.labelReadying = UILabel(frame: labelReadyRect)
+            labelReadying?.text = readyStr
+            labelReadying?.backgroundColor = UIColor.clearColor()
+            labelReadying?.textColor = UIColor.whiteColor()
+            labelReadying?.font = UIFont.systemFontOfSize(18.0)
+            addSubview(labelReadying!)
+        }
+        
+         addSubview(labelReadying!)
+         activityView?.startAnimating()
+        
+    }
+    
+    func deviceStopReadying()
+    {
+        if activityView != nil
+        {
+            activityView?.stopAnimating()
+            activityView?.removeFromSuperview()
+            labelReadying?.removeFromSuperview()
+            
+            activityView = nil
+            labelReadying = nil
+            
+        }
+    }
 
 }

@@ -12,6 +12,7 @@
 		48B143C81C1809CA00B2E7D5 /* LBXScanNetAnimation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48B143C71C1809CA00B2E7D5 /* LBXScanNetAnimation.swift */; };
 		48B143CA1C1809E700B2E7D5 /* CodeScan.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 48B143C91C1809E700B2E7D5 /* CodeScan.bundle */; };
 		48B789531C19071F003BC426 /* LBXScanWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48B789521C19071F003BC426 /* LBXScanWrapper.swift */; };
+		48B789571C195944003BC426 /* README.md in Sources */ = {isa = PBXBuildFile; fileRef = 48B789561C195944003BC426 /* README.md */; };
 		48BE28941C16D16A0051EA4C /* LBXScanViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48BE28931C16D16A0051EA4C /* LBXScanViewController.swift */; };
 		7D42B9B01C05EE9A0084D045 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D42B9AF1C05EE9A0084D045 /* AppDelegate.swift */; };
 		7D42B9B21C05EE9A0084D045 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D42B9B11C05EE9A0084D045 /* ViewController.swift */; };
@@ -28,6 +29,7 @@
 		48B143C71C1809CA00B2E7D5 /* LBXScanNetAnimation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LBXScanNetAnimation.swift; sourceTree = "<group>"; };
 		48B143C91C1809E700B2E7D5 /* CodeScan.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = CodeScan.bundle; sourceTree = "<group>"; };
 		48B789521C19071F003BC426 /* LBXScanWrapper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LBXScanWrapper.swift; sourceTree = "<group>"; };
+		48B789561C195944003BC426 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		48BE28931C16D16A0051EA4C /* LBXScanViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LBXScanViewController.swift; sourceTree = "<group>"; };
 		7D42B9AC1C05EE9A0084D045 /* swiftScan.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = swiftScan.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7D42B9AF1C05EE9A0084D045 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -56,6 +58,7 @@
 		7D42B9A31C05EE9A0084D045 = {
 			isa = PBXGroup;
 			children = (
+				48B789561C195944003BC426 /* README.md */,
 				7D42B9AE1C05EE9A0084D045 /* swiftScan */,
 				7D42B9AD1C05EE9A0084D045 /* Products */,
 			);
@@ -165,6 +168,7 @@
 			files = (
 				48B143C61C18095500B2E7D5 /* LBXScanLineAnimation.swift in Sources */,
 				7D98F5DF1C1710A800602D59 /* LBXScanViewStyle.swift in Sources */,
+				48B789571C195944003BC426 /* README.md in Sources */,
 				7D98F5DD1C170BF000602D59 /* LBXScanView.swift in Sources */,
 				48B143C41C17C98B00B2E7D5 /* MainTableViewController.swift in Sources */,
 				48B789531C19071F003BC426 /* LBXScanWrapper.swift in Sources */,

@@ -11,11 +11,9 @@ import Foundation
 import AVFoundation
 
 
-class LBXScanViewController: UIViewController,AVCaptureMetadataOutputObjectsDelegate {
-
-    let device = AVCaptureDevice.defaultDeviceWithMediaType(AVMediaTypeVideo)
-    let session = AVCaptureSession()
-    var layer: AVCaptureVideoPreviewLayer?
+class LBXScanViewController: UIViewController {
+    
+    var scanObj:LBXScanWrapper?
     
     var scanStyle:LBXScanViewStyle?
     
@@ -23,6 +21,9 @@ class LBXScanViewController: UIViewController,AVCaptureMetadataOutputObjectsDele
     
     //启动区域识别功能
     var isOpenInterestRect = false
+    
+    //识别码的类型
+    var arrayCodeType:[String]?
 
     
     override func viewDidLoad() {
@@ -31,94 +32,128 @@ class LBXScanViewController: UIViewController,AVCaptureMetadataOutputObjectsDele
         // Do any additional setup after loading the view.
         
               // [self.view addSubview:_qRScanView];
-        self.view.backgroundColor = UIColor.whiteColor()
+        self.view.backgroundColor = UIColor.blackColor()
       
         //没有效果
         if (respondsToSelector("setEdgesForExtendedLayout"))
         {
             self.edgesForExtendedLayout = UIRectEdge.None
         }
-        
     }
-
  
     override func viewWillAppear(animated: Bool) {
         
         super.viewWillAppear(animated)
+    }
+    
+    override func viewDidAppear(animated: Bool) {
         
-        self.setupCamera()
-        self.session.startRunning()        
+        super.viewDidAppear(animated)
         
+        drawScanView()
+       
+        performSelector("startScan", withObject: nil, afterDelay: 0.3)
         
-        qRScanView = LBXScanView(frame: self.view.frame,vstyle:scanStyle! )
-        self.view.addSubview(qRScanView!)
-        qRScanView!.startScanAnimation()
-
+    }
+    
+    func startScan()
+    {
+        if (scanObj == nil)
+        {
+            var cropRect = CGRectZero
+            if isOpenInterestRect
+            {
+                cropRect = LBXScanView.getScanRectWithPreView(self.view, style:scanStyle! )
+            }
+            
+            //识别各种码，
+            //let arrayCode = LBXScanWrapper.defaultMetaDataObjectTypes()
+            
+            //指定识别几种码
+            if arrayCodeType == nil
+            {
+                arrayCodeType = [AVMetadataObjectTypeQRCode,AVMetadataObjectTypeEAN13Code,AVMetadataObjectTypeCode128Code]
+            }
+            
+            scanObj = LBXScanWrapper(videoPreView: self.view,objType:arrayCodeType!, isCaptureImg: false,cropRect:cropRect, success: { (arrayResult) -> Void in
+                
+                self.handleCodeResult(arrayResult)
+            })
+        }
+        
+        //结束相机等待提示
+        qRScanView?.deviceStopReadying()
+        
+        //开始扫描动画
+        qRScanView?.startScanAnimation()
+        
+        //相机运行
+        scanObj?.start()
+    }
+    
+    func drawScanView()
+    {
+        if qRScanView == nil
+        {
+            qRScanView = LBXScanView(frame: self.view.frame,vstyle:scanStyle! )
+            self.view.addSubview(qRScanView!)
+        }
+        
+        qRScanView?.deviceStartReadying("相机启动中...")
+        
+    }
+    
+    func restartScan()
+    {
+        qRScanView?.startScanAnimation()
+        self.scanObj?.start()
+    }
+    
+    func handleCodeResult(arrayResult:[LBXScanResult])
+    {
+        //停止扫描动画
+        qRScanView?.stopScanAnimation()
+        
+        scanResult(arrayResult)
+    }
+    
+    
+    /**
+     需要对应处理的，如果是继承本控制器的，可以重写该方法
+     */
+    func scanResult(arrayResult:[LBXScanResult])
+    {
+        for result:LBXScanResult in arrayResult
+        {
+            print("%@",result.strScanned)
+        }
+        
+        let result:LBXScanResult = arrayResult[0]
+        
+        let alertController = UIAlertController(title: result.strBarCodeType, message: result.strScanned, preferredStyle: UIAlertControllerStyle.Alert)
+        
+        let alertAction = UIAlertAction(title:  "知道了", style: UIAlertActionStyle.Default) { (alertAction) -> Void in
+            
+            self.restartScan()
+        }
+        
+        alertController.addAction(alertAction)
+        
+        presentViewController(alertController, animated: true, completion: nil)
     }
     
     override func viewWillDisappear(animated: Bool) {
         
-        self.session.stopRunning()
+        NSObject.cancelPreviousPerformRequestsWithTarget(self)
+        
+        qRScanView?.stopScanAnimation()
+        
+        scanObj?.stop()
     }
-    
-    
-    func setupCamera(){
-        self.session.sessionPreset = AVCaptureSessionPresetHigh
-       
-        var input:AVCaptureDeviceInput?;
-        do{
-            input = try AVCaptureDeviceInput(device: device)
-        }
-        catch let error as NSError {
-            print("AVCaptureDeviceInput(): \(error)")
-        }
-        
-        
-        
-        if session.canAddInput(input) {
-            session.addInput(input)
-        }
-        layer = AVCaptureVideoPreviewLayer(session: session)
-        layer!.videoGravity = AVLayerVideoGravityResizeAspectFill
-        layer!.frame = CGRectMake(0.0,0.0,CGRectGetWidth(self.view.frame),CGRectGetHeight(self.view.frame));
-        self.view.layer.insertSublayer(layer!, atIndex: 0)
-        let output = AVCaptureMetadataOutput()
-        output.setMetadataObjectsDelegate(self, queue: dispatch_get_main_queue())
-        if session.canAddOutput(output) {
-            session.addOutput(output)
-            output.metadataObjectTypes = [AVMetadataObjectTypeQRCode];
-        }
-        
-        if isOpenInterestRect
-        {            
-            output.rectOfInterest = LBXScanView.getScanRectWithPreView(self.view, style:scanStyle! )
-        }
-        
-        session.startRunning()
-    }
-    
-    func captureOutput(captureOutput: AVCaptureOutput!, didOutputMetadataObjects metadataObjects: [AnyObject]!, fromConnection connection: AVCaptureConnection!){
-        var stringValue:String?
-        if metadataObjects.count > 0 {
-            let metadataObject = metadataObjects[0] as! AVMetadataMachineReadableCodeObject
-            stringValue = metadataObject.stringValue
-        }
-        session.stopRunning()
-        
-        
-        let alertController = UIAlertController(title: "xxx码", message: stringValue, preferredStyle: UIAlertControllerStyle.Alert)
-        alertController.addAction(UIAlertAction(title: "知道了", style: UIAlertActionStyle.Default, handler: nil))
-        self.presentViewController(alertController, animated: true, completion: nil)
-
-        
-        session.performSelector("startRunning", withObject: nil, afterDelay: 3.0)
-       // performSelector( "restartRun", withObject: nil, afterDelay: 3.0);
-    }
-
-    func restartRun()
-    {
-        session.startRunning()
-    }
-    
     
 }
+
+
+
+
+
