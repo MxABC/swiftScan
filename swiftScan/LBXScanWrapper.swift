@@ -18,15 +18,10 @@ struct  LBXScanResult {
     //码的类型
     var strBarCodeType:String? = ""
     
-    init(str:String,img:UIImage?,barCodeType:String)
+    init(str:String?,img:UIImage?,barCodeType:String?)
     {
         self.strScanned = str
-        
-        if img != nil
-        {
-            self.imgScanned = img
-        }
-       
+        self.imgScanned = img
         self.strBarCodeType = barCodeType
     }
 }
