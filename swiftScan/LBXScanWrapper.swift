@@ -354,7 +354,170 @@ class LBXScanWrapper: NSObject,AVCaptureMetadataOutputObjectsDelegate {
         
         return types;
     }
+    
+    
+    static func isSysIos8Later()->Bool
+    {
+        return Float(UIDevice.currentDevice().systemVersion)  >= 8.0 ? true:false
+    }
 
+    /**
+     识别二维码码图像
+     
+     - parameter image: 二维码图像
+     
+     - returns: 返回识别结果
+     */
+    static func recognizeQRImage(image:UIImage) ->[LBXScanResult]
+    {
+        var returnResult:[LBXScanResult]=[]
+        
+        if LBXScanWrapper.isSysIos8Later()
+        {
+            let detector:CIDetector = CIDetector(ofType: CIDetectorTypeQRCode, context: nil, options: [CIDetectorAccuracy:CIDetectorAccuracyHigh])
+            
+            
+            let img = CIImage(CGImage: (image.CGImage)!)
+            
+            let features:[CIFeature]? = detector.featuresInImage(img, options: [CIDetectorAccuracy:CIDetectorAccuracyHigh])
+            
+            if( features != nil && features?.count > 0)
+            {
+                let feature = features![0]
+                
+                if feature.isKindOfClass(CIQRCodeFeature)
+                {
+                    let featureTmp:CIQRCodeFeature = feature as! CIQRCodeFeature
+                    
+                    let scanResult = featureTmp.messageString
+                    
+                    
+                    let result = LBXScanResult(str: scanResult, img: image, barCodeType: AVMetadataObjectTypeQRCode)
+                    
+                    returnResult.append(result)
+                }
+            }
+        }
+        
+        return returnResult
+    }
 
+    
+    //MARK: -- - 生成二维码，背景色及二维码颜色设置
+    //oc 引用自:http://www.jianshu.com/p/e8f7a257b612
+    
+    static func createCode( codeType:String, codeString:String, size:CGSize,qrColor:UIColor,bkColor:UIColor )->UIImage?
+    {
+        let stringData = codeString.dataUsingEncoding(NSUTF8StringEncoding)
+        
+        
+        //系统自带能生成的码
+        //        CIAztecCodeGenerator
+        //        CICode128BarcodeGenerator
+        //        CIPDF417BarcodeGenerator
+        //        CIQRCodeGenerator
+        let qrFilter = CIFilter(name: codeType)
+        
+        
+        qrFilter?.setValue(stringData, forKey: "inputMessage")
+        
+        qrFilter?.setValue("H", forKey: "inputCorrectionLevel")
+        
+        
+        //上色
+        let colorFilter = CIFilter(name: "CIFalseColor", withInputParameters: ["inputImage":qrFilter!.outputImage!,"inputColor0":CIColor(CGColor: qrColor.CGColor),"inputColor1":CIColor(CGColor: bkColor.CGColor)])
+        
+        
+        let qrImage = colorFilter!.outputImage;
+        
+        //绘制
+        let cgImage = CIContext().createCGImage(qrImage!, fromRect: qrImage!.extent)
+        
+        
+        UIGraphicsBeginImageContext(size);
+        let context = UIGraphicsGetCurrentContext();
+        CGContextSetInterpolationQuality(context, CGInterpolationQuality.None);
+        CGContextScaleCTM(context, 1.0, -1.0);
+        CGContextDrawImage(context, CGContextGetClipBoundingBox(context), cgImage);
+        let codeImage = UIGraphicsGetImageFromCurrentImageContext();
+        UIGraphicsEndImageContext();
+        
+        return codeImage;
+    }
+    
+    static func createCode128(  codeString:String, size:CGSize,qrColor:UIColor,bkColor:UIColor )->UIImage?
+    {
+        let stringData = codeString.dataUsingEncoding(NSUTF8StringEncoding)
+        
+        
+        //系统自带能生成的码
+        //        CIAztecCodeGenerator 二维码
+        //        CICode128BarcodeGenerator 条形码
+        //        CIPDF417BarcodeGenerator
+        //        CIQRCodeGenerator     二维码
+        let qrFilter = CIFilter(name: "CICode128BarcodeGenerator")
+        qrFilter?.setDefaults()
+        qrFilter?.setValue(stringData, forKey: "inputMessage")
+  
+         
+            
+        let outputImage:CIImage? = qrFilter?.outputImage
+            let context = CIContext()
+            let cgImage = context.createCGImage(outputImage!, fromRect: outputImage!.extent)
+       
+            let image = UIImage(CGImage: cgImage, scale: 1.0, orientation: UIImageOrientation.Up)
+        
+            
+            // Resize without interpolating
+        let scaleRate:CGFloat = 20.0
+            let resized = resizeImage(image, quality: CGInterpolationQuality.None, rate: scaleRate)
+        
+            
+          //  self.imageView.image = resized;
+//
+       
+
+        
+        return resized;
+    }
+    
+    /**
+    @brief  图像中间加logo图片
+    @param srcImg    原图像
+    @param LogoImage logo图像
+    @param logoSize  logo图像尺寸
+    @return 加Logo的图像
+    */
+    static func addImageLogo(srcImg:UIImage,logoImg:UIImage,logoSize:CGSize )->UIImage
+    {
+        UIGraphicsBeginImageContext(srcImg.size);
+        srcImg.drawInRect(CGRectMake(0, 0, srcImg.size.width, srcImg.size.height))
+        let rect = CGRectMake(srcImg.size.width/2 - logoSize.width/2, srcImg.size.height/2-logoSize.height/2, logoSize.width, logoSize.height);
+        logoImg.drawInRect(rect)
+        let resultingImage = UIGraphicsGetImageFromCurrentImageContext();
+        UIGraphicsEndImageContext();
+        return resultingImage;
+    }
+
+    
+    static func resizeImage(image:UIImage,quality:CGInterpolationQuality,rate:CGFloat)->UIImage?
+    {
+        var resized:UIImage?;
+        let width    = image.size.width * rate;
+        let height   = image.size.height * rate;
+        
+        UIGraphicsBeginImageContext(CGSizeMake(width, height));
+        let context = UIGraphicsGetCurrentContext();
+        CGContextSetInterpolationQuality(context, quality);
+        image.drawInRect(CGRectMake(0, 0, width, height))
+        
+        resized = UIGraphicsGetImageFromCurrentImageContext();
+        UIGraphicsEndImageContext();
+        
+        return resized;
+    }
+
+    
+    
 
 }

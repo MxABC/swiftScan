@@ -14,7 +14,7 @@ class LBXScanLineAnimation: UIImageView {
     var animationRect:CGRect = CGRectZero
     
     func startAnimatingWithRect(animationRect:CGRect, parentView:UIView, image:UIImage?)
-    {
+    { 
         self.image = image
         self.animationRect = animationRect
         parentView.addSubview(self)

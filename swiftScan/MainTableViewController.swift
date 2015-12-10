@@ -7,8 +7,10 @@
 //
 
 import UIKit
+import Foundation
+import AVFoundation
 
-class MainTableViewController: UITableViewController {
+class MainTableViewController: UITableViewController,UIImagePickerControllerDelegate,UINavigationControllerDelegate {
     
     var arrayItems:Array<Array<String>> = [
     ["模拟qq扫码界面","qqStyle"],
@@ -20,7 +22,7 @@ class MainTableViewController: UITableViewController {
     ["只识别框内","recoCropRect"],
     ["改变尺寸","changeSize"],
     ["条形码效果","notSquare"],
-    ["二维码/条形码生成","myQR"],
+    ["二维码/条形码生成","myCode"],
     ["相册","openLocalPhotoAlbum"]
     ];
 
@@ -85,7 +87,7 @@ class MainTableViewController: UITableViewController {
     {
         print("qqStyle")
         
-        let vc = LBXScanViewController();
+        let vc = QQScanViewController();
         var style = LBXScanViewStyle()
         style.animationImage = UIImage(named: "CodeScan.bundle/qrcode_scan_light_green")
         vc.scanStyle = style
@@ -357,6 +359,70 @@ class MainTableViewController: UITableViewController {
     }
     
 
+    //MARK: -------- 相册
+    func openLocalPhotoAlbum()
+    {
+        let picker = UIImagePickerController()
+        
+        picker.sourceType = UIImagePickerControllerSourceType.PhotoLibrary
+        
+        picker.delegate = self;
+        
+        picker.allowsEditing = true
+        
+        presentViewController(picker, animated: true, completion: nil)
+    }
     
+    //MARK: -----相册选择图片识别二维码 （条形码没有找到系统方法）
+    func imagePickerController(picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : AnyObject])
+    {
+        picker.dismissViewControllerAnimated(true, completion: nil)
+        
+        var image:UIImage? = info[UIImagePickerControllerEditedImage] as? UIImage
+        
+        if (image == nil )
+        {
+            image = info[UIImagePickerControllerOriginalImage] as? UIImage
+        }
+        
+        if(image == nil)
+        {
+            return
+        }
+        
+        if(image != nil)
+        {
+            let arrayResult = LBXScanWrapper.recognizeQRImage(image!)
+            if arrayResult.count > 0
+            {
+                let result = arrayResult[0];
+                
+                showMsg(result.strBarCodeType, message: result.strScanned)
+                
+                return
+            }
+        }
+        showMsg("", message: "识别失败")       
+    }
+    
+    func showMsg(title:String?,message:String?)
+    {
+        let alertController = UIAlertController(title: title, message:message, preferredStyle: UIAlertControllerStyle.Alert)
+        
+        let alertAction = UIAlertAction(title:  "知道了", style: UIAlertActionStyle.Default) { (alertAction) -> Void in
+            
+           
+        }
+        
+        alertController.addAction(alertAction)
+        
+        presentViewController(alertController, animated: true, completion: nil)
+    }
+
+    func myCode()
+    {
+        let vc = MyCodeViewController()
+        self.navigationController?.pushViewController(vc, animated: true)
+    }
 
 }

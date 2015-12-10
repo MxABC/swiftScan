@@ -31,6 +31,8 @@ class LBXScanView: UIView
     //启动相机中的提示文字
     var labelReadying:UILabel?
     
+    //记录动画状态
+    var isAnimationing:Bool = false
     
     /**
     初始化扫描界面
@@ -102,6 +104,13 @@ class LBXScanView: UIView
     */
     func startScanAnimation()
     {
+        if isAnimationing
+        {
+            return
+        }
+        
+        isAnimationing = true
+        
         let cropRect:CGRect = getScanRectForAnimation()
         
         switch viewStyle.anmiationStyle
@@ -138,7 +147,9 @@ class LBXScanView: UIView
      *  开始扫描动画
      */
     func stopScanAnimation()
-    {  
+    {
+        isAnimationing = false
+        
         switch viewStyle.anmiationStyle
         {
         case LBXScanViewAnimationStyle.LineMove:

@@ -34,11 +34,10 @@ class LBXScanViewController: UIViewController,UIImagePickerControllerDelegate,UI
               // [self.view addSubview:_qRScanView];
         self.view.backgroundColor = UIColor.blackColor()
       
-        //没有效果
-        if (respondsToSelector("setEdgesForExtendedLayout"))
-        {
-            self.edgesForExtendedLayout = UIRectEdge.None
-        }
+       
+       // self.edgesForExtendedLayout = UIRectEdge.None
+            
+        
     }
  
     override func viewWillAppear(animated: Bool) {
@@ -167,42 +166,34 @@ class LBXScanViewController: UIViewController,UIImagePickerControllerDelegate,UI
             image = info[UIImagePickerControllerOriginalImage] as? UIImage
         }
         
-        if(image == nil)
+        if(image != nil)
         {
-            return
+            let arrayResult = LBXScanWrapper.recognizeQRImage(image!)
+            if arrayResult.count > 0
+            {
+                handleCodeResult(arrayResult)
+                return
+            }
         }
-        
-        let detector:CIDetector = CIDetector(ofType: CIDetectorTypeQRCode, context: nil, options: [CIDetectorAccuracy:CIDetectorAccuracyHigh])
-        
-        let features:[CIQRCodeFeature]? = detector.featuresInImage(image!.CIImage!, options: [CIDetectorAccuracy:CIDetectorAccuracyHigh]) as? [CIQRCodeFeature]
-        
-        if( features != nil && features?.count > 0)
-        {
-            let feature = features![0]
-            let scanResult = feature.messageString
-            
-            let result = LBXScanResult(str: scanResult, img: image!, barCodeType: AVMetadataObjectTypeQRCode)
-            
-            handleCodeResult([result])
-        }
-        else
-        {
-            showMsg("", message: "识别失败")
-        }
+      
+        showMsg("", message: "识别失败")
     }
     
     func showMsg(title:String?,message:String?)
     {
-        let alertController = UIAlertController(title: title, message:message, preferredStyle: UIAlertControllerStyle.Alert)
-        
-        let alertAction = UIAlertAction(title:  "知道了", style: UIAlertActionStyle.Default) { (alertAction) -> Void in
+        if LBXScanWrapper.isSysIos8Later()
+        {
+            let alertController = UIAlertController(title: title, message:message, preferredStyle: UIAlertControllerStyle.Alert)
             
-            self.restartScan()
+            let alertAction = UIAlertAction(title:  "知道了", style: UIAlertActionStyle.Default) { (alertAction) -> Void in
+                
+                self.restartScan()
+            }
+            
+            alertController.addAction(alertAction)
+            
+            presentViewController(alertController, animated: true, completion: nil)
         }
-        
-        alertController.addAction(alertAction)
-        
-        presentViewController(alertController, animated: true, completion: nil)
     }
     
 }
