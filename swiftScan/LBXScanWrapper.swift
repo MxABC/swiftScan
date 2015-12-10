@@ -44,9 +44,22 @@ class LBXScanWrapper: NSObject,AVCaptureMetadataOutputObjectsDelegate {
     var previewLayer:AVCaptureVideoPreviewLayer?
     var stillImageOutput:AVCaptureStillImageOutput?
     
-    init( videoPreView:UIView,objType:[String]?,cropRect:CGRect )
+    //存储返回结果
+    var arrayResult:[LBXScanResult] = [];
+    
+    var isNeedCaptureImage:Bool
+    
+    /**
+     初始化设备
+     - parameter videoPreView: 视频显示UIView
+     - parameter objType:      识别码的类型,缺省值 QR二维码
+     - parameter isCaptureImg: 识别后是否采集当前照片
+     - parameter cropRect:     识别区域
+     - parameter success:      返回识别信息
+     - returns:
+     */
+    init( videoPreView:UIView,objType:[String] = [AVMetadataObjectTypeQRCode],isCaptureImg:Bool,cropRect:CGRect=CGRectZero,success:( ([LBXScanResult]) -> Void) )
     {
-        
         do{
             input = try AVCaptureDeviceInput(device: device)
         }
@@ -61,6 +74,7 @@ class LBXScanWrapper: NSObject,AVCaptureMetadataOutputObjectsDelegate {
         
         stillImageOutput = AVCaptureStillImageOutput();
         
+        isNeedCaptureImage = isCaptureImg
         
         super.init()
         
@@ -71,17 +85,8 @@ class LBXScanWrapper: NSObject,AVCaptureMetadataOutputObjectsDelegate {
         //参数设置
         output.setMetadataObjectsDelegate(self, queue: dispatch_get_main_queue())
         
-        var codeType:[String]
-        if (objType == nil)
-        {
-            codeType = defaultMetaDataObjectTypes()
-        }
-        else
-        {
-            codeType = objType!
-        }
         
-        output.metadataObjectTypes = codeType
+        output.metadataObjectTypes = objType
        
         if CGRectEqualToRect(cropRect, CGRectZero)
         {
@@ -152,18 +157,67 @@ class LBXScanWrapper: NSObject,AVCaptureMetadataOutputObjectsDelegate {
     {
         stop()
         
+        
+        arrayResult.removeAll()
+        
         //识别扫码类型
         for current:AnyObject in metadataObjects
         {
             if current.isKindOfClass(AVMetadataMachineReadableCodeObject)
             {
                 //码类型
-                print("code type:%@",(current as! AVMetadataObject).type)
+                let codeType = (current as! AVMetadataObject).type
+                print("code type:%@",codeType)
                 //码内容
-                print("code string:%@",(current as! AVMetadataMachineReadableCodeObject).stringValue)
+                let codeContent = (current as! AVMetadataMachineReadableCodeObject).stringValue
+                print("code string:%@",codeContent)
+                
+                arrayResult.append(LBXScanResult(str: codeType, img: UIImage(), barCodeType: codeContent))
+                
             }
         }
     }
+    
+    
+    func captureImage()
+    {
+        //var stillImageConnection:AVCaptureConnection
+    }
+    
+    func connectionWithMediaType(mediaType:String,connections:[AnyObject]) -> AVCaptureConnection?
+    {
+        for connection:AnyObject in connections
+        {
+            let connectionTmp:AVCaptureConnection = connection as! AVCaptureConnection
+            for port:AnyObject in connectionTmp.inputPorts
+            {
+                if port.isKindOfClass(AVCaptureInputPort)
+                {
+                    let portTmp:AVCaptureInputPort = port as! AVCaptureInputPort
+                    if portTmp.mediaType == mediaType
+                    {
+                        return connectionTmp
+                    }
+                    
+                }
+            }
+        }
+        return nil
+    }
+  
+    /*
+    + (AVCaptureConnection *)connectionWithMediaType:(NSString *)mediaType fromConnections:(NSArray *)connections
+    {
+    for ( AVCaptureConnection *connection in connections ) {
+    for ( AVCaptureInputPort *port in [connection inputPorts] ) {
+    if ( [[port mediaType] isEqual:mediaType] ) {
+				return connection;
+    }
+    }
+    }
+    return nil;
+    }
+    */
     
     
     //MARK:切换识别区域
@@ -191,7 +245,6 @@ class LBXScanWrapper: NSObject,AVCaptureMetadataOutputObjectsDelegate {
         do
         {
             try input?.device.lockForConfiguration()
-            
             
             input?.device.torchMode = torch ? AVCaptureTorchMode.On : AVCaptureTorchMode.Off            
             
@@ -237,7 +290,8 @@ class LBXScanWrapper: NSObject,AVCaptureMetadataOutputObjectsDelegate {
     //MARK: ------获取系统默认支持的码的类型
     func defaultMetaDataObjectTypes() ->[String]
     {
-        var types = [AVMetadataObjectTypeQRCode,
+        var types =
+           [AVMetadataObjectTypeQRCode,
             AVMetadataObjectTypeUPCECode,
             AVMetadataObjectTypeCode39Code,
             AVMetadataObjectTypeCode39Mod43Code,
