@@ -516,6 +516,10 @@ class LBXScanWrapper: NSObject,AVCaptureMetadataOutputObjectsDelegate {
         return resized;
     }
 
+    deinit
+    {
+        print("LBXScanWrapper deinit")
+    }
     
     
 

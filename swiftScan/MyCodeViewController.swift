@@ -98,6 +98,10 @@ class MyCodeViewController: UIViewController {
 
     }
 
+    deinit
+    {
+        print("MyCodeViewController deinit")
+    }
    
 
 }

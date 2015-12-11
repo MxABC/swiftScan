@@ -74,7 +74,7 @@ class LBXScanViewController: UIViewController,UIImagePickerControllerDelegate,UI
                 arrayCodeType = [AVMetadataObjectTypeQRCode,AVMetadataObjectTypeEAN13Code,AVMetadataObjectTypeCode128Code]
             }
             
-            scanObj = LBXScanWrapper(videoPreView: self.view,objType:arrayCodeType!, isCaptureImg: false,cropRect:cropRect, success: { (arrayResult) -> Void in
+            scanObj = LBXScanWrapper(videoPreView: self.view,objType:arrayCodeType!, isCaptureImg: false,cropRect:cropRect, success: { [unowned self] (arrayResult) -> Void in
                 
                 self.handleCodeResult(arrayResult)
             })
@@ -187,8 +187,9 @@ class LBXScanViewController: UIViewController,UIImagePickerControllerDelegate,UI
             //if #available(iOS 8.0, *)
             
             let alertController = UIAlertController(title: title, message:message, preferredStyle: UIAlertControllerStyle.Alert)
-            let alertAction = UIAlertAction(title:  "知道了", style: UIAlertActionStyle.Default) { (alertAction) -> Void in
+            let alertAction = UIAlertAction(title:  "知道了", style: UIAlertActionStyle.Default) { [unowned self] (alertAction) -> Void in
                 
+            
                 self.restartScan()
             }
             
@@ -199,6 +200,10 @@ class LBXScanViewController: UIViewController,UIImagePickerControllerDelegate,UI
             
            
         }
+    }
+    deinit
+    {
+        print("LBXScanViewController deinit")
     }
     
 }
