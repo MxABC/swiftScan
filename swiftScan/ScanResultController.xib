@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="9059" systemVersion="15B42" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9049"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="ScanResultController" customModule="swiftScan" customModuleProvider="target">
+            <connections>
+                <outlet property="codeImg" destination="fg4-Ct-oKK" id="3qT-G0-jkT"/>
+                <outlet property="codeStringLabel" destination="FYu-Sd-42q" id="3Qn-82-Vt7"/>
+                <outlet property="codeTypeLabel" destination="xvo-Et-qv7" id="blH-ps-xCh"/>
+                <outlet property="concreteCodeImg" destination="pA1-ae-BZc" id="h3R-iD-PVa"/>
+                <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT">
+            <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="fg4-Ct-oKK">
+                    <rect key="frame" x="88" y="28" width="145" height="149"/>
+                    <animations/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="149" id="YAA-yR-3bN"/>
+                    </constraints>
+                </imageView>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="码的内容:123456789" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FYu-Sd-42q">
+                    <rect key="frame" x="31" y="506" width="248" height="21"/>
+                    <animations/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="21" id="MJs-cF-uBO"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="码的类型:...." textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xvo-Et-qv7">
+                    <rect key="frame" x="31" y="467" width="253" height="21"/>
+                    <animations/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="21" id="BZR-b5-hKG"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="pA1-ae-BZc">
+                    <rect key="frame" x="100" y="218" width="120" height="120"/>
+                    <animations/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="120" id="5c7-3W-a55"/>
+                        <constraint firstAttribute="height" constant="120" id="XMZ-PW-ONc"/>
+                    </constraints>
+                </imageView>
+            </subviews>
+            <animations/>
+            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+            <constraints>
+                <constraint firstAttribute="trailing" secondItem="xvo-Et-qv7" secondAttribute="trailing" constant="36" id="9qS-OJ-YJF"/>
+                <constraint firstItem="xvo-Et-qv7" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="31" id="A0B-Ed-FSZ"/>
+                <constraint firstItem="pA1-ae-BZc" firstAttribute="top" secondItem="fg4-Ct-oKK" secondAttribute="bottom" constant="41" id="F7R-DW-I5G"/>
+                <constraint firstAttribute="trailing" secondItem="FYu-Sd-42q" secondAttribute="trailing" constant="41" id="NoW-6u-jqR"/>
+                <constraint firstAttribute="bottom" secondItem="FYu-Sd-42q" secondAttribute="bottom" constant="41" id="PfM-IC-vPU"/>
+                <constraint firstItem="pA1-ae-BZc" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="Qla-PA-5Ax"/>
+                <constraint firstItem="fg4-Ct-oKK" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="88" id="Z5I-XE-TPb"/>
+                <constraint firstItem="fg4-Ct-oKK" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="28" id="eMz-tv-PbA"/>
+                <constraint firstItem="FYu-Sd-42q" firstAttribute="top" secondItem="xvo-Et-qv7" secondAttribute="bottom" constant="18" id="feP-4W-bmN"/>
+                <constraint firstAttribute="trailing" secondItem="fg4-Ct-oKK" secondAttribute="trailing" constant="87" id="qZg-aA-K8A"/>
+                <constraint firstItem="FYu-Sd-42q" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="31" id="ulY-o2-jvY"/>
+            </constraints>
+            <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
+            <point key="canvasLocation" x="327" y="421"/>
+        </view>
+    </objects>
+</document>

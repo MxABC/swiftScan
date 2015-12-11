@@ -15,7 +15,7 @@ class LBXScanViewController: UIViewController,UIImagePickerControllerDelegate,UI
     
     var scanObj:LBXScanWrapper?
     
-    var scanStyle:LBXScanViewStyle?
+    var scanStyle:LBXScanViewStyle? = LBXScanViewStyle()
     
     var qRScanView:LBXScanView?
     
@@ -24,6 +24,9 @@ class LBXScanViewController: UIViewController,UIImagePickerControllerDelegate,UI
     
     //识别码的类型
     var arrayCodeType:[String]?
+    
+    //是否需要识别后的当前图像
+    var isNeedCodeImage = false
 
     
     override func viewDidLoad() {
@@ -35,7 +38,7 @@ class LBXScanViewController: UIViewController,UIImagePickerControllerDelegate,UI
         self.view.backgroundColor = UIColor.blackColor()
       
        
-       // self.edgesForExtendedLayout = UIRectEdge.None
+        self.edgesForExtendedLayout = UIRectEdge.None
             
         
     }
@@ -74,10 +77,13 @@ class LBXScanViewController: UIViewController,UIImagePickerControllerDelegate,UI
                 arrayCodeType = [AVMetadataObjectTypeQRCode,AVMetadataObjectTypeEAN13Code,AVMetadataObjectTypeCode128Code]
             }
             
-            scanObj = LBXScanWrapper(videoPreView: self.view,objType:arrayCodeType!, isCaptureImg: false,cropRect:cropRect, success: { [weak self] (arrayResult) -> Void in
+            scanObj = LBXScanWrapper(videoPreView: self.view,objType:arrayCodeType!, isCaptureImg: isNeedCodeImage,cropRect:cropRect, success: { [weak self] (arrayResult) -> Void in
                 
                 if let strongSelf = self
                 {
+                    //停止扫描动画
+                    strongSelf.qRScanView?.stopScanAnimation()
+                    
                     strongSelf.handleCodeResult(arrayResult)
                 }
              })
@@ -104,26 +110,12 @@ class LBXScanViewController: UIViewController,UIImagePickerControllerDelegate,UI
         qRScanView?.deviceStartReadying("相机启动中...")
         
     }
-    
-    func restartScan()
-    {
-        qRScanView?.startScanAnimation()
-        self.scanObj?.start()
-    }
-    
-    func handleCodeResult(arrayResult:[LBXScanResult])
-    {
-        //停止扫描动画
-        qRScanView?.stopScanAnimation()
-        
-        scanResult(arrayResult)
-    }
-    
+   
     
     /**
-     需要对应处理的，如果是继承本控制器的，可以重写该方法
+     处理扫码结果，如果是继承本控制器的，可以重写该方法,作出相应地处理
      */
-    func scanResult(arrayResult:[LBXScanResult])
+    func handleCodeResult(arrayResult:[LBXScanResult])
     {
         for result:LBXScanResult in arrayResult
         {
@@ -194,7 +186,7 @@ class LBXScanViewController: UIViewController,UIImagePickerControllerDelegate,UI
                 
                 if let strongSelf = self
                 {
-                    strongSelf.restartScan()
+                    strongSelf.startScan()
                 }
             }
             

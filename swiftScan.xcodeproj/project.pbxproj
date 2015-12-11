@@ -17,6 +17,8 @@
 		48B143C41C17C98B00B2E7D5 /* MainTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48B143C31C17C98B00B2E7D5 /* MainTableViewController.swift */; };
 		48B143CA1C1809E700B2E7D5 /* CodeScan.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 48B143C91C1809E700B2E7D5 /* CodeScan.bundle */; };
 		48B789571C195944003BC426 /* README.md in Sources */ = {isa = PBXBuildFile; fileRef = 48B789561C195944003BC426 /* README.md */; };
+		7D21CAB81C1B0516007A3BF0 /* ScanResultController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D21CAB61C1B0516007A3BF0 /* ScanResultController.swift */; };
+		7D21CAB91C1B0516007A3BF0 /* ScanResultController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7D21CAB71C1B0516007A3BF0 /* ScanResultController.xib */; };
 		7D42B9B01C05EE9A0084D045 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D42B9AF1C05EE9A0084D045 /* AppDelegate.swift */; };
 		7D42B9B21C05EE9A0084D045 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D42B9B11C05EE9A0084D045 /* ViewController.swift */; };
 		7D42B9B51C05EE9A0084D045 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7D42B9B31C05EE9A0084D045 /* Main.storyboard */; };
@@ -38,6 +40,8 @@
 		48B143C31C17C98B00B2E7D5 /* MainTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainTableViewController.swift; sourceTree = "<group>"; };
 		48B143C91C1809E700B2E7D5 /* CodeScan.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = CodeScan.bundle; sourceTree = "<group>"; };
 		48B789561C195944003BC426 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
+		7D21CAB61C1B0516007A3BF0 /* ScanResultController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScanResultController.swift; sourceTree = "<group>"; };
+		7D21CAB71C1B0516007A3BF0 /* ScanResultController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ScanResultController.xib; sourceTree = "<group>"; };
 		7D42B9AC1C05EE9A0084D045 /* swiftScan.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = swiftScan.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7D42B9AF1C05EE9A0084D045 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		7D42B9B11C05EE9A0084D045 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -109,6 +113,8 @@
 				7DA82E041C19B4790028B5DB /* QQScanViewController.swift */,
 				48B143C31C17C98B00B2E7D5 /* MainTableViewController.swift */,
 				7DA82E061C19BE170028B5DB /* MyCodeViewController.swift */,
+				7D21CAB61C1B0516007A3BF0 /* ScanResultController.swift */,
+				7D21CAB71C1B0516007A3BF0 /* ScanResultController.xib */,
 			);
 			path = swiftScan;
 			sourceTree = "<group>";
@@ -145,7 +151,7 @@
 				TargetAttributes = {
 					7D42B9AB1C05EE9A0084D045 = {
 						CreatedOnToolsVersion = 7.1;
-						DevelopmentTeam = 63A29QN5UB;
+						DevelopmentTeam = 8LQ7CL73D8;
 					};
 				};
 			};
@@ -175,6 +181,7 @@
 				48B143CA1C1809E700B2E7D5 /* CodeScan.bundle in Resources */,
 				7D42B9BA1C05EE9A0084D045 /* LaunchScreen.storyboard in Resources */,
 				7D42B9B71C05EE9A0084D045 /* Assets.xcassets in Resources */,
+				7D21CAB91C1B0516007A3BF0 /* ScanResultController.xib in Resources */,
 				7DA82E091C19CE5E0028B5DB /* logo.JPG in Resources */,
 				7D42B9B51C05EE9A0084D045 /* Main.storyboard in Resources */,
 				488928AE1C1A6F4D005A8F83 /* swiftScan.podspec in Resources */,
@@ -198,6 +205,7 @@
 				488928E81C1A7BE4005A8F83 /* LBXScanWrapper.swift in Sources */,
 				7D42B9B01C05EE9A0084D045 /* AppDelegate.swift in Sources */,
 				488928E71C1A7BE4005A8F83 /* LBXScanViewStyle.swift in Sources */,
+				7D21CAB81C1B0516007A3BF0 /* ScanResultController.swift in Sources */,
 				488928E41C1A7BE4005A8F83 /* LBXScanNetAnimation.swift in Sources */,
 				488928E31C1A7BE4005A8F83 /* LBXScanLineAnimation.swift in Sources */,
 			);
@@ -316,7 +324,7 @@
 				INFOPLIST_FILE = swiftScan/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.mxabc.swiftScan2;
+				PRODUCT_BUNDLE_IDENTIFIER = com.mxabc.swiftScan;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Debug;
@@ -329,7 +337,7 @@
 				INFOPLIST_FILE = swiftScan/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.mxabc.swiftScan2;
+				PRODUCT_BUNDLE_IDENTIFIER = com.mxabc.swiftScan;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Release;

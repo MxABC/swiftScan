@@ -38,6 +38,13 @@ class QQScanViewController: LBXScanViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        //需要识别后的图像
+        isNeedCodeImage = true
+        
+        //框向上移动10个像素
+        scanStyle?.centerUpOffset += 10
+    
 
         // Do any additional setup after loading the view.
     }
@@ -48,6 +55,22 @@ class QQScanViewController: LBXScanViewController {
         
         drawBottomItems()
     }
+    
+    
+  
+    override func handleCodeResult(arrayResult: [LBXScanResult]) {
+        
+        for result:LBXScanResult in arrayResult
+        {
+            print("%@",result.strScanned)
+        }
+        
+        let result:LBXScanResult = arrayResult[0]
+        
+        let vc = ScanResultController()
+        vc.codeResult = result
+        navigationController?.pushViewController(vc, animated: true)
+    }
 
     
     func drawBottomItems()
@@ -57,7 +80,9 @@ class QQScanViewController: LBXScanViewController {
             return;
         }
         
-        bottomItemsView = UIView(frame:CGRectMake( 0.0, CGRectGetMaxY(self.view.frame)-100,self.view.frame.size.width, 100 ) )
+        let yMax = CGRectGetMaxY(self.view.frame) - CGRectGetMinY(self.view.frame)
+        
+        bottomItemsView = UIView(frame:CGRectMake( 0.0, yMax-100,self.view.frame.size.width, 100 ) )
         
         
         bottomItemsView!.backgroundColor = UIColor(red: 0.0, green: 0.0, blue: 0.0, alpha: 0.6)

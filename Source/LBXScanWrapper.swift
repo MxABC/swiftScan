@@ -18,11 +18,15 @@ struct  LBXScanResult {
     //码的类型
     var strBarCodeType:String? = ""
     
-    init(str:String?,img:UIImage?,barCodeType:String?)
+    //码在图像中的位置
+    var arrayCorner:[AnyObject]?
+    
+    init(str:String?,img:UIImage?,barCodeType:String?,corner:[AnyObject]?)
     {
         self.strScanned = str
         self.imgScanned = img
         self.strBarCodeType = barCodeType
+        self.arrayCorner = corner
     }
 }
 
@@ -179,14 +183,19 @@ class LBXScanWrapper: NSObject,AVCaptureMetadataOutputObjectsDelegate {
         {
             if current.isKindOfClass(AVMetadataMachineReadableCodeObject)
             {
+                let code = current as! AVMetadataMachineReadableCodeObject
+                
                 //码类型
-                let codeType = (current as! AVMetadataObject).type
+                let codeType = code.type
                 print("code type:%@",codeType)
                 //码内容
-                let codeContent = (current as! AVMetadataMachineReadableCodeObject).stringValue
+                let codeContent = code.stringValue
                 print("code string:%@",codeContent)
                 
-                arrayResult.append(LBXScanResult(str: codeContent, img: UIImage(), barCodeType: codeType))
+                //4个字典，分别 左上角-右上角-右下角-左下角的 坐标百分百，可以使用这个比例抠出码的图像
+                let arrayRatio = code.corners
+                
+                arrayResult.append(LBXScanResult(str: codeContent, img: UIImage(), barCodeType: codeType,corner: code.corners))
             }
         }
         
@@ -226,7 +235,7 @@ class LBXScanWrapper: NSObject,AVCaptureMetadataOutputObjectsDelegate {
                 let scanImg:UIImage? = UIImage(data: imageData)
                 
                 
-                for idx in 0...self.arrayResult.count
+                for idx in 0...self.arrayResult.count-1
                 {
                     self.arrayResult[idx].imgScanned = scanImg
                 }
@@ -395,7 +404,7 @@ class LBXScanWrapper: NSObject,AVCaptureMetadataOutputObjectsDelegate {
                     let scanResult = featureTmp.messageString
                     
                     
-                    let result = LBXScanResult(str: scanResult, img: image, barCodeType: AVMetadataObjectTypeQRCode)
+                    let result = LBXScanResult(str: scanResult, img: image, barCodeType: AVMetadataObjectTypeQRCode,corner: nil)
                     
                     returnResult.append(result)
                 }
@@ -480,6 +489,87 @@ class LBXScanWrapper: NSObject,AVCaptureMetadataOutputObjectsDelegate {
         return resized;
     }
     
+    
+    //MARK:根据扫描结果，获取图像中得二维码区域图像（如果相机拍摄角度故意很倾斜，获取的图像效果很差）
+    static func getConcreteCodeImage(srcCodeImage:UIImage,codeResult:LBXScanResult)->UIImage?
+    {
+        let rect:CGRect = getConcreteCodeRectFromImage(srcCodeImage, codeResult: codeResult)
+        
+        if CGRectIsEmpty(rect)
+        {
+            return nil
+        }
+        
+        let img = imageByCroppingWithStyle(srcCodeImage, rect: rect)
+        
+        if img != nil
+        {
+            let imgRotation = imageRotation(img!, orientation: UIImageOrientation.Right)
+            return imgRotation
+        }
+        return nil
+    }
+    
+    static func getConcreteCodeImage(srcCodeImage:UIImage,rect:CGRect)->UIImage?
+    {
+        if CGRectIsEmpty(rect)
+        {
+            return nil
+        }
+        
+        let img = imageByCroppingWithStyle(srcCodeImage, rect: rect)
+        
+        if img != nil
+        {
+            let imgRotation = imageRotation(img!, orientation: UIImageOrientation.Right)
+            return imgRotation
+        }
+        return nil
+    }
+
+    static func getConcreteCodeRectFromImage(srcCodeImage:UIImage,codeResult:LBXScanResult)->CGRect
+    {
+        if (codeResult.arrayCorner == nil || codeResult.arrayCorner?.count < 4  )
+        {
+            return CGRectZero
+        }
+        
+        let corner:[[String:Float]] = codeResult.arrayCorner  as! [[String:Float]]
+        
+        let dicTopLeft     = corner[0]
+        let dicTopRight    = corner[1]
+        let dicBottomRight = corner[2]
+        let dicBottomLeft  = corner[3]
+        
+        let xLeftTopRatio:Float = dicTopLeft["X"]!
+        let yLeftTopRatio:Float  = dicTopLeft["Y"]!
+        
+        let xRightTopRatio:Float = dicTopRight["X"]!
+        let yRightTopRatio:Float = dicTopRight["Y"]!
+        
+        let xBottomRightRatio:Float = dicBottomRight["X"]!
+        let yBottomRightRatio:Float = dicBottomRight["Y"]!
+        
+        let xLeftBottomRatio:Float = dicBottomLeft["X"]!
+        let yLeftBottomRatio:Float = dicBottomLeft["Y"]!
+        
+        //由于截图只能矩形，所以截图不规则四边形的最大外围
+        let xMinLeft = CGFloat( min(xLeftTopRatio, xLeftBottomRatio) )
+        let xMaxRight = CGFloat( max(xRightTopRatio, xBottomRightRatio) )
+        
+        let yMinTop = CGFloat( min(yLeftTopRatio, yRightTopRatio) )
+        let yMaxBottom = CGFloat ( max(yLeftBottomRatio, yBottomRightRatio) )
+        
+        let imgW = srcCodeImage.size.width
+        let imgH = srcCodeImage.size.height
+        
+        //宽高反过来计算
+        let rect = CGRectMake(xMinLeft * imgH, yMinTop*imgW,(xMaxRight-xMinLeft)*imgH, (yMaxBottom-yMinTop)*imgW)
+        return rect
+    }
+    
+    //MARK: ----图像处理
+    
     /**
     @brief  图像中间加logo图片
     @param srcImg    原图像
@@ -498,7 +588,7 @@ class LBXScanWrapper: NSObject,AVCaptureMetadataOutputObjectsDelegate {
         return resultingImage;
     }
 
-    
+    //图像缩放
     static func resizeImage(image:UIImage,quality:CGInterpolationQuality,rate:CGFloat)->UIImage?
     {
         var resized:UIImage?;
@@ -514,6 +604,74 @@ class LBXScanWrapper: NSObject,AVCaptureMetadataOutputObjectsDelegate {
         UIGraphicsEndImageContext();
         
         return resized;
+    }
+    
+    
+    //图像裁剪
+    static func imageByCroppingWithStyle(srcImg:UIImage,rect:CGRect)->UIImage?
+    {
+        let imageRef = srcImg.CGImage
+        let imagePartRef = CGImageCreateWithImageInRect(imageRef,rect)
+        let cropImage = UIImage(CGImage: imagePartRef!)
+        
+        return cropImage
+    }
+    //图像旋转
+    static func imageRotation(image:UIImage,orientation:UIImageOrientation)->UIImage
+    {
+        var rotate:Double = 0.0;
+        var rect:CGRect;
+        var translateX:CGFloat = 0.0;
+        var translateY:CGFloat = 0.0;
+        var scaleX:CGFloat = 1.0;
+        var scaleY:CGFloat = 1.0;
+        
+        switch (orientation) {
+        case UIImageOrientation.Left:
+            rotate = M_PI_2;
+            rect = CGRectMake(0, 0, image.size.height, image.size.width);
+            translateX = 0;
+            translateY = -rect.size.width;
+            scaleY = rect.size.width/rect.size.height;
+            scaleX = rect.size.height/rect.size.width;
+            break;
+        case UIImageOrientation.Right:
+            rotate = 3 * M_PI_2;
+            rect = CGRectMake(0, 0, image.size.height, image.size.width);
+            translateX = -rect.size.height;
+            translateY = 0;
+            scaleY = rect.size.width/rect.size.height;
+            scaleX = rect.size.height/rect.size.width;
+            break;
+        case UIImageOrientation.Down:
+            rotate = M_PI;
+            rect = CGRectMake(0, 0, image.size.width, image.size.height);
+            translateX = -rect.size.width;
+            translateY = -rect.size.height;
+            break;
+        default:
+            rotate = 0.0;
+            rect = CGRectMake(0, 0, image.size.width, image.size.height);
+            translateX = 0;
+            translateY = 0;
+            break;
+        }
+        
+        UIGraphicsBeginImageContext(rect.size);
+        let context = UIGraphicsGetCurrentContext();
+        //做CTM变换
+        CGContextTranslateCTM(context, 0.0, rect.size.height);
+        CGContextScaleCTM(context, 1.0, -1.0);
+        CGContextRotateCTM(context, CGFloat(rotate));
+        CGContextTranslateCTM(context, translateX, translateY);
+        
+        CGContextScaleCTM(context, scaleX, scaleY);
+        //绘制图片
+        CGContextDrawImage(context, CGRectMake(0, 0, rect.size.width, rect.size.height), image.CGImage);
+        
+        let newPic = UIGraphicsGetImageFromCurrentImageContext();
+        
+        return newPic;
     }
 
     deinit
