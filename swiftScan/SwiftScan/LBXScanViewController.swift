@@ -183,16 +183,26 @@ class LBXScanViewController: UIViewController,UIImagePickerControllerDelegate,UI
     {
         if LBXScanWrapper.isSysIos8Later()
         {
-            let alertController = UIAlertController(title: title, message:message, preferredStyle: UIAlertControllerStyle.Alert)
-            
-            let alertAction = UIAlertAction(title:  "知道了", style: UIAlertActionStyle.Default) { (alertAction) -> Void in
+        
+            if #available(iOS 8.0, *) {
+                let alertController = UIAlertController(title: title, message:message, preferredStyle: UIAlertControllerStyle.Alert)
+                let alertAction = UIAlertAction(title:  "知道了", style: UIAlertActionStyle.Default) { (alertAction) -> Void in
+                    
+                    self.restartScan()
+                }
                 
-                self.restartScan()
+                alertController.addAction(alertAction)
+                
+                presentViewController(alertController, animated: true, completion: nil)
+                
+            } else {
+                // Fallback on earlier versions
+                
+    
+                
             }
             
-            alertController.addAction(alertAction)
-            
-            presentViewController(alertController, animated: true, completion: nil)
+           
         }
     }
     

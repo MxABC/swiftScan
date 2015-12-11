@@ -329,7 +329,7 @@ class LBXScanWrapper: NSObject,AVCaptureMetadataOutputObjectsDelegate {
     static func defaultMetaDataObjectTypes() ->[String]
     {
         var types =
-           [AVMetadataObjectTypeQRCode,
+        [AVMetadataObjectTypeQRCode,
             AVMetadataObjectTypeUPCECode,
             AVMetadataObjectTypeCode39Code,
             AVMetadataObjectTypeCode39Mod43Code,
@@ -339,17 +339,19 @@ class LBXScanWrapper: NSObject,AVCaptureMetadataOutputObjectsDelegate {
             AVMetadataObjectTypeCode128Code,
             AVMetadataObjectTypePDF417Code,
             AVMetadataObjectTypeAztecCode,
-            AVMetadataObjectTypeInterleaved2of5Code,
-            AVMetadataObjectTypeITF14Code,
-            AVMetadataObjectTypeDataMatrixCode
+            
         ];
         
-        if (floor(NSFoundationVersionNumber) > NSFoundationVersionNumber_iOS_8_0)
-        {
+        //if (floor(NSFoundationVersionNumber) > NSFoundationVersionNumber_iOS_8_0)
+        
+        if #available(iOS 8.0, *) {
             types.append(AVMetadataObjectTypeInterleaved2of5Code)
             types.append(AVMetadataObjectTypeITF14Code)
             types.append(AVMetadataObjectTypeDataMatrixCode)
             
+            types.append(AVMetadataObjectTypeInterleaved2of5Code)
+            types.append(AVMetadataObjectTypeITF14Code)
+            types.append(AVMetadataObjectTypeDataMatrixCode)
         }
         
         return types;
@@ -374,28 +376,32 @@ class LBXScanWrapper: NSObject,AVCaptureMetadataOutputObjectsDelegate {
         
         if LBXScanWrapper.isSysIos8Later()
         {
-            let detector:CIDetector = CIDetector(ofType: CIDetectorTypeQRCode, context: nil, options: [CIDetectorAccuracy:CIDetectorAccuracyHigh])
-            
-            
-            let img = CIImage(CGImage: (image.CGImage)!)
-            
-            let features:[CIFeature]? = detector.featuresInImage(img, options: [CIDetectorAccuracy:CIDetectorAccuracyHigh])
-            
-            if( features != nil && features?.count > 0)
-            {
-                let feature = features![0]
+            if #available(iOS 8.0, *) {
+                let detector:CIDetector = CIDetector(ofType: CIDetectorTypeQRCode, context: nil, options: [CIDetectorAccuracy:CIDetectorAccuracyHigh])
                 
-                if feature.isKindOfClass(CIQRCodeFeature)
+                let img = CIImage(CGImage: (image.CGImage)!)
+                
+                let features:[CIFeature]? = detector.featuresInImage(img, options: [CIDetectorAccuracy:CIDetectorAccuracyHigh])
+                
+                if( features != nil && features?.count > 0)
                 {
-                    let featureTmp:CIQRCodeFeature = feature as! CIQRCodeFeature
+                    let feature = features![0]
                     
-                    let scanResult = featureTmp.messageString
-                    
-                    
-                    let result = LBXScanResult(str: scanResult, img: image, barCodeType: AVMetadataObjectTypeQRCode)
-                    
-                    returnResult.append(result)
+                    if feature.isKindOfClass(CIQRCodeFeature)
+                    {
+                        let featureTmp:CIQRCodeFeature = feature as! CIQRCodeFeature
+                        
+                        let scanResult = featureTmp.messageString
+                        
+                        
+                        let result = LBXScanResult(str: scanResult, img: image, barCodeType: AVMetadataObjectTypeQRCode)
+                        
+                        returnResult.append(result)
+                    }
                 }
+                
+            } else {
+                // Fallback on earlier versions
             }
         }
         
@@ -404,45 +410,48 @@ class LBXScanWrapper: NSObject,AVCaptureMetadataOutputObjectsDelegate {
 
     
     //MARK: -- - 生成二维码，背景色及二维码颜色设置
-    //oc 引用自:http://www.jianshu.com/p/e8f7a257b612
-    
     static func createCode( codeType:String, codeString:String, size:CGSize,qrColor:UIColor,bkColor:UIColor )->UIImage?
     {
-        let stringData = codeString.dataUsingEncoding(NSUTF8StringEncoding)
+        if #available(iOS 8.0, *)
+        {
+            let stringData = codeString.dataUsingEncoding(NSUTF8StringEncoding)
+            
+            
+            //系统自带能生成的码
+            //        CIAztecCodeGenerator
+            //        CICode128BarcodeGenerator
+            //        CIPDF417BarcodeGenerator
+            //        CIQRCodeGenerator
+            let qrFilter = CIFilter(name: codeType)
+            
+            
+            qrFilter?.setValue(stringData, forKey: "inputMessage")
+            
+            qrFilter?.setValue("H", forKey: "inputCorrectionLevel")
+            
+            
+            //上色
+            let colorFilter = CIFilter(name: "CIFalseColor", withInputParameters: ["inputImage":qrFilter!.outputImage!,"inputColor0":CIColor(CGColor: qrColor.CGColor),"inputColor1":CIColor(CGColor: bkColor.CGColor)])
+            
+            
+            let qrImage = colorFilter!.outputImage;
+            
+            //绘制
+            let cgImage = CIContext().createCGImage(qrImage!, fromRect: qrImage!.extent)
+            
+            
+            UIGraphicsBeginImageContext(size);
+            let context = UIGraphicsGetCurrentContext();
+            CGContextSetInterpolationQuality(context, CGInterpolationQuality.None);
+            CGContextScaleCTM(context, 1.0, -1.0);
+            CGContextDrawImage(context, CGContextGetClipBoundingBox(context), cgImage);
+            let codeImage = UIGraphicsGetImageFromCurrentImageContext();
+            UIGraphicsEndImageContext();
+            
+            return codeImage
+        }
         
-        
-        //系统自带能生成的码
-        //        CIAztecCodeGenerator
-        //        CICode128BarcodeGenerator
-        //        CIPDF417BarcodeGenerator
-        //        CIQRCodeGenerator
-        let qrFilter = CIFilter(name: codeType)
-        
-        
-        qrFilter?.setValue(stringData, forKey: "inputMessage")
-        
-        qrFilter?.setValue("H", forKey: "inputCorrectionLevel")
-        
-        
-        //上色
-        let colorFilter = CIFilter(name: "CIFalseColor", withInputParameters: ["inputImage":qrFilter!.outputImage!,"inputColor0":CIColor(CGColor: qrColor.CGColor),"inputColor1":CIColor(CGColor: bkColor.CGColor)])
-        
-        
-        let qrImage = colorFilter!.outputImage;
-        
-        //绘制
-        let cgImage = CIContext().createCGImage(qrImage!, fromRect: qrImage!.extent)
-        
-        
-        UIGraphicsBeginImageContext(size);
-        let context = UIGraphicsGetCurrentContext();
-        CGContextSetInterpolationQuality(context, CGInterpolationQuality.None);
-        CGContextScaleCTM(context, 1.0, -1.0);
-        CGContextDrawImage(context, CGContextGetClipBoundingBox(context), cgImage);
-        let codeImage = UIGraphicsGetImageFromCurrentImageContext();
-        UIGraphicsEndImageContext();
-        
-        return codeImage;
+        return nil
     }
     
     static func createCode128(  codeString:String, size:CGSize,qrColor:UIColor,bkColor:UIColor )->UIImage?
@@ -458,25 +467,19 @@ class LBXScanWrapper: NSObject,AVCaptureMetadataOutputObjectsDelegate {
         let qrFilter = CIFilter(name: "CICode128BarcodeGenerator")
         qrFilter?.setDefaults()
         qrFilter?.setValue(stringData, forKey: "inputMessage")
-  
-         
-            
+        
+        
+        
         let outputImage:CIImage? = qrFilter?.outputImage
-            let context = CIContext()
-            let cgImage = context.createCGImage(outputImage!, fromRect: outputImage!.extent)
-       
-            let image = UIImage(CGImage: cgImage, scale: 1.0, orientation: UIImageOrientation.Up)
+        let context = CIContext()
+        let cgImage = context.createCGImage(outputImage!, fromRect: outputImage!.extent)
         
-            
-            // Resize without interpolating
+        let image = UIImage(CGImage: cgImage, scale: 1.0, orientation: UIImageOrientation.Up)
+        
+        
+        // Resize without interpolating
         let scaleRate:CGFloat = 20.0
-            let resized = resizeImage(image, quality: CGInterpolationQuality.None, rate: scaleRate)
-        
-            
-          //  self.imageView.image = resized;
-//
-       
-
+        let resized = resizeImage(image, quality: CGInterpolationQuality.None, rate: scaleRate)
         
         return resized;
     }
