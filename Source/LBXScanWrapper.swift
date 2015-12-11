@@ -509,7 +509,7 @@ class LBXScanWrapper: NSObject,AVCaptureMetadataOutputObjectsDelegate {
         }
         return nil
     }
-    
+    //根据二维码的区域截取二维码区域图像
     static func getConcreteCodeImage(srcCodeImage:UIImage,rect:CGRect)->UIImage?
     {
         if CGRectIsEmpty(rect)
@@ -527,6 +527,7 @@ class LBXScanWrapper: NSObject,AVCaptureMetadataOutputObjectsDelegate {
         return nil
     }
 
+    //获取二维码的图像区域
     static func getConcreteCodeRectFromImage(srcCodeImage:UIImage,codeResult:LBXScanResult)->CGRect
     {
         if (codeResult.arrayCorner == nil || codeResult.arrayCorner?.count < 4  )
