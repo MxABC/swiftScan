@@ -1,9 +1,9 @@
 #swiftscan
 
-### xcode版本
-Demo xcode版本：xcode7.1
-
  [链接objetive-c版本](https://github.com/MxABC/LBXScan)
+
+### xcode
+Demo xcode版本号：xcode7.1 
 
 ## 介绍
 **swift封装系统自带扫码及识别图片功能**
