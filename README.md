@@ -2,9 +2,9 @@
 # ios 二维码、条形码 swift 版本
 
 
-objetive-c Version <img src="https://github.com/MxABC/LBXScan/blob/master/DemoTests/objectiveCIcon.jpg" height="40" width="35">
+objective-c Version <img src="https://github.com/MxABC/LBXScan/blob/master/DemoTests/objectiveCIcon.jpg" height="50" width="40">
 =====
-If you are looking for objetive-c version check it out here: **[LBXScan](https://github.com/MxABC/LBXScan)**
+If you are looking for objective-c version check it out here: **[LBXScan](https://github.com/MxABC/LBXScan)**
 
 ### xcode
 Demo xcode版本号：xcode7.1 
