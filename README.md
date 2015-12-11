@@ -7,7 +7,7 @@ objective-c Version <img src="https://github.com/MxABC/LBXScan/blob/master/DemoT
 If you are looking for objective-c version check it out here: **[LBXScan](https://github.com/MxABC/LBXScan)**
 
 ### xcode
-Demo xcode版本号：xcode7.1 
+测试程序 xcode版本号：xcode7.1 
 
 ## 介绍
 **swift封装系统自带扫码及识别图片功能**
