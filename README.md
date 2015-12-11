@@ -1,6 +1,10 @@
-#swiftscan
 
- [链接objetive-c版本](https://github.com/MxABC/LBXScan)
+# ios 二维码、条形码 swift 版本
+
+
+objetive-c Version <img src="https://github.com/MxABC/LBXScan/blob/master/DemoTests/objectiveCIcon.jpg" height="25" width="25">
+=====
+If you are looking for objetive-c version check it out here: **[LBXScan](https://github.com/MxABC/LBXScan)**
 
 ### xcode
 Demo xcode版本号：xcode7.1 
