@@ -76,9 +76,9 @@ class LBXScanViewController: UIViewController,UIImagePickerControllerDelegate,UI
             
             scanObj = LBXScanWrapper(videoPreView: self.view,objType:arrayCodeType!, isCaptureImg: false,cropRect:cropRect, success: { [weak self] (arrayResult) -> Void in
                 
-                if self != nil
+                if let strongSelf = self
                 {
-                    self!.handleCodeResult(arrayResult)
+                    strongSelf.handleCodeResult(arrayResult)
                 }
              })
         }
@@ -191,10 +191,10 @@ class LBXScanViewController: UIViewController,UIImagePickerControllerDelegate,UI
             
             let alertController = UIAlertController(title: title, message:message, preferredStyle: UIAlertControllerStyle.Alert)
             let alertAction = UIAlertAction(title:  "知道了", style: UIAlertActionStyle.Default) { [weak self] (alertAction) -> Void in
-                            
-                if self != nil
+                
+                if let strongSelf = self
                 {
-                    self!.restartScan()
+                    strongSelf.restartScan()
                 }
             }
             
