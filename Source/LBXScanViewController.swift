@@ -74,10 +74,13 @@ class LBXScanViewController: UIViewController,UIImagePickerControllerDelegate,UI
                 arrayCodeType = [AVMetadataObjectTypeQRCode,AVMetadataObjectTypeEAN13Code,AVMetadataObjectTypeCode128Code]
             }
             
-            scanObj = LBXScanWrapper(videoPreView: self.view,objType:arrayCodeType!, isCaptureImg: false,cropRect:cropRect, success: { [unowned self] (arrayResult) -> Void in
+            scanObj = LBXScanWrapper(videoPreView: self.view,objType:arrayCodeType!, isCaptureImg: false,cropRect:cropRect, success: { [weak self] (arrayResult) -> Void in
                 
-                self.handleCodeResult(arrayResult)
-            })
+                if self != nil
+                {
+                    self!.handleCodeResult(arrayResult)
+                }
+             })
         }
         
         //结束相机等待提示
@@ -187,10 +190,12 @@ class LBXScanViewController: UIViewController,UIImagePickerControllerDelegate,UI
             //if #available(iOS 8.0, *)
             
             let alertController = UIAlertController(title: title, message:message, preferredStyle: UIAlertControllerStyle.Alert)
-            let alertAction = UIAlertAction(title:  "知道了", style: UIAlertActionStyle.Default) { [unowned self] (alertAction) -> Void in
-                
-            
-                self.restartScan()
+            let alertAction = UIAlertAction(title:  "知道了", style: UIAlertActionStyle.Default) { [weak self] (alertAction) -> Void in
+                            
+                if self != nil
+                {
+                    self!.restartScan()
+                }
             }
             
             alertController.addAction(alertAction)
