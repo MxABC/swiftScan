@@ -3,7 +3,7 @@
 ### xcode版本
 Demo xcode版本：xcode7.1
 
- [链接objetive-c版本](https://github.com/MxABC/LBXScan))
+ [链接objetive-c版本](https://github.com/MxABC/LBXScan)
 
 ## 介绍
 **swift封装系统自带扫码及识别图片功能**
@@ -29,9 +29,8 @@ Demo xcode版本：xcode7.1
 
 
 
-## Installation with CocoaPods
+### Installation with CocoaPods
 
-#### Podfile
 
 ```ruby
 platform :ios, '8.0'
