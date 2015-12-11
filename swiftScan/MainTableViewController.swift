@@ -2,7 +2,7 @@
 //  MainTableViewController.swift
 //  swiftScan
 //
-//  Created by csc on 15/12/9.
+//  Created by lbxia on 15/12/9.
 //  Copyright © 2015年 xialibing. All rights reserved.
 //
 

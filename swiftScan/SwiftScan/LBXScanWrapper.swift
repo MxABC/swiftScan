@@ -2,7 +2,7 @@
 //  LBXScanWrapper.swift
 //  swiftScan
 //
-//  Created by csc on 15/12/10.
+//  Created by lbxia on 15/12/10.
 //  Copyright © 2015年 xialibing. All rights reserved.
 //
 

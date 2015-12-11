@@ -1,21 +1,20 @@
 //
-//  LBXScanNetAnimation.swift
+//  LBXScanLineAnimation.swift
 //  swiftScan
 //
-//  Created by csc on 15/12/9.
+//  Created by lbxia on 15/12/9.
 //  Copyright © 2015年 xialibing. All rights reserved.
 //
 
 import UIKit
 
-class LBXScanNetAnimation: UIImageView {
+class LBXScanLineAnimation: UIImageView {
 
     var isAnimationing = false
     var animationRect:CGRect = CGRectZero
     
-    
     func startAnimatingWithRect(animationRect:CGRect, parentView:UIView, image:UIImage?)
-    {
+    { 
         self.image = image
         self.animationRect = animationRect
         parentView.addSubview(self)
@@ -24,12 +23,10 @@ class LBXScanNetAnimation: UIImageView {
         
         isAnimationing = true;
         
-        if (image != nil)
+        if image != nil
         {
-           stepAnimation()
+            stepAnimation()
         }
-       
-       
         
     }
     
@@ -39,18 +36,16 @@ class LBXScanNetAnimation: UIImageView {
             return;
         }
         
-        var frame = animationRect;
-        
+        var frame:CGRect = animationRect;
         
         let hImg = self.image!.size.height * animationRect.size.width / self.image!.size.width;
         
         frame.origin.y -= hImg;
         frame.size.height = hImg;
         self.frame = frame;
-        
         self.alpha = 0.0;
         
-        UIView.animateWithDuration(1.2, animations: { () -> Void in
+        UIView.animateWithDuration(1.4, animations: { () -> Void in
             
             self.alpha = 1.0;
             
@@ -63,9 +58,8 @@ class LBXScanNetAnimation: UIImageView {
             self.frame = frame;
             
             }, completion:{ (value: Bool) -> Void in
-                
+                                
                 self.performSelector("stepAnimation", withObject: nil, afterDelay: 0.3)
-               
         })
         
     }
@@ -75,7 +69,16 @@ class LBXScanNetAnimation: UIImageView {
         self.hidden = true;
         isAnimationing = false;
     }
-
-
+    
+    deinit
+    {
+        print("LBXScanLineAnimation deinit")
+        stopStepAnimating()
+    }
 
 }
+
+
+
+
+

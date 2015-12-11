@@ -2,7 +2,7 @@
 //  LBXScanViewController.swift
 //  swiftScan
 //
-//  Created by csc on 15/12/8.
+//  Created by lbxia on 15/12/8.
 //  Copyright © 2015年 xialibing. All rights reserved.
 //
 

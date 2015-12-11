@@ -7,33 +7,37 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		488928AE1C1A6F4D005A8F83 /* swiftScan.podspec in Resources */ = {isa = PBXBuildFile; fileRef = 488928AD1C1A6F4D005A8F83 /* swiftScan.podspec */; };
+		488928B61C1A6F9F005A8F83 /* LBXScanLineAnimation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 488928B01C1A6F9F005A8F83 /* LBXScanLineAnimation.swift */; };
+		488928B71C1A6F9F005A8F83 /* LBXScanNetAnimation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 488928B11C1A6F9F005A8F83 /* LBXScanNetAnimation.swift */; };
+		488928B81C1A6F9F005A8F83 /* LBXScanView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 488928B21C1A6F9F005A8F83 /* LBXScanView.swift */; };
+		488928B91C1A6F9F005A8F83 /* LBXScanViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 488928B31C1A6F9F005A8F83 /* LBXScanViewController.swift */; };
+		488928BA1C1A6F9F005A8F83 /* LBXScanViewStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 488928B41C1A6F9F005A8F83 /* LBXScanViewStyle.swift */; };
+		488928BB1C1A6F9F005A8F83 /* LBXScanWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 488928B51C1A6F9F005A8F83 /* LBXScanWrapper.swift */; };
 		48B143C41C17C98B00B2E7D5 /* MainTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48B143C31C17C98B00B2E7D5 /* MainTableViewController.swift */; };
-		48B143C61C18095500B2E7D5 /* LBXScanLineAnimation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48B143C51C18095500B2E7D5 /* LBXScanLineAnimation.swift */; };
-		48B143C81C1809CA00B2E7D5 /* LBXScanNetAnimation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48B143C71C1809CA00B2E7D5 /* LBXScanNetAnimation.swift */; };
 		48B143CA1C1809E700B2E7D5 /* CodeScan.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 48B143C91C1809E700B2E7D5 /* CodeScan.bundle */; };
-		48B789531C19071F003BC426 /* LBXScanWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48B789521C19071F003BC426 /* LBXScanWrapper.swift */; };
 		48B789571C195944003BC426 /* README.md in Sources */ = {isa = PBXBuildFile; fileRef = 48B789561C195944003BC426 /* README.md */; };
-		48BE28941C16D16A0051EA4C /* LBXScanViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48BE28931C16D16A0051EA4C /* LBXScanViewController.swift */; };
 		7D42B9B01C05EE9A0084D045 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D42B9AF1C05EE9A0084D045 /* AppDelegate.swift */; };
 		7D42B9B21C05EE9A0084D045 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D42B9B11C05EE9A0084D045 /* ViewController.swift */; };
 		7D42B9B51C05EE9A0084D045 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7D42B9B31C05EE9A0084D045 /* Main.storyboard */; };
 		7D42B9B71C05EE9A0084D045 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7D42B9B61C05EE9A0084D045 /* Assets.xcassets */; };
 		7D42B9BA1C05EE9A0084D045 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7D42B9B81C05EE9A0084D045 /* LaunchScreen.storyboard */; };
-		7D98F5DD1C170BF000602D59 /* LBXScanView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D98F5DC1C170BF000602D59 /* LBXScanView.swift */; };
-		7D98F5DF1C1710A800602D59 /* LBXScanViewStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D98F5DE1C1710A800602D59 /* LBXScanViewStyle.swift */; };
 		7DA82E051C19B4790028B5DB /* QQScanViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DA82E041C19B4790028B5DB /* QQScanViewController.swift */; };
 		7DA82E071C19BE170028B5DB /* MyCodeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DA82E061C19BE170028B5DB /* MyCodeViewController.swift */; };
 		7DA82E091C19CE5E0028B5DB /* logo.JPG in Resources */ = {isa = PBXBuildFile; fileRef = 7DA82E081C19CE5E0028B5DB /* logo.JPG */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		488928AD1C1A6F4D005A8F83 /* swiftScan.podspec */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = swiftScan.podspec; sourceTree = "<group>"; };
+		488928B01C1A6F9F005A8F83 /* LBXScanLineAnimation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LBXScanLineAnimation.swift; sourceTree = "<group>"; };
+		488928B11C1A6F9F005A8F83 /* LBXScanNetAnimation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LBXScanNetAnimation.swift; sourceTree = "<group>"; };
+		488928B21C1A6F9F005A8F83 /* LBXScanView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LBXScanView.swift; sourceTree = "<group>"; };
+		488928B31C1A6F9F005A8F83 /* LBXScanViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LBXScanViewController.swift; sourceTree = "<group>"; };
+		488928B41C1A6F9F005A8F83 /* LBXScanViewStyle.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LBXScanViewStyle.swift; sourceTree = "<group>"; };
+		488928B51C1A6F9F005A8F83 /* LBXScanWrapper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LBXScanWrapper.swift; sourceTree = "<group>"; };
 		48B143C31C17C98B00B2E7D5 /* MainTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainTableViewController.swift; sourceTree = "<group>"; };
-		48B143C51C18095500B2E7D5 /* LBXScanLineAnimation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LBXScanLineAnimation.swift; sourceTree = "<group>"; };
-		48B143C71C1809CA00B2E7D5 /* LBXScanNetAnimation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LBXScanNetAnimation.swift; sourceTree = "<group>"; };
 		48B143C91C1809E700B2E7D5 /* CodeScan.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = CodeScan.bundle; sourceTree = "<group>"; };
-		48B789521C19071F003BC426 /* LBXScanWrapper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LBXScanWrapper.swift; sourceTree = "<group>"; };
 		48B789561C195944003BC426 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
-		48BE28931C16D16A0051EA4C /* LBXScanViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LBXScanViewController.swift; sourceTree = "<group>"; };
 		7D42B9AC1C05EE9A0084D045 /* swiftScan.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = swiftScan.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7D42B9AF1C05EE9A0084D045 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		7D42B9B11C05EE9A0084D045 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -43,8 +47,6 @@
 		7D42B9BB1C05EE9A0084D045 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		7D46320C1C18683A00D70CF1 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Main.strings"; sourceTree = "<group>"; };
 		7D46320D1C18683A00D70CF1 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/LaunchScreen.strings"; sourceTree = "<group>"; };
-		7D98F5DC1C170BF000602D59 /* LBXScanView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LBXScanView.swift; sourceTree = "<group>"; };
-		7D98F5DE1C1710A800602D59 /* LBXScanViewStyle.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LBXScanViewStyle.swift; sourceTree = "<group>"; };
 		7DA82E041C19B4790028B5DB /* QQScanViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QQScanViewController.swift; sourceTree = "<group>"; };
 		7DA82E061C19BE170028B5DB /* MyCodeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyCodeViewController.swift; sourceTree = "<group>"; };
 		7DA82E081C19CE5E0028B5DB /* logo.JPG */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = logo.JPG; sourceTree = "<group>"; };
@@ -61,9 +63,23 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		488928AF1C1A6F9F005A8F83 /* SwiftScan */ = {
+			isa = PBXGroup;
+			children = (
+				488928B01C1A6F9F005A8F83 /* LBXScanLineAnimation.swift */,
+				488928B11C1A6F9F005A8F83 /* LBXScanNetAnimation.swift */,
+				488928B21C1A6F9F005A8F83 /* LBXScanView.swift */,
+				488928B31C1A6F9F005A8F83 /* LBXScanViewController.swift */,
+				488928B41C1A6F9F005A8F83 /* LBXScanViewStyle.swift */,
+				488928B51C1A6F9F005A8F83 /* LBXScanWrapper.swift */,
+			);
+			path = SwiftScan;
+			sourceTree = "<group>";
+		};
 		7D42B9A31C05EE9A0084D045 = {
 			isa = PBXGroup;
 			children = (
+				488928AD1C1A6F4D005A8F83 /* swiftScan.podspec */,
 				48B789561C195944003BC426 /* README.md */,
 				7D42B9AE1C05EE9A0084D045 /* swiftScan */,
 				7D42B9AD1C05EE9A0084D045 /* Products */,
@@ -81,6 +97,7 @@
 		7D42B9AE1C05EE9A0084D045 /* swiftScan */ = {
 			isa = PBXGroup;
 			children = (
+				488928AF1C1A6F9F005A8F83 /* SwiftScan */,
 				7DA82E081C19CE5E0028B5DB /* logo.JPG */,
 				48B143C91C1809E700B2E7D5 /* CodeScan.bundle */,
 				7D42B9AF1C05EE9A0084D045 /* AppDelegate.swift */,
@@ -89,14 +106,8 @@
 				7D42B9B61C05EE9A0084D045 /* Assets.xcassets */,
 				7D42B9B81C05EE9A0084D045 /* LaunchScreen.storyboard */,
 				7D42B9BB1C05EE9A0084D045 /* Info.plist */,
-				48BE28931C16D16A0051EA4C /* LBXScanViewController.swift */,
 				7DA82E041C19B4790028B5DB /* QQScanViewController.swift */,
-				7D98F5DC1C170BF000602D59 /* LBXScanView.swift */,
-				7D98F5DE1C1710A800602D59 /* LBXScanViewStyle.swift */,
 				48B143C31C17C98B00B2E7D5 /* MainTableViewController.swift */,
-				48B143C51C18095500B2E7D5 /* LBXScanLineAnimation.swift */,
-				48B143C71C1809CA00B2E7D5 /* LBXScanNetAnimation.swift */,
-				48B789521C19071F003BC426 /* LBXScanWrapper.swift */,
 				7DA82E061C19BE170028B5DB /* MyCodeViewController.swift */,
 			);
 			path = swiftScan;
@@ -134,7 +145,7 @@
 				TargetAttributes = {
 					7D42B9AB1C05EE9A0084D045 = {
 						CreatedOnToolsVersion = 7.1;
-						DevelopmentTeam = 8LQ7CL73D8;
+						DevelopmentTeam = 63A29QN5UB;
 					};
 				};
 			};
@@ -166,6 +177,7 @@
 				7D42B9B71C05EE9A0084D045 /* Assets.xcassets in Resources */,
 				7DA82E091C19CE5E0028B5DB /* logo.JPG in Resources */,
 				7D42B9B51C05EE9A0084D045 /* Main.storyboard in Resources */,
+				488928AE1C1A6F4D005A8F83 /* swiftScan.podspec in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -176,18 +188,18 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				48B143C61C18095500B2E7D5 /* LBXScanLineAnimation.swift in Sources */,
-				7D98F5DF1C1710A800602D59 /* LBXScanViewStyle.swift in Sources */,
+				488928B91C1A6F9F005A8F83 /* LBXScanViewController.swift in Sources */,
 				48B789571C195944003BC426 /* README.md in Sources */,
-				7D98F5DD1C170BF000602D59 /* LBXScanView.swift in Sources */,
 				48B143C41C17C98B00B2E7D5 /* MainTableViewController.swift in Sources */,
-				48B789531C19071F003BC426 /* LBXScanWrapper.swift in Sources */,
 				7DA82E051C19B4790028B5DB /* QQScanViewController.swift in Sources */,
-				48BE28941C16D16A0051EA4C /* LBXScanViewController.swift in Sources */,
 				7D42B9B21C05EE9A0084D045 /* ViewController.swift in Sources */,
+				488928B81C1A6F9F005A8F83 /* LBXScanView.swift in Sources */,
 				7DA82E071C19BE170028B5DB /* MyCodeViewController.swift in Sources */,
-				48B143C81C1809CA00B2E7D5 /* LBXScanNetAnimation.swift in Sources */,
+				488928BB1C1A6F9F005A8F83 /* LBXScanWrapper.swift in Sources */,
 				7D42B9B01C05EE9A0084D045 /* AppDelegate.swift in Sources */,
+				488928BA1C1A6F9F005A8F83 /* LBXScanViewStyle.swift in Sources */,
+				488928B71C1A6F9F005A8F83 /* LBXScanNetAnimation.swift in Sources */,
+				488928B61C1A6F9F005A8F83 /* LBXScanLineAnimation.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -304,7 +316,7 @@
 				INFOPLIST_FILE = swiftScan/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.mxabc.swiftScan;
+				PRODUCT_BUNDLE_IDENTIFIER = com.mxabc.swiftScan2;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Debug;
@@ -317,7 +329,7 @@
 				INFOPLIST_FILE = swiftScan/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.mxabc.swiftScan;
+				PRODUCT_BUNDLE_IDENTIFIER = com.mxabc.swiftScan2;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Release;
