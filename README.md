@@ -46,3 +46,11 @@ pod 'swiftScan',:git=>'https://github.com/MxABC/swiftScan.git'
 (加载速度慢，可刷新网页)
 
 ![image](https://github.com/MxABC/LBXScan/blob/master/ScreenShots/page1.png)
+![image](https://github.com/MxABC/LBXScan/blob/master/ScreenShots/page2.png)
+![image](https://github.com/MxABC/LBXScan/blob/master/ScreenShots/page3.png)
+![image](https://github.com/MxABC/LBXScan/blob/master/ScreenShots/page11.png)
+![image](https://github.com/MxABC/LBXScan/blob/master/ScreenShots/page4.png)
+![image](https://github.com/MxABC/LBXScan/blob/master/ScreenShots/page5.png)
+![image](https://github.com/MxABC/LBXScan/blob/master/ScreenShots/page6.png)
+![image](https://github.com/MxABC/LBXScan/blob/master/ScreenShots/page7.png)
+![image](https://github.com/MxABC/LBXScan/blob/master/ScreenShots/page8.png)
