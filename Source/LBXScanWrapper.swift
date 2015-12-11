@@ -341,18 +341,16 @@ class LBXScanWrapper: NSObject,AVCaptureMetadataOutputObjectsDelegate {
             AVMetadataObjectTypeAztecCode,
             
         ];
+        //if #available(iOS 8.0, *)
+       
+        types.append(AVMetadataObjectTypeInterleaved2of5Code)
+        types.append(AVMetadataObjectTypeITF14Code)
+        types.append(AVMetadataObjectTypeDataMatrixCode)
         
-        //if (floor(NSFoundationVersionNumber) > NSFoundationVersionNumber_iOS_8_0)
+        types.append(AVMetadataObjectTypeInterleaved2of5Code)
+        types.append(AVMetadataObjectTypeITF14Code)
+        types.append(AVMetadataObjectTypeDataMatrixCode)
         
-        if #available(iOS 8.0, *) {
-            types.append(AVMetadataObjectTypeInterleaved2of5Code)
-            types.append(AVMetadataObjectTypeITF14Code)
-            types.append(AVMetadataObjectTypeDataMatrixCode)
-            
-            types.append(AVMetadataObjectTypeInterleaved2of5Code)
-            types.append(AVMetadataObjectTypeITF14Code)
-            types.append(AVMetadataObjectTypeDataMatrixCode)
-        }
         
         return types;
     }
@@ -360,7 +358,9 @@ class LBXScanWrapper: NSObject,AVCaptureMetadataOutputObjectsDelegate {
     
     static func isSysIos8Later()->Bool
     {
-        return Float(UIDevice.currentDevice().systemVersion)  >= 8.0 ? true:false
+//        return Float(UIDevice.currentDevice().systemVersion)  >= 8.0 ? true:false
+        
+        return floor(NSFoundationVersionNumber) > NSFoundationVersionNumber_iOS_8_0
     }
 
     /**
@@ -376,33 +376,31 @@ class LBXScanWrapper: NSObject,AVCaptureMetadataOutputObjectsDelegate {
         
         if LBXScanWrapper.isSysIos8Later()
         {
-            if #available(iOS 8.0, *) {
-                let detector:CIDetector = CIDetector(ofType: CIDetectorTypeQRCode, context: nil, options: [CIDetectorAccuracy:CIDetectorAccuracyHigh])
+            //if #available(iOS 8.0, *)
+            
+            let detector:CIDetector = CIDetector(ofType: CIDetectorTypeQRCode, context: nil, options: [CIDetectorAccuracy:CIDetectorAccuracyHigh])
+            
+            let img = CIImage(CGImage: (image.CGImage)!)
+            
+            let features:[CIFeature]? = detector.featuresInImage(img, options: [CIDetectorAccuracy:CIDetectorAccuracyHigh])
+            
+            if( features != nil && features?.count > 0)
+            {
+                let feature = features![0]
                 
-                let img = CIImage(CGImage: (image.CGImage)!)
-                
-                let features:[CIFeature]? = detector.featuresInImage(img, options: [CIDetectorAccuracy:CIDetectorAccuracyHigh])
-                
-                if( features != nil && features?.count > 0)
+                if feature.isKindOfClass(CIQRCodeFeature)
                 {
-                    let feature = features![0]
+                    let featureTmp:CIQRCodeFeature = feature as! CIQRCodeFeature
                     
-                    if feature.isKindOfClass(CIQRCodeFeature)
-                    {
-                        let featureTmp:CIQRCodeFeature = feature as! CIQRCodeFeature
-                        
-                        let scanResult = featureTmp.messageString
-                        
-                        
-                        let result = LBXScanResult(str: scanResult, img: image, barCodeType: AVMetadataObjectTypeQRCode)
-                        
-                        returnResult.append(result)
-                    }
+                    let scanResult = featureTmp.messageString
+                    
+                    
+                    let result = LBXScanResult(str: scanResult, img: image, barCodeType: AVMetadataObjectTypeQRCode)
+                    
+                    returnResult.append(result)
                 }
-                
-            } else {
-                // Fallback on earlier versions
             }
+            
         }
         
         return returnResult
@@ -412,46 +410,44 @@ class LBXScanWrapper: NSObject,AVCaptureMetadataOutputObjectsDelegate {
     //MARK: -- - 生成二维码，背景色及二维码颜色设置
     static func createCode( codeType:String, codeString:String, size:CGSize,qrColor:UIColor,bkColor:UIColor )->UIImage?
     {
-        if #available(iOS 8.0, *)
-        {
-            let stringData = codeString.dataUsingEncoding(NSUTF8StringEncoding)
-            
-            
-            //系统自带能生成的码
-            //        CIAztecCodeGenerator
-            //        CICode128BarcodeGenerator
-            //        CIPDF417BarcodeGenerator
-            //        CIQRCodeGenerator
-            let qrFilter = CIFilter(name: codeType)
-            
-            
-            qrFilter?.setValue(stringData, forKey: "inputMessage")
-            
-            qrFilter?.setValue("H", forKey: "inputCorrectionLevel")
-            
-            
-            //上色
-            let colorFilter = CIFilter(name: "CIFalseColor", withInputParameters: ["inputImage":qrFilter!.outputImage!,"inputColor0":CIColor(CGColor: qrColor.CGColor),"inputColor1":CIColor(CGColor: bkColor.CGColor)])
-            
-            
-            let qrImage = colorFilter!.outputImage;
-            
-            //绘制
-            let cgImage = CIContext().createCGImage(qrImage!, fromRect: qrImage!.extent)
-            
-            
-            UIGraphicsBeginImageContext(size);
-            let context = UIGraphicsGetCurrentContext();
-            CGContextSetInterpolationQuality(context, CGInterpolationQuality.None);
-            CGContextScaleCTM(context, 1.0, -1.0);
-            CGContextDrawImage(context, CGContextGetClipBoundingBox(context), cgImage);
-            let codeImage = UIGraphicsGetImageFromCurrentImageContext();
-            UIGraphicsEndImageContext();
-            
-            return codeImage
-        }
+        //if #available(iOS 8.0, *)
         
-        return nil
+        let stringData = codeString.dataUsingEncoding(NSUTF8StringEncoding)
+        
+        
+        //系统自带能生成的码
+        //        CIAztecCodeGenerator
+        //        CICode128BarcodeGenerator
+        //        CIPDF417BarcodeGenerator
+        //        CIQRCodeGenerator
+        let qrFilter = CIFilter(name: codeType)
+        
+        
+        qrFilter?.setValue(stringData, forKey: "inputMessage")
+        
+        qrFilter?.setValue("H", forKey: "inputCorrectionLevel")
+        
+        
+        //上色
+        let colorFilter = CIFilter(name: "CIFalseColor", withInputParameters: ["inputImage":qrFilter!.outputImage!,"inputColor0":CIColor(CGColor: qrColor.CGColor),"inputColor1":CIColor(CGColor: bkColor.CGColor)])
+        
+        
+        let qrImage = colorFilter!.outputImage;
+        
+        //绘制
+        let cgImage = CIContext().createCGImage(qrImage!, fromRect: qrImage!.extent)
+        
+        
+        UIGraphicsBeginImageContext(size);
+        let context = UIGraphicsGetCurrentContext();
+        CGContextSetInterpolationQuality(context, CGInterpolationQuality.None);
+        CGContextScaleCTM(context, 1.0, -1.0);
+        CGContextDrawImage(context, CGContextGetClipBoundingBox(context), cgImage);
+        let codeImage = UIGraphicsGetImageFromCurrentImageContext();
+        UIGraphicsEndImageContext();
+        
+        return codeImage        
+       
     }
     
     static func createCode128(  codeString:String, size:CGSize,qrColor:UIColor,bkColor:UIColor )->UIImage?
