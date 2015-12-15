@@ -76,8 +76,14 @@ class LBXScanWrapper: NSObject,AVCaptureMetadataOutputObjectsDelegate {
         }
         
         
+        successBlock = success
         
+        // Output
+        output = AVCaptureMetadataOutput()
         
+        isNeedCaptureImage = isCaptureImg
+        
+        stillImageOutput = AVCaptureStillImageOutput();
         
         super.init()
         
@@ -86,14 +92,6 @@ class LBXScanWrapper: NSObject,AVCaptureMetadataOutputObjectsDelegate {
             return
         }
         
-        // Output
-        output = AVCaptureMetadataOutput()
-        
-        stillImageOutput = AVCaptureStillImageOutput();
-        
-        isNeedCaptureImage = isCaptureImg
-        
-        successBlock = success
         
         if session.canAddInput(input)
         {
