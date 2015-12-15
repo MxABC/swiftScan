@@ -193,7 +193,7 @@ class LBXScanWrapper: NSObject,AVCaptureMetadataOutputObjectsDelegate {
                 print("code string:%@",codeContent)
                 
                 //4个字典，分别 左上角-右上角-右下角-左下角的 坐标百分百，可以使用这个比例抠出码的图像
-                let arrayRatio = code.corners
+               // let arrayRatio = code.corners
                 
                 arrayResult.append(LBXScanResult(str: codeContent, img: UIImage(), barCodeType: codeType,corner: code.corners))
             }
