@@ -60,6 +60,12 @@ class LBXScanViewController: UIViewController,UIImagePickerControllerDelegate,UI
     
     func startScan()
     {
+        if(!LBXPermissions .isGetCameraPermission())
+        {
+            showMsg("提示", message: "没有相机权限，请到设置->隐私中开启本程序相机权限")
+            return;
+        }
+        
         if (scanObj == nil)
         {
             var cropRect = CGRectZero
@@ -138,6 +144,11 @@ class LBXScanViewController: UIViewController,UIImagePickerControllerDelegate,UI
     
     func openPhotoAlbum()
     {
+        if(!LBXPermissions.isGetPhotoPermission())
+        {
+            showMsg("提示", message: "没有相册权限，请到设置->隐私中开启本程序相册权限")
+        }
+        
         let picker = UIImagePickerController()
         
         picker.sourceType = UIImagePickerControllerSourceType.PhotoLibrary
