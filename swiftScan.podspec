@@ -4,7 +4,7 @@ Pod::Spec.new do |s|
     s.summary      = 'ios swift scan wrapper'
     s.homepage     = 'https://github.com/MxABC/swiftScan'
     s.license      = 'MIT'
-    s.authors      = {'lbxia' => 'lbxia20091227@foxmail.com'}
+    s.authors      = {'MxABC' => 'lbxia20091227@foxmail.com'}
     s.platform     = :ios, '8.0'
     s.source       = {:git => 'https://github.com/MxABC/swiftScan.git', :tag => s.version}
     s.source_files = 'Source/*.swift'
