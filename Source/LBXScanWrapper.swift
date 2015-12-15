@@ -34,7 +34,7 @@ struct  LBXScanResult {
 
 class LBXScanWrapper: NSObject,AVCaptureMetadataOutputObjectsDelegate {
     
-    let device:AVCaptureDevice = AVCaptureDevice.defaultDeviceWithMediaType(AVMediaTypeVideo);
+    let device:AVCaptureDevice? = AVCaptureDevice.defaultDeviceWithMediaType(AVMediaTypeVideo);
     
     var input:AVCaptureDeviceInput?
     var output:AVCaptureMetadataOutput
@@ -75,6 +75,17 @@ class LBXScanWrapper: NSObject,AVCaptureMetadataOutputObjectsDelegate {
             
         }
         
+        
+        
+        
+        
+        super.init()
+        
+        if device == nil
+        {
+            return
+        }
+        
         // Output
         output = AVCaptureMetadataOutput()
         
@@ -83,8 +94,6 @@ class LBXScanWrapper: NSObject,AVCaptureMetadataOutputObjectsDelegate {
         isNeedCaptureImage = isCaptureImg
         
         successBlock = success
-        
-        super.init()
         
         if session.canAddInput(input)
         {
@@ -131,7 +140,7 @@ class LBXScanWrapper: NSObject,AVCaptureMetadataOutputObjectsDelegate {
         videoPreView.layer .insertSublayer(previewLayer!, atIndex: 0)
         
         
-        if ( device.focusPointOfInterestSupported && device.isFocusModeSupported(AVCaptureFocusMode.ContinuousAutoFocus) )
+        if ( device!.focusPointOfInterestSupported && device!.isFocusModeSupported(AVCaptureFocusMode.ContinuousAutoFocus) )
         {
             do
             {
@@ -282,6 +291,15 @@ class LBXScanWrapper: NSObject,AVCaptureMetadataOutputObjectsDelegate {
         //待测试中途修改是否有效
         output.metadataObjectTypes = objType
     }
+    
+    func isGetFlash()->Bool
+    {
+        if (device != nil &&  device!.hasFlash && device!.hasTorch)
+        {
+            return true
+        }
+        return false
+    }
 
     /**
      打开或关闭闪关灯
@@ -289,18 +307,22 @@ class LBXScanWrapper: NSObject,AVCaptureMetadataOutputObjectsDelegate {
      */
     func setTorch(torch:Bool)
     {
-        do
+        if isGetFlash()
         {
-            try input?.device.lockForConfiguration()
-            
-            input?.device.torchMode = torch ? AVCaptureTorchMode.On : AVCaptureTorchMode.Off            
-            
-            input?.device.unlockForConfiguration()
+            do
+            {
+                try input?.device.lockForConfiguration()
+                
+                input?.device.torchMode = torch ? AVCaptureTorchMode.On : AVCaptureTorchMode.Off
+                
+                input?.device.unlockForConfiguration()
+            }
+            catch let error as NSError {
+                print("device.lockForConfiguration(): \(error)")
+                
+            }
         }
-        catch let error as NSError {
-            print("device.lockForConfiguration(): \(error)")
-            
-        }
+        
     }
     
     
@@ -309,28 +331,31 @@ class LBXScanWrapper: NSObject,AVCaptureMetadataOutputObjectsDelegate {
     */
     func changeTorch()
     {
-        do
+        if isGetFlash()
         {
-            try input?.device.lockForConfiguration()
-            
-            var torch = false
-            
-            if input?.device.torchMode == AVCaptureTorchMode.On
+            do
             {
-                torch = false
+                try input?.device.lockForConfiguration()
+                
+                var torch = false
+                
+                if input?.device.torchMode == AVCaptureTorchMode.On
+                {
+                    torch = false
+                }
+                else if input?.device.torchMode == AVCaptureTorchMode.Off
+                {
+                    torch = true
+                }
+                
+                input?.device.torchMode = torch ? AVCaptureTorchMode.On : AVCaptureTorchMode.Off
+                
+                input?.device.unlockForConfiguration()
             }
-            else if input?.device.torchMode == AVCaptureTorchMode.Off
-            {
-                torch = true
+            catch let error as NSError {
+                print("device.lockForConfiguration(): \(error)")
+                
             }
-            
-            input?.device.torchMode = torch ? AVCaptureTorchMode.On : AVCaptureTorchMode.Off
-            
-            input?.device.unlockForConfiguration()
-        }
-        catch let error as NSError {
-            print("device.lockForConfiguration(): \(error)")
-            
         }
     }
     
