@@ -32,13 +32,14 @@
 
 
 
-### Installation with CocoaPods
+### CocoaPods安装
 
 
 ```ruby
+source 'https://github.com/CocoaPods/Specs.git'
 platform :ios, '8.0'
 use_frameworks!
-pod 'swiftScan',:git=>'https://github.com/MxABC/swiftScan.git'
+pod 'swiftScan'
 ```
 
 ### 手动安装 
