@@ -27,6 +27,7 @@
 		7DA82E051C19B4790028B5DB /* QQScanViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DA82E041C19B4790028B5DB /* QQScanViewController.swift */; };
 		7DA82E071C19BE170028B5DB /* MyCodeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DA82E061C19BE170028B5DB /* MyCodeViewController.swift */; };
 		7DA82E091C19CE5E0028B5DB /* logo.JPG in Resources */ = {isa = PBXBuildFile; fileRef = 7DA82E081C19CE5E0028B5DB /* logo.JPG */; };
+		BEACF78B1C5B5D75004EDB0C /* LBXPermissions.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEACF78A1C5B5D75004EDB0C /* LBXPermissions.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -54,6 +55,7 @@
 		7DA82E041C19B4790028B5DB /* QQScanViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QQScanViewController.swift; sourceTree = "<group>"; };
 		7DA82E061C19BE170028B5DB /* MyCodeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyCodeViewController.swift; sourceTree = "<group>"; };
 		7DA82E081C19CE5E0028B5DB /* logo.JPG */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = logo.JPG; sourceTree = "<group>"; };
+		BEACF78A1C5B5D75004EDB0C /* LBXPermissions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LBXPermissions.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -70,6 +72,7 @@
 		488928DC1C1A7BE4005A8F83 /* Source */ = {
 			isa = PBXGroup;
 			children = (
+				BEACF78A1C5B5D75004EDB0C /* LBXPermissions.swift */,
 				488928DD1C1A7BE4005A8F83 /* LBXScanLineAnimation.swift */,
 				488928DE1C1A7BE4005A8F83 /* LBXScanNetAnimation.swift */,
 				488928DF1C1A7BE4005A8F83 /* LBXScanView.swift */,
@@ -208,6 +211,7 @@
 				7D21CAB81C1B0516007A3BF0 /* ScanResultController.swift in Sources */,
 				488928E41C1A7BE4005A8F83 /* LBXScanNetAnimation.swift in Sources */,
 				488928E31C1A7BE4005A8F83 /* LBXScanLineAnimation.swift in Sources */,
+				BEACF78B1C5B5D75004EDB0C /* LBXPermissions.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
