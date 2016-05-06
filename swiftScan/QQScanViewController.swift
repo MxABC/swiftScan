@@ -96,7 +96,7 @@ class QQScanViewController: LBXScanViewController {
         btnFlash.bounds = CGRectMake(0, 0, size.width, size.height)
         btnFlash.center = CGPointMake(CGRectGetWidth(bottomItemsView!.frame)/2, CGRectGetHeight(bottomItemsView!.frame)/2)
         btnFlash.setImage(UIImage(named: "CodeScan.bundle/qrcode_scan_btn_flash_nor"), forState:UIControlState.Normal)
-        btnFlash.addTarget(self, action: "openOrCloseFlash", forControlEvents: UIControlEvents.TouchUpInside)
+        btnFlash.addTarget(self, action: #selector(QQScanViewController.openOrCloseFlash), forControlEvents: UIControlEvents.TouchUpInside)
         
         
         self.btnPhoto = UIButton()
@@ -104,7 +104,7 @@ class QQScanViewController: LBXScanViewController {
         btnPhoto.center = CGPointMake(CGRectGetWidth(bottomItemsView!.frame)/4, CGRectGetHeight(bottomItemsView!.frame)/2)
         btnPhoto.setImage(UIImage(named: "CodeScan.bundle/qrcode_scan_btn_photo_nor"), forState: UIControlState.Normal)
         btnPhoto.setImage(UIImage(named: "CodeScan.bundle/qrcode_scan_btn_photo_down"), forState: UIControlState.Highlighted)
-        btnPhoto.addTarget(self, action: "openPhotoAlbum", forControlEvents: UIControlEvents.TouchUpInside)
+        btnPhoto.addTarget(self, action: Selector("openPhotoAlbum"), forControlEvents: UIControlEvents.TouchUpInside)
         
         
         self.btnMyQR = UIButton()
@@ -112,7 +112,7 @@ class QQScanViewController: LBXScanViewController {
         btnMyQR.center = CGPointMake(CGRectGetWidth(bottomItemsView!.frame) * 3/4, CGRectGetHeight(bottomItemsView!.frame)/2);
         btnMyQR.setImage(UIImage(named: "CodeScan.bundle/qrcode_scan_btn_myqrcode_nor"), forState: UIControlState.Normal)
         btnMyQR.setImage(UIImage(named: "CodeScan.bundle/qrcode_scan_btn_myqrcode_down"), forState: UIControlState.Highlighted)
-        btnMyQR.addTarget(self, action: "myCode", forControlEvents: UIControlEvents.TouchUpInside)
+        btnMyQR.addTarget(self, action: #selector(QQScanViewController.myCode), forControlEvents: UIControlEvents.TouchUpInside)
         
         bottomItemsView?.addSubview(btnFlash)
         bottomItemsView?.addSubview(btnPhoto)
