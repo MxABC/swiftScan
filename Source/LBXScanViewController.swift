@@ -11,13 +11,13 @@ import Foundation
 import AVFoundation
 
 
-class LBXScanViewController: UIViewController,UIImagePickerControllerDelegate,UINavigationControllerDelegate {
+class LBXScanViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     
-    var scanObj:LBXScanWrapper?
+    var scanObj: LBXScanWrapper?
     
-    var scanStyle:LBXScanViewStyle? = LBXScanViewStyle()
+    var scanStyle: LBXScanViewStyle? = LBXScanViewStyle()
     
-    var qRScanView:LBXScanView?
+    var qRScanView: LBXScanView?
     
     //启动区域识别功能
     var isOpenInterestRect = false
@@ -28,7 +28,6 @@ class LBXScanViewController: UIViewController,UIImagePickerControllerDelegate,UI
     //是否需要识别后的当前图像
     var isNeedCodeImage = false
 
-    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -36,15 +35,10 @@ class LBXScanViewController: UIViewController,UIImagePickerControllerDelegate,UI
         
               // [self.view addSubview:_qRScanView];
         self.view.backgroundColor = UIColor.blackColor()
-      
-       
         self.edgesForExtendedLayout = UIRectEdge.None
-            
-        
     }
  
     override func viewWillAppear(animated: Bool) {
-        
         super.viewWillAppear(animated)
     }
     
@@ -54,7 +48,7 @@ class LBXScanViewController: UIViewController,UIImagePickerControllerDelegate,UI
         
         drawScanView()
        
-        performSelector("startScan", withObject: nil, afterDelay: 0.3)
+        performSelector(#selector(LBXScanViewController.startScan), withObject: nil, afterDelay: 0.3)
         
     }
     

@@ -11,9 +11,9 @@ import UIKit
 class LBXScanLineAnimation: UIImageView {
 
     var isAnimationing = false
-    var animationRect:CGRect = CGRectZero
+    var animationRect: CGRect = CGRectZero
     
-    func startAnimatingWithRect(animationRect:CGRect, parentView:UIView, image:UIImage?)
+    func startAnimatingWithRect(animationRect: CGRect, parentView: UIView, image: UIImage?)
     { 
         self.image = image
         self.animationRect = animationRect
@@ -59,7 +59,7 @@ class LBXScanLineAnimation: UIImageView {
             
             }, completion:{ (value: Bool) -> Void in
                                 
-                self.performSelector("stepAnimation", withObject: nil, afterDelay: 0.3)
+                self.performSelector(#selector(LBXScanLineAnimation.stepAnimation), withObject: nil, afterDelay: 0.3)
         })
         
     }

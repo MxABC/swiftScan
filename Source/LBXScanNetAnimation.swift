@@ -64,7 +64,7 @@ class LBXScanNetAnimation: UIImageView {
             
             }, completion:{ (value: Bool) -> Void in
                 
-                self.performSelector("stepAnimation", withObject: nil, afterDelay: 0.3)
+                self.performSelector(#selector(LBXScanNetAnimation.stepAnimation), withObject: nil, afterDelay: 0.3)
                
         })
         
