@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import swiftScan
 
 class QQScanViewController: LBXScanViewController {
     
@@ -40,7 +41,7 @@ class QQScanViewController: LBXScanViewController {
         super.viewDidLoad()
         
         //需要识别后的图像
-        isNeedCodeImage = true
+        setNeedCodeImage(true)
         
         //框向上移动10个像素
         scanStyle?.centerUpOffset += 10

@@ -18,15 +18,15 @@
 		48B143CA1C1809E700B2E7D5 /* CodeScan.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 48B143C91C1809E700B2E7D5 /* CodeScan.bundle */; };
 		48B789571C195944003BC426 /* README.md in Sources */ = {isa = PBXBuildFile; fileRef = 48B789561C195944003BC426 /* README.md */; };
 		48D3BBD11C70104100823F87 /* LBXPermissions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48D3BBD01C70104100823F87 /* LBXPermissions.swift */; };
-		7D21CAB81C1B0516007A3BF0 /* ScanResultController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D21CAB61C1B0516007A3BF0 /* ScanResultController.swift */; };
-		7D21CAB91C1B0516007A3BF0 /* ScanResultController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7D21CAB71C1B0516007A3BF0 /* ScanResultController.xib */; };
+		73FF0B8E1CF545FE0083F169 /* ScanResultController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 73FF0B8A1CF545FE0083F169 /* ScanResultController.xib */; };
+		73FF0B8F1CF545FE0083F169 /* ScanResultController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73FF0B8B1CF545FE0083F169 /* ScanResultController.swift */; };
+		73FF0B901CF545FE0083F169 /* MyCodeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73FF0B8C1CF545FE0083F169 /* MyCodeViewController.swift */; };
+		73FF0B911CF545FE0083F169 /* QQScanViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73FF0B8D1CF545FE0083F169 /* QQScanViewController.swift */; };
 		7D42B9B01C05EE9A0084D045 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D42B9AF1C05EE9A0084D045 /* AppDelegate.swift */; };
 		7D42B9B21C05EE9A0084D045 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D42B9B11C05EE9A0084D045 /* ViewController.swift */; };
 		7D42B9B51C05EE9A0084D045 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7D42B9B31C05EE9A0084D045 /* Main.storyboard */; };
 		7D42B9B71C05EE9A0084D045 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7D42B9B61C05EE9A0084D045 /* Assets.xcassets */; };
 		7D42B9BA1C05EE9A0084D045 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7D42B9B81C05EE9A0084D045 /* LaunchScreen.storyboard */; };
-		7DA82E051C19B4790028B5DB /* QQScanViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DA82E041C19B4790028B5DB /* QQScanViewController.swift */; };
-		7DA82E071C19BE170028B5DB /* MyCodeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DA82E061C19BE170028B5DB /* MyCodeViewController.swift */; };
 		7DA82E091C19CE5E0028B5DB /* logo.JPG in Resources */ = {isa = PBXBuildFile; fileRef = 7DA82E081C19CE5E0028B5DB /* logo.JPG */; };
 /* End PBXBuildFile section */
 
@@ -42,8 +42,10 @@
 		48B143C91C1809E700B2E7D5 /* CodeScan.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = CodeScan.bundle; sourceTree = "<group>"; };
 		48B789561C195944003BC426 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		48D3BBD01C70104100823F87 /* LBXPermissions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LBXPermissions.swift; sourceTree = "<group>"; };
-		7D21CAB61C1B0516007A3BF0 /* ScanResultController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScanResultController.swift; sourceTree = "<group>"; };
-		7D21CAB71C1B0516007A3BF0 /* ScanResultController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ScanResultController.xib; sourceTree = "<group>"; };
+		73FF0B8A1CF545FE0083F169 /* ScanResultController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ScanResultController.xib; sourceTree = "<group>"; };
+		73FF0B8B1CF545FE0083F169 /* ScanResultController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScanResultController.swift; sourceTree = "<group>"; };
+		73FF0B8C1CF545FE0083F169 /* MyCodeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyCodeViewController.swift; sourceTree = "<group>"; };
+		73FF0B8D1CF545FE0083F169 /* QQScanViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QQScanViewController.swift; sourceTree = "<group>"; };
 		7D42B9AC1C05EE9A0084D045 /* swiftScan.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = swiftScan.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7D42B9AF1C05EE9A0084D045 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		7D42B9B11C05EE9A0084D045 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -53,8 +55,6 @@
 		7D42B9BB1C05EE9A0084D045 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		7D46320C1C18683A00D70CF1 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Main.strings"; sourceTree = "<group>"; };
 		7D46320D1C18683A00D70CF1 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/LaunchScreen.strings"; sourceTree = "<group>"; };
-		7DA82E041C19B4790028B5DB /* QQScanViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QQScanViewController.swift; sourceTree = "<group>"; };
-		7DA82E061C19BE170028B5DB /* MyCodeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyCodeViewController.swift; sourceTree = "<group>"; };
 		7DA82E081C19CE5E0028B5DB /* logo.JPG */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = logo.JPG; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -105,6 +105,10 @@
 		7D42B9AE1C05EE9A0084D045 /* swiftScan */ = {
 			isa = PBXGroup;
 			children = (
+				73FF0B8A1CF545FE0083F169 /* ScanResultController.xib */,
+				73FF0B8B1CF545FE0083F169 /* ScanResultController.swift */,
+				73FF0B8C1CF545FE0083F169 /* MyCodeViewController.swift */,
+				73FF0B8D1CF545FE0083F169 /* QQScanViewController.swift */,
 				7DA82E081C19CE5E0028B5DB /* logo.JPG */,
 				48B143C91C1809E700B2E7D5 /* CodeScan.bundle */,
 				7D42B9AF1C05EE9A0084D045 /* AppDelegate.swift */,
@@ -113,11 +117,7 @@
 				7D42B9B61C05EE9A0084D045 /* Assets.xcassets */,
 				7D42B9B81C05EE9A0084D045 /* LaunchScreen.storyboard */,
 				7D42B9BB1C05EE9A0084D045 /* Info.plist */,
-				7DA82E041C19B4790028B5DB /* QQScanViewController.swift */,
 				48B143C31C17C98B00B2E7D5 /* MainTableViewController.swift */,
-				7DA82E061C19BE170028B5DB /* MyCodeViewController.swift */,
-				7D21CAB61C1B0516007A3BF0 /* ScanResultController.swift */,
-				7D21CAB71C1B0516007A3BF0 /* ScanResultController.xib */,
 			);
 			path = swiftScan;
 			sourceTree = "<group>";
@@ -154,7 +154,7 @@
 				TargetAttributes = {
 					7D42B9AB1C05EE9A0084D045 = {
 						CreatedOnToolsVersion = 7.1;
-						DevelopmentTeam = M975Q88777;
+						DevelopmentTeam = GNQWJMXZN2;
 					};
 				};
 			};
@@ -184,7 +184,7 @@
 				48B143CA1C1809E700B2E7D5 /* CodeScan.bundle in Resources */,
 				7D42B9BA1C05EE9A0084D045 /* LaunchScreen.storyboard in Resources */,
 				7D42B9B71C05EE9A0084D045 /* Assets.xcassets in Resources */,
-				7D21CAB91C1B0516007A3BF0 /* ScanResultController.xib in Resources */,
+				73FF0B8E1CF545FE0083F169 /* ScanResultController.xib in Resources */,
 				7DA82E091C19CE5E0028B5DB /* logo.JPG in Resources */,
 				7D42B9B51C05EE9A0084D045 /* Main.storyboard in Resources */,
 				488928AE1C1A6F4D005A8F83 /* swiftScan.podspec in Resources */,
@@ -199,17 +199,17 @@
 			buildActionMask = 2147483647;
 			files = (
 				488928E61C1A7BE4005A8F83 /* LBXScanViewController.swift in Sources */,
+				73FF0B911CF545FE0083F169 /* QQScanViewController.swift in Sources */,
 				48B789571C195944003BC426 /* README.md in Sources */,
 				48B143C41C17C98B00B2E7D5 /* MainTableViewController.swift in Sources */,
-				7DA82E051C19B4790028B5DB /* QQScanViewController.swift in Sources */,
 				7D42B9B21C05EE9A0084D045 /* ViewController.swift in Sources */,
 				488928E51C1A7BE4005A8F83 /* LBXScanView.swift in Sources */,
-				7DA82E071C19BE170028B5DB /* MyCodeViewController.swift in Sources */,
 				488928E81C1A7BE4005A8F83 /* LBXScanWrapper.swift in Sources */,
 				7D42B9B01C05EE9A0084D045 /* AppDelegate.swift in Sources */,
+				73FF0B901CF545FE0083F169 /* MyCodeViewController.swift in Sources */,
 				488928E71C1A7BE4005A8F83 /* LBXScanViewStyle.swift in Sources */,
-				7D21CAB81C1B0516007A3BF0 /* ScanResultController.swift in Sources */,
 				488928E41C1A7BE4005A8F83 /* LBXScanNetAnimation.swift in Sources */,
+				73FF0B8F1CF545FE0083F169 /* ScanResultController.swift in Sources */,
 				488928E31C1A7BE4005A8F83 /* LBXScanLineAnimation.swift in Sources */,
 				48D3BBD11C70104100823F87 /* LBXPermissions.swift in Sources */,
 			);
@@ -325,11 +325,13 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = swiftScan/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.mxabc.swiftScan;
+				PRODUCT_BUNDLE_IDENTIFIER = com.lbx.test;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 			};
 			name = Debug;
 		};
@@ -338,11 +340,13 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = swiftScan/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.mxabc.swiftScan;
+				PRODUCT_BUNDLE_IDENTIFIER = com.lbx.test;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 			};
 			name = Release;
 		};
