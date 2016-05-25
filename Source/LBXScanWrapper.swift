@@ -9,19 +9,19 @@
 import UIKit
 import AVFoundation
 
-struct  LBXScanResult {
+public struct  LBXScanResult {
     
     //码内容
-    var strScanned:String? = ""
+    public var strScanned:String? = ""
     //扫描图像
-    var imgScanned:UIImage?
+    public var imgScanned:UIImage?
     //码的类型
-    var strBarCodeType:String? = ""
+    public var strBarCodeType:String? = ""
     
     //码在图像中的位置
-    var arrayCorner:[AnyObject]?
+    public var arrayCorner:[AnyObject]?
     
-    init(str:String?,img:UIImage?,barCodeType:String?,corner:[AnyObject]?)
+    public init(str:String?,img:UIImage?,barCodeType:String?,corner:[AnyObject]?)
     {
         self.strScanned = str
         self.imgScanned = img
@@ -32,7 +32,7 @@ struct  LBXScanResult {
 
 
 
-class LBXScanWrapper: NSObject,AVCaptureMetadataOutputObjectsDelegate {
+public class LBXScanWrapper: NSObject,AVCaptureMetadataOutputObjectsDelegate {
     
     let device:AVCaptureDevice? = AVCaptureDevice.defaultDeviceWithMediaType(AVMediaTypeVideo);
     
@@ -173,7 +173,7 @@ class LBXScanWrapper: NSObject,AVCaptureMetadataOutputObjectsDelegate {
         }
     }
     
-    func captureOutput(captureOutput: AVCaptureOutput!, didOutputMetadataObjects metadataObjects: [AnyObject]!, fromConnection connection: AVCaptureConnection!)
+    public func captureOutput(captureOutput: AVCaptureOutput!, didOutputMetadataObjects metadataObjects: [AnyObject]!, fromConnection connection: AVCaptureConnection!)
     {
         if !isNeedScanResult
         {
@@ -228,7 +228,7 @@ class LBXScanWrapper: NSObject,AVCaptureMetadataOutputObjectsDelegate {
     
     
     //MARK: ----拍照
-    func captureImage()
+    public func captureImage()
     {
         let stillImageConnection:AVCaptureConnection? = connectionWithMediaType(AVMediaTypeVideo, connections: (stillImageOutput?.connections)!)
         
@@ -253,7 +253,7 @@ class LBXScanWrapper: NSObject,AVCaptureMetadataOutputObjectsDelegate {
         })
     }
     
-    func connectionWithMediaType(mediaType:String,connections:[AnyObject]) -> AVCaptureConnection?
+    public func connectionWithMediaType(mediaType:String,connections:[AnyObject]) -> AVCaptureConnection?
     {
         for connection:AnyObject in connections
         {
@@ -275,7 +275,7 @@ class LBXScanWrapper: NSObject,AVCaptureMetadataOutputObjectsDelegate {
     
     
     //MARK:切换识别区域
-    func changeScanRect(cropRect:CGRect)
+    public func changeScanRect(cropRect:CGRect)
     {
         //待测试，不知道是否有效
         stop()
@@ -284,13 +284,13 @@ class LBXScanWrapper: NSObject,AVCaptureMetadataOutputObjectsDelegate {
     }
 
     //MARK: 切换识别码的类型
-    func changeScanType(objType:[String])
+    public func changeScanType(objType:[String])
     {
         //待测试中途修改是否有效
         output.metadataObjectTypes = objType
     }
     
-    func isGetFlash()->Bool
+    public func isGetFlash()->Bool
     {
         if (device != nil &&  device!.hasFlash && device!.hasTorch)
         {
@@ -303,7 +303,7 @@ class LBXScanWrapper: NSObject,AVCaptureMetadataOutputObjectsDelegate {
      打开或关闭闪关灯
      - parameter torch: true：打开闪关灯 false:关闭闪光灯
      */
-    func setTorch(torch:Bool)
+    public func setTorch(torch:Bool)
     {
         if isGetFlash()
         {
@@ -327,7 +327,7 @@ class LBXScanWrapper: NSObject,AVCaptureMetadataOutputObjectsDelegate {
     /**
     ------闪光灯打开或关闭
     */
-    func changeTorch()
+    public func changeTorch()
     {
         if isGetFlash()
         {
@@ -440,7 +440,7 @@ class LBXScanWrapper: NSObject,AVCaptureMetadataOutputObjectsDelegate {
 
     
     //MARK: -- - 生成二维码，背景色及二维码颜色设置
-    static func createCode( codeType:String, codeString:String, size:CGSize,qrColor:UIColor,bkColor:UIColor )->UIImage?
+    static public func createCode( codeType:String, codeString:String, size:CGSize,qrColor:UIColor,bkColor:UIColor )->UIImage?
     {
         //if #available(iOS 8.0, *)
         
@@ -482,7 +482,7 @@ class LBXScanWrapper: NSObject,AVCaptureMetadataOutputObjectsDelegate {
        
     }
     
-    static func createCode128(  codeString:String, size:CGSize,qrColor:UIColor,bkColor:UIColor )->UIImage?
+    static public func createCode128(  codeString:String, size:CGSize,qrColor:UIColor,bkColor:UIColor )->UIImage?
     {
         let stringData = codeString.dataUsingEncoding(NSUTF8StringEncoding)
         
@@ -533,7 +533,7 @@ class LBXScanWrapper: NSObject,AVCaptureMetadataOutputObjectsDelegate {
         return nil
     }
     //根据二维码的区域截取二维码区域图像
-    static func getConcreteCodeImage(srcCodeImage:UIImage,rect:CGRect)->UIImage?
+    static public func getConcreteCodeImage(srcCodeImage:UIImage,rect:CGRect)->UIImage?
     {
         if CGRectIsEmpty(rect)
         {
@@ -551,7 +551,7 @@ class LBXScanWrapper: NSObject,AVCaptureMetadataOutputObjectsDelegate {
     }
 
     //获取二维码的图像区域
-    static func getConcreteCodeRectFromImage(srcCodeImage:UIImage,codeResult:LBXScanResult)->CGRect
+    static public func getConcreteCodeRectFromImage(srcCodeImage:UIImage,codeResult:LBXScanResult)->CGRect
     {
         if (codeResult.arrayCorner == nil || codeResult.arrayCorner?.count < 4  )
         {
@@ -601,7 +601,7 @@ class LBXScanWrapper: NSObject,AVCaptureMetadataOutputObjectsDelegate {
     @param logoSize  logo图像尺寸
     @return 加Logo的图像
     */
-    static func addImageLogo(srcImg:UIImage,logoImg:UIImage,logoSize:CGSize )->UIImage
+    static public func addImageLogo(srcImg:UIImage,logoImg:UIImage,logoSize:CGSize )->UIImage
     {
         UIGraphicsBeginImageContext(srcImg.size);
         srcImg.drawInRect(CGRectMake(0, 0, srcImg.size.width, srcImg.size.height))

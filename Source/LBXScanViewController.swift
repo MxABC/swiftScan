@@ -11,13 +11,13 @@ import Foundation
 import AVFoundation
 
 
-class LBXScanViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+public class LBXScanViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     
-    var scanObj: LBXScanWrapper?
+   public var scanObj: LBXScanWrapper?
     
-    var scanStyle: LBXScanViewStyle? = LBXScanViewStyle()
+   public var scanStyle: LBXScanViewStyle? = LBXScanViewStyle()
     
-    var qRScanView: LBXScanView?
+   public var qRScanView: LBXScanView?
     
     //启动区域识别功能
     var isOpenInterestRect = false
@@ -28,7 +28,7 @@ class LBXScanViewController: UIViewController, UIImagePickerControllerDelegate, 
     //是否需要识别后的当前图像
     var isNeedCodeImage = false
 
-    override func viewDidLoad() {
+    override public func viewDidLoad() {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
@@ -37,12 +37,17 @@ class LBXScanViewController: UIViewController, UIImagePickerControllerDelegate, 
         self.view.backgroundColor = UIColor.blackColor()
         self.edgesForExtendedLayout = UIRectEdge.None
     }
+    
+    public func setNeedCodeImage(needCodeImg:Bool)
+    {
+        isNeedCodeImage = needCodeImg;
+    }
  
-    override func viewWillAppear(animated: Bool) {
+    override public func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
     }
     
-    override func viewDidAppear(animated: Bool) {
+    override public func viewDidAppear(animated: Bool) {
         
         super.viewDidAppear(animated)
         
@@ -52,7 +57,7 @@ class LBXScanViewController: UIViewController, UIImagePickerControllerDelegate, 
         
     }
     
-    func startScan()
+    public func startScan()
     {
         if(!LBXPermissions .isGetCameraPermission())
         {
@@ -99,7 +104,7 @@ class LBXScanViewController: UIViewController, UIImagePickerControllerDelegate, 
         scanObj?.start()
     }
     
-    func drawScanView()
+    public func drawScanView()
     {
         if qRScanView == nil
         {
@@ -115,7 +120,7 @@ class LBXScanViewController: UIViewController, UIImagePickerControllerDelegate, 
     /**
      处理扫码结果，如果是继承本控制器的，可以重写该方法,作出相应地处理
      */
-    func handleCodeResult(arrayResult:[LBXScanResult])
+    public func handleCodeResult(arrayResult:[LBXScanResult])
     {
         for result:LBXScanResult in arrayResult
         {
@@ -127,7 +132,7 @@ class LBXScanViewController: UIViewController, UIImagePickerControllerDelegate, 
         showMsg(result.strBarCodeType, message: result.strScanned)
     }
     
-    override func viewWillDisappear(animated: Bool) {
+    override public func viewWillDisappear(animated: Bool) {
         
         NSObject.cancelPreviousPerformRequestsWithTarget(self)
         
@@ -155,7 +160,7 @@ class LBXScanViewController: UIViewController, UIImagePickerControllerDelegate, 
     }
     
     //MARK: -----相册选择图片识别二维码 （条形码没有找到系统方法）
-    func imagePickerController(picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : AnyObject])
+    public func imagePickerController(picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : AnyObject])
     {
         picker.dismissViewControllerAnimated(true, completion: nil)
         

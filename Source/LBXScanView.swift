@@ -8,7 +8,7 @@
 
 import UIKit
 
-class LBXScanView: UIView
+public class LBXScanView: UIView
 {
     //扫码区域各种参数
     var viewStyle:LBXScanViewStyle = LBXScanViewStyle()
@@ -81,7 +81,7 @@ class LBXScanView: UIView
         backgroundColor = UIColor.clearColor()
     }
     
-    required init?(coder aDecoder: NSCoder)
+    required public init?(coder aDecoder: NSCoder)
     {
         self.init()
        
@@ -178,7 +178,7 @@ class LBXScanView: UIView
     
     // Only override drawRect: if you perform custom drawing.
     // An empty implementation adversely affects performance during animation.
-    override func drawRect(rect: CGRect)
+    override public func drawRect(rect: CGRect)
     {
         // Drawing code
         drawScanRect()
