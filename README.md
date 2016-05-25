@@ -35,6 +35,7 @@
 ### CocoaPods安装
 
 
+
 ```ruby
 source 'https://github.com/CocoaPods/Specs.git'
 platform :ios, '8.0'
@@ -44,6 +45,11 @@ pod 'swiftScan'
 
 ### 手动安装 
 下载后将Source文件夹copy到工程即可
+
+
+### 版本
+#### v1.0.8
+修改适应cocoapods安装后，编译报错bug
 
 
 ## 界面效果
