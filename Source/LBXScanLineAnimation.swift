@@ -70,6 +70,11 @@ class LBXScanLineAnimation: UIImageView {
         isAnimationing = false;
     }
     
+    static public func instance()->LBXScanLineAnimation
+    {
+        return LBXScanLineAnimation()
+    }
+    
     deinit
     {
         print("LBXScanLineAnimation deinit")

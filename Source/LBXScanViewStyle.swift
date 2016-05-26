@@ -93,6 +93,11 @@ public struct LBXScanViewStyle
     public var blue_notRecoginitonArea:CGFloat   = 0.0
     public var alpa_notRecoginitonArea:CGFloat   = 0.5
     
+    public init()
+    {
+        
+    }
+    
 
 }
 

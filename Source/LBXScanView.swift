@@ -41,17 +41,17 @@ public class LBXScanView: UIView
     
     - returns: instancetype
     */
-    init(frame:CGRect, vstyle:LBXScanViewStyle )
+    public init(frame:CGRect, vstyle:LBXScanViewStyle )
     {
         viewStyle = vstyle
         
         switch (viewStyle.anmiationStyle)
         {
         case LBXScanViewAnimationStyle.LineMove:
-            scanLineAnimation = LBXScanLineAnimation()
+            scanLineAnimation = LBXScanLineAnimation.instance()
             break
         case LBXScanViewAnimationStyle.NetGrid:
-            scanNetAnimation = LBXScanNetAnimation()
+            scanNetAnimation = LBXScanNetAnimation.instance()
             break
         case LBXScanViewAnimationStyle.LineStill:
             scanLineStill = UIImageView()

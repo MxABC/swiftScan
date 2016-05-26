@@ -14,6 +14,11 @@ class LBXScanNetAnimation: UIImageView {
     var animationRect:CGRect = CGRectZero
     
     
+    static public func instance()->LBXScanNetAnimation
+    {
+        return LBXScanNetAnimation()
+    }
+    
     func startAnimatingWithRect(animationRect:CGRect, parentView:UIView, image:UIImage?)
     {
         self.image = image
