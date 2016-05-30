@@ -42,6 +42,10 @@ public class LBXScanViewController: UIViewController, UIImagePickerControllerDel
     {
         isNeedCodeImage = needCodeImg;
     }
+    //设置框内识别
+    public func setOpenInterestRect(isOpen:Bool){
+        isOpenInterestRect = isOpen
+    }
  
     override public func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
