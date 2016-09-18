@@ -410,7 +410,7 @@ public class LBXScanWrapper: NSObject,AVCaptureMetadataOutputObjectsDelegate {
         {
             //if #available(iOS 8.0, *)
             
-            let detector:CIDetector = CIDetector(ofType: CIDetectorTypeQRCode, context: nil, options: [CIDetectorAccuracy:CIDetectorAccuracyHigh])
+            let detector:CIDetector = CIDetector(ofType: CIDetectorTypeQRCode, context: nil, options: [CIDetectorAccuracy:CIDetectorAccuracyHigh])!
             
             let img = CIImage(CGImage: (image.CGImage)!)
             
@@ -472,9 +472,9 @@ public class LBXScanWrapper: NSObject,AVCaptureMetadataOutputObjectsDelegate {
         
         UIGraphicsBeginImageContext(size);
         let context = UIGraphicsGetCurrentContext();
-        CGContextSetInterpolationQuality(context, CGInterpolationQuality.None);
-        CGContextScaleCTM(context, 1.0, -1.0);
-        CGContextDrawImage(context, CGContextGetClipBoundingBox(context), cgImage);
+        CGContextSetInterpolationQuality(context!, CGInterpolationQuality.None);
+        CGContextScaleCTM(context!, 1.0, -1.0);
+        CGContextDrawImage(context, CGContextGetClipBoundingBox(context!), cgImage);
         let codeImage = UIGraphicsGetImageFromCurrentImageContext();
         UIGraphicsEndImageContext();
         
@@ -502,7 +502,7 @@ public class LBXScanWrapper: NSObject,AVCaptureMetadataOutputObjectsDelegate {
         let context = CIContext()
         let cgImage = context.createCGImage(outputImage!, fromRect: outputImage!.extent)
         
-        let image = UIImage(CGImage: cgImage, scale: 1.0, orientation: UIImageOrientation.Up)
+        let image = UIImage(CGImage: cgImage!, scale: 1.0, orientation: UIImageOrientation.Up)
         
         
         // Resize without interpolating
@@ -609,7 +609,7 @@ public class LBXScanWrapper: NSObject,AVCaptureMetadataOutputObjectsDelegate {
         logoImg.drawInRect(rect)
         let resultingImage = UIGraphicsGetImageFromCurrentImageContext();
         UIGraphicsEndImageContext();
-        return resultingImage;
+        return resultingImage!;
     }
 
     //图像缩放
@@ -621,7 +621,7 @@ public class LBXScanWrapper: NSObject,AVCaptureMetadataOutputObjectsDelegate {
         
         UIGraphicsBeginImageContext(CGSizeMake(width, height));
         let context = UIGraphicsGetCurrentContext();
-        CGContextSetInterpolationQuality(context, quality);
+        CGContextSetInterpolationQuality(context!, quality);
         image.drawInRect(CGRectMake(0, 0, width, height))
         
         resized = UIGraphicsGetImageFromCurrentImageContext();
@@ -635,7 +635,7 @@ public class LBXScanWrapper: NSObject,AVCaptureMetadataOutputObjectsDelegate {
     static func imageByCroppingWithStyle(srcImg:UIImage,rect:CGRect)->UIImage?
     {
         let imageRef = srcImg.CGImage
-        let imagePartRef = CGImageCreateWithImageInRect(imageRef,rect)
+        let imagePartRef = CGImageCreateWithImageInRect(imageRef!,rect)
         let cropImage = UIImage(CGImage: imagePartRef!)
         
         return cropImage
@@ -684,18 +684,18 @@ public class LBXScanWrapper: NSObject,AVCaptureMetadataOutputObjectsDelegate {
         UIGraphicsBeginImageContext(rect.size);
         let context = UIGraphicsGetCurrentContext();
         //做CTM变换
-        CGContextTranslateCTM(context, 0.0, rect.size.height);
-        CGContextScaleCTM(context, 1.0, -1.0);
-        CGContextRotateCTM(context, CGFloat(rotate));
-        CGContextTranslateCTM(context, translateX, translateY);
+        CGContextTranslateCTM(context!, 0.0, rect.size.height);
+        CGContextScaleCTM(context!, 1.0, -1.0);
+        CGContextRotateCTM(context!, CGFloat(rotate));
+        CGContextTranslateCTM(context!, translateX, translateY);
         
-        CGContextScaleCTM(context, scaleX, scaleY);
+        CGContextScaleCTM(context!, scaleX, scaleY);
         //绘制图片
-        CGContextDrawImage(context, CGRectMake(0, 0, rect.size.width, rect.size.height), image.CGImage);
+        CGContextDrawImage(context, CGRectMake(0, 0, rect.size.width, rect.size.height), image.CGImage!);
         
         let newPic = UIGraphicsGetImageFromCurrentImageContext();
         
-        return newPic;
+        return newPic!;
     }
 
     deinit

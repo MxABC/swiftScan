@@ -142,11 +142,11 @@ class MainTableViewController: UITableViewController,UIImagePickerControllerDele
         let rect=CGRectMake(0.0, 0.0, 1.0, 1.0);
         UIGraphicsBeginImageContext(rect.size);
         let context = UIGraphicsGetCurrentContext();
-        CGContextSetFillColorWithColor(context, color.CGColor);
-        CGContextFillRect(context, rect);
+        CGContextSetFillColorWithColor(context!, color.CGColor);
+        CGContextFillRect(context!, rect);
         let theImage = UIGraphicsGetImageFromCurrentImageContext();
         UIGraphicsEndImageContext();
-        return theImage;
+        return theImage!;
     }
     
     //MARK: -------条形码扫码界面 ---------
