@@ -474,7 +474,7 @@ public class LBXScanWrapper: NSObject,AVCaptureMetadataOutputObjectsDelegate {
         let context = UIGraphicsGetCurrentContext();
         CGContextSetInterpolationQuality(context!, CGInterpolationQuality.None);
         CGContextScaleCTM(context!, 1.0, -1.0);
-        CGContextDrawImage(context, CGContextGetClipBoundingBox(context!), cgImage);
+        CGContextDrawImage(context!, CGContextGetClipBoundingBox(context!), cgImage!);
         let codeImage = UIGraphicsGetImageFromCurrentImageContext();
         UIGraphicsEndImageContext();
         
@@ -691,7 +691,7 @@ public class LBXScanWrapper: NSObject,AVCaptureMetadataOutputObjectsDelegate {
         
         CGContextScaleCTM(context!, scaleX, scaleY);
         //绘制图片
-        CGContextDrawImage(context, CGRectMake(0, 0, rect.size.width, rect.size.height), image.CGImage!);
+        CGContextDrawImage(context!, CGRectMake(0, 0, rect.size.width, rect.size.height), image.CGImage!);
         
         let newPic = UIGraphicsGetImageFromCurrentImageContext();
         
