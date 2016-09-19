@@ -155,6 +155,7 @@
 					7D42B9AB1C05EE9A0084D045 = {
 						CreatedOnToolsVersion = 7.1;
 						DevelopmentTeam = GNQWJMXZN2;
+						LastSwiftMigration = 0800;
 					};
 				};
 			};
@@ -332,6 +333,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.lbx.test;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
+				SWIFT_VERSION = 3.0;
 			};
 			name = Debug;
 		};
@@ -347,6 +349,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.lbx.test;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
+				SWIFT_VERSION = 3.0;
 			};
 			name = Release;
 		};
