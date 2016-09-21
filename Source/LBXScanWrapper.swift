@@ -464,17 +464,17 @@ public class LBXScanWrapper: NSObject,AVCaptureMetadataOutputObjectsDelegate {
         let colorFilter = CIFilter(name: "CIFalseColor", withInputParameters: ["inputImage":qrFilter!.outputImage!,"inputColor0":CIColor(CGColor: qrColor.CGColor),"inputColor1":CIColor(CGColor: bkColor.CGColor)])
         
         
-        let qrImage = colorFilter!.outputImage;
+        let qrImage = colorFilter!.outputImage!;
         
         //绘制
-        let cgImage = CIContext().createCGImage(qrImage!, fromRect: qrImage!.extent)
+        let cgImage = CIContext().createCGImage(qrImage, fromRect: qrImage.extent)!
         
         
         UIGraphicsBeginImageContext(size);
-        let context = UIGraphicsGetCurrentContext();
-        CGContextSetInterpolationQuality(context!, CGInterpolationQuality.None);
-        CGContextScaleCTM(context!, 1.0, -1.0);
-        CGContextDrawImage(context!, CGContextGetClipBoundingBox(context!), cgImage!);
+        let context = UIGraphicsGetCurrentContext()!;
+        CGContextSetInterpolationQuality(context, CGInterpolationQuality.None);
+        CGContextScaleCTM(context, 1.0, -1.0);
+        CGContextDrawImage(context, CGContextGetClipBoundingBox(context), cgImage);
         let codeImage = UIGraphicsGetImageFromCurrentImageContext();
         UIGraphicsEndImageContext();
         
