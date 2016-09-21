@@ -682,16 +682,16 @@ public class LBXScanWrapper: NSObject,AVCaptureMetadataOutputObjectsDelegate {
         }
         
         UIGraphicsBeginImageContext(rect.size);
-        let context = UIGraphicsGetCurrentContext();
+        let context = UIGraphicsGetCurrentContext()!;
         //做CTM变换
-        CGContextTranslateCTM(context!, 0.0, rect.size.height);
-        CGContextScaleCTM(context!, 1.0, -1.0);
-        CGContextRotateCTM(context!, CGFloat(rotate));
-        CGContextTranslateCTM(context!, translateX, translateY);
+        CGContextTranslateCTM(context, 0.0, rect.size.height);
+        CGContextScaleCTM(context, 1.0, -1.0);
+        CGContextRotateCTM(context, CGFloat(rotate));
+        CGContextTranslateCTM(context, translateX, translateY);
         
-        CGContextScaleCTM(context!, scaleX, scaleY);
+        CGContextScaleCTM(context, scaleX, scaleY);
         //绘制图片
-        CGContextDrawImage(context!, CGRectMake(0, 0, rect.size.width, rect.size.height), image.CGImage!);
+        CGContextDrawImage(context, CGRectMake(0, 0, rect.size.width, rect.size.height), image.CGImage!);
         
         let newPic = UIGraphicsGetImageFromCurrentImageContext();
         
