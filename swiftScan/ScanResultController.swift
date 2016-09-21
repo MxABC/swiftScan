@@ -22,7 +22,7 @@ class ScanResultController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.edgesForExtendedLayout = UIRectEdge.None
+        self.edgesForExtendedLayout = UIRectEdge(rawValue: 0)
         
         codeTypeLabel.text = ""
         codeStringLabel.text = ""
@@ -30,7 +30,7 @@ class ScanResultController: UIViewController {
         // Do any additional setup after loading the view.
     }
 
-    override func viewDidAppear(animated: Bool)
+    override func viewDidAppear(_ animated: Bool)
     {
         super.viewDidAppear(animated)
         
@@ -40,13 +40,13 @@ class ScanResultController: UIViewController {
         
         if codeImg.image != nil
         {
-            var rect = LBXScanWrapper.getConcreteCodeRectFromImage(codeImg.image!, codeResult: codeResult!)
+            var rect = LBXScanWrapper.getConcreteCodeRectFromImage(srcCodeImage: codeImg.image!, codeResult: codeResult!)
             
-            if !CGRectIsEmpty(rect)
+            if !rect.isEmpty
             {
-                zoomRect(&rect, srcImg: codeImg.image!)
+                zoomRect(rect: &rect, srcImg: codeImg.image!)
                 
-                let img2 = LBXScanWrapper.getConcreteCodeImage(codeImg.image!, rect: rect)
+                let img2 = LBXScanWrapper.getConcreteCodeImage(srcCodeImage: codeImg.image!, rect: rect)
                 
                 if (img2 != nil)
                 {
@@ -57,7 +57,7 @@ class ScanResultController: UIViewController {
         }
     }
     
-    func zoomRect(inout rect:CGRect,srcImg:UIImage)
+    func zoomRect( rect:inout CGRect,srcImg:UIImage)
     {
         rect.origin.x -= 10
         rect.origin.y -= 10

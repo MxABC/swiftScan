@@ -15,11 +15,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     var window: UIWindow?;
     
     
-    func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
+    private func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         // Override point for customization after application launch.
         //分号不是必须
         window? = UIWindow()
-        window?.frame = UIScreen.mainScreen().bounds;
+        window?.frame = UIScreen.main.bounds;
                 
         window?.rootViewController =  UINavigationController(rootViewController: MainTableViewController())
 

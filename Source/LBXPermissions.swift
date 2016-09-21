@@ -19,9 +19,9 @@ class LBXPermissions: NSObject {
     static func isGetCameraPermission()->Bool
     {
         
-        let authStaus = AVCaptureDevice.authorizationStatusForMediaType(AVMediaTypeVideo)
+        let authStaus = AVCaptureDevice.authorizationStatus(forMediaType: AVMediaTypeVideo)
         
-        if authStaus != AVAuthorizationStatus.Denied
+        if authStaus != AVAuthorizationStatus.denied
         {
             return true
         }
@@ -35,16 +35,16 @@ class LBXPermissions: NSObject {
     static func isGetPhotoPermission()->Bool
     {
         var bResult = false
-        if  Float(UIDevice.currentDevice().systemVersion) < 8.0
+        if  Int(UIDevice.current.systemVersion)! < 8
         {
-            if( ALAssetsLibrary.authorizationStatus() != ALAuthorizationStatus.Denied )
+            if( ALAssetsLibrary.authorizationStatus() != ALAuthorizationStatus.denied )
             {
                 bResult = true
             }
         }
         else
         {
-            if ( PHPhotoLibrary.authorizationStatus() != PHAuthorizationStatus.Denied )
+            if ( PHPhotoLibrary.authorizationStatus() != PHAuthorizationStatus.denied )
             {
                 bResult = true
             }
