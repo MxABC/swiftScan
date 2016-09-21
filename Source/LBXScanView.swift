@@ -321,12 +321,12 @@ public class LBXScanView: UIView
         
         
         //右下角水平线
-        CGContextMoveToPoint(context, rightX+linewidthAngle/2, bottomY)
-        CGContextAddLineToPoint(context, rightX - wAngle, bottomY)
-        
-        //右下角垂直线
-        CGContextMoveToPoint(context, rightX, bottomY+linewidthAngle/2)
-        CGContextAddLineToPoint(context, rightX, bottomY - hAngle)
+//        CGContextMoveToPoint(context, rightX+linewidthAngle/2, bottomY)
+//        CGContextAddLineToPoint(context, rightX - wAngle, bottomY)
+//        
+//        //右下角垂直线
+//        CGContextMoveToPoint(context, rightX, bottomY+linewidthAngle/2)
+//        CGContextAddLineToPoint(context, rightX, bottomY - hAngle)
         
         context.strokePath()
     }
