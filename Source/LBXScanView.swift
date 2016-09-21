@@ -264,9 +264,9 @@ public class LBXScanView: UIView
         
         //画扫码矩形以及周边半透明黑色坐标参数
         var diffAngle = linewidthAngle/3;
-        //diffAngle = linewidthAngle / 2; //框外面4个角，与框有缝隙
-        //diffAngle = linewidthAngle/2;  //框4个角 在线上加4个角效果
-        //diffAngle = 0;//与矩形框重合
+        diffAngle = linewidthAngle / 2; //框外面4个角，与框有缝隙
+        diffAngle = linewidthAngle/2;  //框4个角 在线上加4个角效果
+        diffAngle = 0;//与矩形框重合
         
         switch viewStyle.photoframeAngleStyle
         {
@@ -306,27 +306,24 @@ public class LBXScanView: UIView
         context.addLine(to: CGPoint(x: leftX + wAngle, y: bottomY))
         
         //左下角垂直线
-//        context.move(to: CGPoint(x: leftX, y: bottomY+linewidthAngle/2))
-//        context.addLine(to: CGPoint(x: leftX, y: bobottomY - hAnglettomY))
-//
-//        
-//        
-//        //右上角水平线
-//        CGContextMoveToPoint(context, rightX+linewidthAngle/2, topY)
-//        CGContextAddLineToPoint(context, rightX - wAngle, topY)
-//        
-//        //右上角垂直线
-//        CGContextMoveToPoint(context, rightX, topY-linewidthAngle/2)
-//        CGContextAddLineToPoint(context, rightX, topY + hAngle)
+        context.move(to: CGPoint(x: leftX, y: bottomY+linewidthAngle/2))
+        context.addLine(to: CGPoint(x: leftX, y: bottomY - hAngle))
+
+        //右上角水平线
+        context.move(to: CGPoint(x: rightX+linewidthAngle/2, y: topY))
+        context.addLine(to: CGPoint(x: rightX - wAngle, y: topY))
         
+        //右上角垂直线
+        context.move(to: CGPoint(x: rightX, y: topY-linewidthAngle/2))
+        context.addLine(to: CGPoint(x: rightX, y: topY + hAngle))
+
+//        右下角水平线
+        context.move(to: CGPoint(x: rightX+linewidthAngle/2, y: bottomY))
+        context.addLine(to: CGPoint(x: rightX - wAngle, y: bottomY))
         
-        //右下角水平线
-//        CGContextMoveToPoint(context, rightX+linewidthAngle/2, bottomY)
-//        CGContextAddLineToPoint(context, rightX - wAngle, bottomY)
-//        
-//        //右下角垂直线
-//        CGContextMoveToPoint(context, rightX, bottomY+linewidthAngle/2)
-//        CGContextAddLineToPoint(context, rightX, bottomY - hAngle)
+        //右下角垂直线
+        context.move(to: CGPoint(x: rightX, y: bottomY+linewidthAngle/2))
+        context.addLine(to: CGPoint(x: rightX, y: bottomY - hAngle))
         
         context.strokePath()
     }
