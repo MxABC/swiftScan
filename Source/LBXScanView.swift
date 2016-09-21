@@ -293,22 +293,22 @@ public class LBXScanView: UIView
         let rightX = XRetangleRight + diffAngle
         let bottomY = YMaxRetangle + diffAngle
         
-//        //左上角水平线
-//        CGContextMoveToPoint(context, leftX-linewidthAngle/2, topY)
-//        CGContextAddLineToPoint(context, leftX + wAngle, topY)
-//        
-//        //左上角垂直线
-//        CGContextMoveToPoint(context, leftX, topY-linewidthAngle/2)
-//        CGContextAddLineToPoint(context, leftX, topY+hAngle)
-//        
-//        
-//        //左下角水平线
-//        CGContextMoveToPoint(context, leftX-linewidthAngle/2, bottomY)
-//        CGContextAddLineToPoint(context, leftX + wAngle, bottomY)
-//        
-//        //左下角垂直线
-//        CGContextMoveToPoint(context, leftX, bottomY+linewidthAngle/2)
-//        CGContextAddLineToPoint(context, leftX, bottomY - hAngle)
+        //左上角水平线
+        context.move(to: CGPoint(x: leftX-linewidthAngle/2, y: topY))
+        context.addLine(to: CGPoint(x: leftX + wAngle, y: topY))
+        
+        //左上角垂直线
+        context.move(to: CGPoint(x: leftX, y: topY-linewidthAngle/2))
+        context.addLine(to: CGPoint(x: leftX, y: topY+hAngle))
+        
+        //左下角水平线
+        context.move(to: CGPoint(x: leftX-linewidthAngle/2, y: bottomY))
+        context.addLine(to: CGPoint(x: leftX + wAngle, y: bottomY))
+        
+        //左下角垂直线
+//        context.move(to: CGPoint(x: leftX, y: bottomY+linewidthAngle/2))
+//        context.addLine(to: CGPoint(x: leftX, y: bobottomY - hAnglettomY))
+//
 //        
 //        
 //        //右上角水平线
@@ -318,16 +318,16 @@ public class LBXScanView: UIView
 //        //右上角垂直线
 //        CGContextMoveToPoint(context, rightX, topY-linewidthAngle/2)
 //        CGContextAddLineToPoint(context, rightX, topY + hAngle)
-//        
-//        
-//        //右下角水平线
-//        CGContextMoveToPoint(context, rightX+linewidthAngle/2, bottomY)
-//        CGContextAddLineToPoint(context, rightX - wAngle, bottomY)
-//        
-//        //右下角垂直线
-//        CGContextMoveToPoint(context, rightX, bottomY+linewidthAngle/2)
-//        CGContextAddLineToPoint(context, rightX, bottomY - hAngle)
-//        
+        
+        
+        //右下角水平线
+        CGContextMoveToPoint(context, rightX+linewidthAngle/2, bottomY)
+        CGContextAddLineToPoint(context, rightX - wAngle, bottomY)
+        
+        //右下角垂直线
+        CGContextMoveToPoint(context, rightX, bottomY+linewidthAngle/2)
+        CGContextAddLineToPoint(context, rightX, bottomY - hAngle)
+        
         context.strokePath()
     }
     

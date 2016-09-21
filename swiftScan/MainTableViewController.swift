@@ -28,12 +28,6 @@ class MainTableViewController: UITableViewController,UIImagePickerControllerDele
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Uncomment the following line to preserve selection between presentations
-        // self.clearsSelectionOnViewWillAppear = false
-
-        // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-        // self.navigationItem.rightBarButtonItem = self.editButtonItem()
         
         self.title = "swift 扫一扫"
         
@@ -70,12 +64,9 @@ class MainTableViewController: UITableViewController,UIImagePickerControllerDele
      func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         
         //objc_msgSend对应方法好像没有
-//        let sel = NSSelectorFromString(arrayItems[indexPath.row].last!)
-//        if(respondsToSelector(sel))
-//        {
-//            performSelector(sel)
-//            
-//        } todo
+        let sel = NSSelectorFromString(arrayItems[indexPath.row].last!)
+        
+      
         
         
         tableView.deselectRow(at: indexPath as IndexPath, animated: true)
