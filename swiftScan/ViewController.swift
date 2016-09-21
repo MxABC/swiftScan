@@ -71,8 +71,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         var style = LBXScanViewStyle()
         style.animationImage = UIImage(named: "CodeScan.bundle/qrcode_scan_light_green")
         vc.scanStyle = style
-        self.present(vc, animated: true, completion: nil)
-//        self.navigationController?.pushViewController(vc, animated: true)
+        self.navigationController?.pushViewController(vc, animated: true)
         
     }
     

@@ -173,7 +173,7 @@ public class LBXScanWrapper: NSObject,AVCaptureMetadataOutputObjectsDelegate {
         }
     }
     
-    public func captureOutput(captureOutput: AVCaptureOutput!, didOutputMetadataObjects metadataObjects: [AnyObject]!, fromConnection connection: AVCaptureConnection!)
+    @nonobjc public func captureOutput(captureOutput: AVCaptureOutput!, didOutputMetadataObjects metadataObjects: [AnyObject]!, fromConnection connection: AVCaptureConnection!)
     {
         if !isNeedScanResult
         {
