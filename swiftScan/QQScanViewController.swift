@@ -7,7 +7,6 @@
 //
 
 import UIKit
-import swiftScan
 
 class QQScanViewController: LBXScanViewController {
     
@@ -45,8 +44,7 @@ class QQScanViewController: LBXScanViewController {
         
         //框向上移动10个像素
         scanStyle?.centerUpOffset += 10
-    
-
+ 
         // Do any additional setup after loading the view.
     }
     

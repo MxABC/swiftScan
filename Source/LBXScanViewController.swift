@@ -71,7 +71,8 @@ public class LBXScanViewController: UIViewController, UIImagePickerControllerDel
         
         if (scanObj == nil)
         {
-            var cropRect = CGRect.zero
+//            var cropRect = CGRect.zero
+            var cropRect = UIScreen.main.bounds
             if isOpenInterestRect
             {
                 cropRect = LBXScanView.getScanRectWithPreView(preView: self.view, style:scanStyle! )

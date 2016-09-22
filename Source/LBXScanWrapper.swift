@@ -71,10 +71,7 @@ public class LBXScanWrapper: NSObject,AVCaptureMetadataOutputObjectsDelegate {
         }
         catch let error as NSError {
             print("AVCaptureDeviceInput(): \(error)")
-            
-            
         }
-        
         
         successBlock = success
         
@@ -118,7 +115,7 @@ public class LBXScanWrapper: NSObject,AVCaptureMetadataOutputObjectsDelegate {
         
         output.metadataObjectTypes = objType
         
-        //output.metadataObjectTypes = [AVMetadataObjectTypeQRCode]
+//        output.metadataObjectTypes = [AVMetadataObjectTypeQRCode]
         
         if !cropRect.equalTo(CGRect.zero)
         {
@@ -173,7 +170,7 @@ public class LBXScanWrapper: NSObject,AVCaptureMetadataOutputObjectsDelegate {
         }
     }
     
-    @nonobjc public func captureOutput(captureOutput: AVCaptureOutput!, didOutputMetadataObjects metadataObjects: [AnyObject]!, fromConnection connection: AVCaptureConnection!)
+    private func captureOutput(captureOutput: AVCaptureOutput!, didOutputMetadataObjects metadataObjects: [AnyObject]!, fromConnection connection: AVCaptureConnection!)
     {
         if !isNeedScanResult
         {
