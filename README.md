@@ -45,7 +45,7 @@ pod 'swiftScan'
 ```
 Swift 2.3
 ```ruby
- pod 'swiftScan', :git => 'https://github.com/CNKCQ/swiftScan.git', :branch => 'Swift2.3'
+ pod 'swiftScan', :git => 'https://github.com/CNKCQ/swiftScan.git'
 ```
 
 Swift 3.0
