@@ -11,13 +11,13 @@ import Foundation
 import AVFoundation
 
 
-public class LBXScanViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+open class LBXScanViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     
-   public var scanObj: LBXScanWrapper?
+   open var scanObj: LBXScanWrapper?
     
-   public var scanStyle: LBXScanViewStyle? = LBXScanViewStyle()
+   open var scanStyle: LBXScanViewStyle? = LBXScanViewStyle()
     
-   public var qRScanView: LBXScanView?
+   open var qRScanView: LBXScanView?
     
     //启动区域识别功能
     var isOpenInterestRect = false
@@ -28,7 +28,7 @@ public class LBXScanViewController: UIViewController, UIImagePickerControllerDel
     //是否需要识别后的当前图像
     var isNeedCodeImage = false
 
-    override public func viewDidLoad() {
+    override open func viewDidLoad() {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
@@ -38,20 +38,20 @@ public class LBXScanViewController: UIViewController, UIImagePickerControllerDel
         self.edgesForExtendedLayout = UIRectEdge(rawValue: 0)
     }
     
-    public func setNeedCodeImage(needCodeImg:Bool)
+    open func setNeedCodeImage(needCodeImg:Bool)
     {
         isNeedCodeImage = needCodeImg;
     }
     //设置框内识别
-    public func setOpenInterestRect(isOpen:Bool){
+    open func setOpenInterestRect(isOpen:Bool){
         isOpenInterestRect = isOpen
     }
  
-    override public func viewWillAppear(_ animated: Bool) {
+    override open func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
     }
     
-    override public func viewDidAppear(_ animated: Bool) {
+    override open func viewDidAppear(_ animated: Bool) {
         
         super.viewDidAppear(animated)
         
@@ -61,7 +61,7 @@ public class LBXScanViewController: UIViewController, UIImagePickerControllerDel
         
     }
     
-    public func startScan()
+    open func startScan()
     {
         if(!LBXPermissions .isGetCameraPermission())
         {
@@ -71,8 +71,7 @@ public class LBXScanViewController: UIViewController, UIImagePickerControllerDel
         
         if (scanObj == nil)
         {
-//            var cropRect = CGRect.zero
-            var cropRect = UIScreen.main.bounds
+            var cropRect = CGRect.zero
             if isOpenInterestRect
             {
                 cropRect = LBXScanView.getScanRectWithPreView(preView: self.view, style:scanStyle! )
@@ -109,14 +108,13 @@ public class LBXScanViewController: UIViewController, UIImagePickerControllerDel
         scanObj?.start()
     }
     
-    public func drawScanView()
+    open func drawScanView()
     {
         if qRScanView == nil
         {
             qRScanView = LBXScanView(frame: self.view.frame,vstyle:scanStyle! )
             self.view.addSubview(qRScanView!)
         }
-        
         qRScanView?.deviceStartReadying(readyStr: "相机启动中...")
         
     }
@@ -125,7 +123,7 @@ public class LBXScanViewController: UIViewController, UIImagePickerControllerDel
     /**
      处理扫码结果，如果是继承本控制器的，可以重写该方法,作出相应地处理
      */
-    public func handleCodeResult(arrayResult:[LBXScanResult])
+    open func handleCodeResult(arrayResult:[LBXScanResult])
     {
         for result:LBXScanResult in arrayResult
         {
@@ -137,7 +135,7 @@ public class LBXScanViewController: UIViewController, UIImagePickerControllerDel
         showMsg(title: result.strBarCodeType, message: result.strScanned)
     }
     
-    override public func viewWillDisappear(_ animated: Bool) {
+    override open func viewWillDisappear(_ animated: Bool) {
         
         NSObject.cancelPreviousPerformRequests(withTarget: self)
         
@@ -165,7 +163,7 @@ public class LBXScanViewController: UIViewController, UIImagePickerControllerDel
     }
     
     //MARK: -----相册选择图片识别二维码 （条形码没有找到系统方法）
-    @nonobjc public func imagePickerController(picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : AnyObject])
+    @nonobjc open func imagePickerController(picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : AnyObject])
     {
         picker.dismiss(animated: true, completion: nil)
         

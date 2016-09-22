@@ -82,6 +82,4 @@ class LBXScanNetAnimation: UIImageView {
         isAnimationing = false;
     }
 
-
-
 }
