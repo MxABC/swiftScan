@@ -20,7 +20,7 @@ open class LBXScanViewController: UIViewController, UIImagePickerControllerDeleg
    open var qRScanView: LBXScanView?
     
     //启动区域识别功能
-    var isOpenInterestRect = false
+   open var isOpenInterestRect = false
     
     //识别码的类型
     var arrayCodeType:[String]?
@@ -144,7 +144,7 @@ open class LBXScanViewController: UIViewController, UIImagePickerControllerDeleg
         scanObj?.stop()
     }
     
-    func openPhotoAlbum()
+    open func openPhotoAlbum()
     {
         if(!LBXPermissions.isGetPhotoPermission())
         {

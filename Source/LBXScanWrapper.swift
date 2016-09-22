@@ -393,7 +393,7 @@ open class LBXScanWrapper: NSObject,AVCaptureMetadataOutputObjectsDelegate {
      
      - returns: 返回识别结果
      */
-    static func recognizeQRImage(image:UIImage) ->[LBXScanResult]
+    static open func recognizeQRImage(image:UIImage) ->[LBXScanResult]
     {
         var returnResult:[LBXScanResult]=[]
         
