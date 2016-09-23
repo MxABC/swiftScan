@@ -11,13 +11,13 @@ import Foundation
 import AVFoundation
 
 
-public class LBXScanViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+open class LBXScanViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     
-   public var scanObj: LBXScanWrapper?
+   open var scanObj: LBXScanWrapper?
     
-   public var scanStyle: LBXScanViewStyle? = LBXScanViewStyle()
+   open var scanStyle: LBXScanViewStyle? = LBXScanViewStyle()
     
-   public var qRScanView: LBXScanView?
+   open var qRScanView: LBXScanView?
     
     //启动区域识别功能
     var isOpenInterestRect = false
@@ -28,40 +28,40 @@ public class LBXScanViewController: UIViewController, UIImagePickerControllerDel
     //是否需要识别后的当前图像
     var isNeedCodeImage = false
 
-    override public func viewDidLoad() {
+    override open func viewDidLoad() {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
         
               // [self.view addSubview:_qRScanView];
-        self.view.backgroundColor = UIColor.blackColor()
-        self.edgesForExtendedLayout = UIRectEdge.None
+        self.view.backgroundColor = UIColor.black
+        self.edgesForExtendedLayout = UIRectEdge()
     }
     
-    public func setNeedCodeImage(needCodeImg:Bool)
+    open func setNeedCodeImage(_ needCodeImg:Bool)
     {
         isNeedCodeImage = needCodeImg;
     }
     //设置框内识别
-    public func setOpenInterestRect(isOpen:Bool){
+    open func setOpenInterestRect(_ isOpen:Bool){
         isOpenInterestRect = isOpen
     }
  
-    override public func viewWillAppear(animated: Bool) {
+    override open func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
     }
     
-    override public func viewDidAppear(animated: Bool) {
+    override open func viewDidAppear(_ animated: Bool) {
         
         super.viewDidAppear(animated)
         
         drawScanView()
        
-        performSelector(#selector(LBXScanViewController.startScan), withObject: nil, afterDelay: 0.3)
+        perform(#selector(LBXScanViewController.startScan), with: nil, afterDelay: 0.3)
         
     }
     
-    public func startScan()
+    open func startScan()
     {
         if(!LBXPermissions .isGetCameraPermission())
         {
@@ -71,7 +71,7 @@ public class LBXScanViewController: UIViewController, UIImagePickerControllerDel
         
         if (scanObj == nil)
         {
-            var cropRect = CGRectZero
+            var cropRect = CGRect.zero
             if isOpenInterestRect
             {
                 cropRect = LBXScanView.getScanRectWithPreView(self.view, style:scanStyle! )
@@ -108,7 +108,7 @@ public class LBXScanViewController: UIViewController, UIImagePickerControllerDel
         scanObj?.start()
     }
     
-    public func drawScanView()
+    open func drawScanView()
     {
         if qRScanView == nil
         {
@@ -124,7 +124,7 @@ public class LBXScanViewController: UIViewController, UIImagePickerControllerDel
     /**
      处理扫码结果，如果是继承本控制器的，可以重写该方法,作出相应地处理
      */
-    public func handleCodeResult(arrayResult:[LBXScanResult])
+    open func handleCodeResult(_ arrayResult:[LBXScanResult])
     {
         for result:LBXScanResult in arrayResult
         {
@@ -136,9 +136,9 @@ public class LBXScanViewController: UIViewController, UIImagePickerControllerDel
         showMsg(result.strBarCodeType, message: result.strScanned)
     }
     
-    override public func viewWillDisappear(animated: Bool) {
+    override open func viewWillDisappear(_ animated: Bool) {
         
-        NSObject.cancelPreviousPerformRequestsWithTarget(self)
+        NSObject.cancelPreviousPerformRequests(withTarget: self)
         
         qRScanView?.stopScanAnimation()
         
@@ -154,19 +154,19 @@ public class LBXScanViewController: UIViewController, UIImagePickerControllerDel
         
         let picker = UIImagePickerController()
         
-        picker.sourceType = UIImagePickerControllerSourceType.PhotoLibrary
+        picker.sourceType = UIImagePickerControllerSourceType.photoLibrary
         
         picker.delegate = self;
         
         picker.allowsEditing = true
         
-        presentViewController(picker, animated: true, completion: nil)
+        present(picker, animated: true, completion: nil)
     }
     
     //MARK: -----相册选择图片识别二维码 （条形码没有找到系统方法）
-    public func imagePickerController(picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : AnyObject])
+    open func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any])
     {
-        picker.dismissViewControllerAnimated(true, completion: nil)
+        picker.dismiss(animated: true, completion: nil)
         
         var image:UIImage? = info[UIImagePickerControllerEditedImage] as? UIImage
         
@@ -188,15 +188,15 @@ public class LBXScanViewController: UIViewController, UIImagePickerControllerDel
         showMsg("", message: "识别失败")
     }
     
-    func showMsg(title:String?,message:String?)
+    func showMsg(_ title:String?,message:String?)
     {
         if LBXScanWrapper.isSysIos8Later()
         {
         
             //if #available(iOS 8.0, *)
             
-            let alertController = UIAlertController(title: title, message:message, preferredStyle: UIAlertControllerStyle.Alert)
-            let alertAction = UIAlertAction(title:  "知道了", style: UIAlertActionStyle.Default) { [weak self] (alertAction) -> Void in
+            let alertController = UIAlertController(title: title, message:message, preferredStyle: UIAlertControllerStyle.alert)
+            let alertAction = UIAlertAction(title:  "知道了", style: UIAlertActionStyle.default) { [weak self] (alertAction) -> Void in
                 
                 if let strongSelf = self
                 {
@@ -206,7 +206,7 @@ public class LBXScanViewController: UIViewController, UIImagePickerControllerDel
             
             alertController.addAction(alertAction)
             
-            presentViewController(alertController, animated: true, completion: nil)
+            present(alertController, animated: true, completion: nil)
             
             
            

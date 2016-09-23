@@ -8,13 +8,13 @@
 
 import UIKit
 
-public class LBXScanView: UIView
+open class LBXScanView: UIView
 {
     //扫码区域各种参数
     var viewStyle:LBXScanViewStyle = LBXScanViewStyle()
     
      //扫码区域
-    var scanRetangleRect:CGRect = CGRectZero
+    var scanRetangleRect:CGRect = CGRect.zero
     
     //线条扫码动画封装
     var scanLineAnimation:LBXScanLineAnimation?
@@ -47,13 +47,13 @@ public class LBXScanView: UIView
         
         switch (viewStyle.anmiationStyle)
         {
-        case LBXScanViewAnimationStyle.LineMove:
+        case LBXScanViewAnimationStyle.lineMove:
             scanLineAnimation = LBXScanLineAnimation.instance()
             break
-        case LBXScanViewAnimationStyle.NetGrid:
+        case LBXScanViewAnimationStyle.netGrid:
             scanNetAnimation = LBXScanNetAnimation.instance()
             break
-        case LBXScanViewAnimationStyle.LineStill:
+        case LBXScanViewAnimationStyle.lineStill:
             scanLineStill = UIImageView()
             scanLineStill?.image = viewStyle.animationImage
             break
@@ -64,21 +64,21 @@ public class LBXScanView: UIView
         }
         
         var frameTmp = frame;
-        frameTmp.origin = CGPointZero
+        frameTmp.origin = CGPoint.zero
         
         super.init(frame: frameTmp)
         
-        backgroundColor = UIColor.clearColor()
+        backgroundColor = UIColor.clear
     }
     
     override init(frame: CGRect) {
         
         var frameTmp = frame;
-        frameTmp.origin = CGPointZero
+        frameTmp.origin = CGPoint.zero
         
         super.init(frame: frameTmp)
         
-        backgroundColor = UIColor.clearColor()
+        backgroundColor = UIColor.clear
     }
     
     required public init?(coder aDecoder: NSCoder)
@@ -119,26 +119,26 @@ public class LBXScanView: UIView
         
         switch viewStyle.anmiationStyle
         {
-        case LBXScanViewAnimationStyle.LineMove:
+        case LBXScanViewAnimationStyle.lineMove:
             
             print(NSStringFromCGRect(cropRect))
             
             scanLineAnimation!.startAnimatingWithRect(cropRect, parentView: self, image:viewStyle.animationImage )
             break
-        case LBXScanViewAnimationStyle.NetGrid:
+        case LBXScanViewAnimationStyle.netGrid:
             
             scanNetAnimation!.startAnimatingWithRect(cropRect, parentView: self, image:viewStyle.animationImage )
             break
-        case LBXScanViewAnimationStyle.LineStill:
+        case LBXScanViewAnimationStyle.lineStill:
             
-            let stillRect = CGRectMake(cropRect.origin.x+20,
-                cropRect.origin.y + cropRect.size.height/2,
-                cropRect.size.width-40,
-                2);
+            let stillRect = CGRect(x: cropRect.origin.x+20,
+                y: cropRect.origin.y + cropRect.size.height/2,
+                width: cropRect.size.width-40,
+                height: 2);
             self.scanLineStill?.frame = stillRect
             
             self.addSubview(scanLineStill!)
-            self.scanLineStill?.hidden = false
+            self.scanLineStill?.isHidden = false
             
             break
             
@@ -156,16 +156,16 @@ public class LBXScanView: UIView
         
         switch viewStyle.anmiationStyle
         {
-        case LBXScanViewAnimationStyle.LineMove:
+        case LBXScanViewAnimationStyle.lineMove:
             
             scanLineAnimation?.stopStepAnimating()
             break
-        case LBXScanViewAnimationStyle.NetGrid:
+        case LBXScanViewAnimationStyle.netGrid:
             
             scanNetAnimation?.stopStepAnimating()
             break
-        case LBXScanViewAnimationStyle.LineStill:
-             self.scanLineStill?.hidden = true
+        case LBXScanViewAnimationStyle.lineStill:
+             self.scanLineStill?.isHidden = true
             
             break
             
@@ -178,7 +178,7 @@ public class LBXScanView: UIView
     
     // Only override drawRect: if you perform custom drawing.
     // An empty implementation adversely affects performance during animation.
-    override public func drawRect(rect: CGRect)
+    override open func draw(_ rect: CGRect)
     {
         // Drawing code
         drawScanRect()
@@ -188,7 +188,7 @@ public class LBXScanView: UIView
     func drawScanRect()
     {
         let XRetangleLeft = viewStyle.xScanRetangleOffset
-        var sizeRetangle = CGSizeMake(self.frame.size.width - XRetangleLeft*2.0, self.frame.size.width - XRetangleLeft*2.0)
+        var sizeRetangle = CGSize(width: self.frame.size.width - XRetangleLeft*2.0, height: self.frame.size.width - XRetangleLeft*2.0)
         if viewStyle.whRatio != 1.0
         {
             let w = sizeRetangle.width;
@@ -197,7 +197,7 @@ public class LBXScanView: UIView
             let hInt:Int = Int(h)
             h = CGFloat(hInt)
             
-            sizeRetangle = CGSizeMake(w,h)
+            sizeRetangle = CGSize(width: w,height: h)
         }
         
         //扫码区域Y轴最小坐标
@@ -213,44 +213,44 @@ public class LBXScanView: UIView
         
         //非扫码区域半透明
             //设置非识别区域颜色
-            CGContextSetRGBFillColor(context, viewStyle.red_notRecoginitonArea, viewStyle.green_notRecoginitonArea,
-                viewStyle.blue_notRecoginitonArea, viewStyle.alpa_notRecoginitonArea)
+            context?.setFillColor(red: viewStyle.red_notRecoginitonArea, green: viewStyle.green_notRecoginitonArea,
+                blue: viewStyle.blue_notRecoginitonArea, alpha: viewStyle.alpa_notRecoginitonArea)
             //填充矩形
             //扫码区域上面填充
-            var rect = CGRectMake(0, 0, self.frame.size.width, YMinRetangle)
-            CGContextFillRect(context, rect)
+            var rect = CGRect(x: 0, y: 0, width: self.frame.size.width, height: YMinRetangle)
+            context?.fill(rect)
             
             
             //扫码区域左边填充
-            rect = CGRectMake(0, YMinRetangle, XRetangleLeft,sizeRetangle.height)
-            CGContextFillRect(context, rect)
+            rect = CGRect(x: 0, y: YMinRetangle, width: XRetangleLeft,height: sizeRetangle.height)
+            context?.fill(rect)
             
             //扫码区域右边填充
-            rect = CGRectMake(XRetangleRight, YMinRetangle, XRetangleLeft,sizeRetangle.height)
-            CGContextFillRect(context, rect)
+            rect = CGRect(x: XRetangleRight, y: YMinRetangle, width: XRetangleLeft,height: sizeRetangle.height)
+            context?.fill(rect)
             
             //扫码区域下面填充
-            rect = CGRectMake(0, YMaxRetangle, self.frame.size.width,self.frame.size.height - YMaxRetangle)
-            CGContextFillRect(context, rect)
+            rect = CGRect(x: 0, y: YMaxRetangle, width: self.frame.size.width,height: self.frame.size.height - YMaxRetangle)
+            context?.fill(rect)
             //执行绘画
-            CGContextStrokePath(context)
+            context?.strokePath()
         
         
         if viewStyle.isNeedShowRetangle
         {
             //中间画矩形(正方形)
-            CGContextSetStrokeColorWithColor(context, viewStyle.colorRetangleLine.CGColor)
-            CGContextSetLineWidth(context, 1);
+            context?.setStrokeColor(viewStyle.colorRetangleLine.cgColor)
+            context?.setLineWidth(1);
             
-            CGContextAddRect(context, CGRectMake(XRetangleLeft, YMinRetangle, sizeRetangle.width, sizeRetangle.height))
+            context?.addRect(CGRect(x: XRetangleLeft, y: YMinRetangle, width: sizeRetangle.width, height: sizeRetangle.height))
             
             //CGContextMoveToPoint(context, XRetangleLeft, YMinRetangle);
             //CGContextAddLineToPoint(context, XRetangleLeft+sizeRetangle.width, YMinRetangle);
             
-            CGContextStrokePath(context)
+            context?.strokePath()
             
         }
-        scanRetangleRect = CGRectMake(XRetangleLeft, YMinRetangle, sizeRetangle.width, sizeRetangle.height)
+        scanRetangleRect = CGRect(x: XRetangleLeft, y: YMinRetangle, width: sizeRetangle.width, height: sizeRetangle.height)
         
         
         //画矩形框4格外围相框角
@@ -270,21 +270,21 @@ public class LBXScanView: UIView
         
         switch viewStyle.photoframeAngleStyle
         {
-        case LBXScanViewPhotoframeAngleStyle.Outer:
+        case LBXScanViewPhotoframeAngleStyle.outer:
                 diffAngle = linewidthAngle/3//框外面4个角，与框紧密联系在一起
            
-        case LBXScanViewPhotoframeAngleStyle.On:
+        case LBXScanViewPhotoframeAngleStyle.on:
                 diffAngle = 0
             
-        case LBXScanViewPhotoframeAngleStyle.Inner:
+        case LBXScanViewPhotoframeAngleStyle.inner:
                 diffAngle = -viewStyle.photoframeLineW/2
         }
         
-        CGContextSetStrokeColorWithColor(context, viewStyle.colorAngle.CGColor);
-        CGContextSetRGBFillColor(context, 1.0, 1.0, 1.0, 1.0);
+        context?.setStrokeColor(viewStyle.colorAngle.cgColor);
+        context?.setFillColor(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0);
         
         // Draw them with a 2.0 stroke width so they are a bit more visible.
-        CGContextSetLineWidth(context, linewidthAngle);
+        context?.setLineWidth(linewidthAngle);
         
         
         //
@@ -294,47 +294,47 @@ public class LBXScanView: UIView
         let bottomY = YMaxRetangle + diffAngle
         
         //左上角水平线
-        CGContextMoveToPoint(context, leftX-linewidthAngle/2, topY)
-        CGContextAddLineToPoint(context, leftX + wAngle, topY)
+        context?.move(to: CGPoint(x: leftX-linewidthAngle/2, y: topY))
+        context?.addLine(to: CGPoint(x: leftX + wAngle, y: topY))
         
         //左上角垂直线
-        CGContextMoveToPoint(context, leftX, topY-linewidthAngle/2)
-        CGContextAddLineToPoint(context, leftX, topY+hAngle)
+        context?.move(to: CGPoint(x: leftX, y: topY-linewidthAngle/2))
+        context?.addLine(to: CGPoint(x: leftX, y: topY+hAngle))
         
         
         //左下角水平线
-        CGContextMoveToPoint(context, leftX-linewidthAngle/2, bottomY)
-        CGContextAddLineToPoint(context, leftX + wAngle, bottomY)
+        context?.move(to: CGPoint(x: leftX-linewidthAngle/2, y: bottomY))
+        context?.addLine(to: CGPoint(x: leftX + wAngle, y: bottomY))
         
         //左下角垂直线
-        CGContextMoveToPoint(context, leftX, bottomY+linewidthAngle/2)
-        CGContextAddLineToPoint(context, leftX, bottomY - hAngle)
+        context?.move(to: CGPoint(x: leftX, y: bottomY+linewidthAngle/2))
+        context?.addLine(to: CGPoint(x: leftX, y: bottomY - hAngle))
         
         
         //右上角水平线
-        CGContextMoveToPoint(context, rightX+linewidthAngle/2, topY)
-        CGContextAddLineToPoint(context, rightX - wAngle, topY)
+        context?.move(to: CGPoint(x: rightX+linewidthAngle/2, y: topY))
+        context?.addLine(to: CGPoint(x: rightX - wAngle, y: topY))
         
         //右上角垂直线
-        CGContextMoveToPoint(context, rightX, topY-linewidthAngle/2)
-        CGContextAddLineToPoint(context, rightX, topY + hAngle)
+        context?.move(to: CGPoint(x: rightX, y: topY-linewidthAngle/2))
+        context?.addLine(to: CGPoint(x: rightX, y: topY + hAngle))
         
         
         //右下角水平线
-        CGContextMoveToPoint(context, rightX+linewidthAngle/2, bottomY)
-        CGContextAddLineToPoint(context, rightX - wAngle, bottomY)
+        context?.move(to: CGPoint(x: rightX+linewidthAngle/2, y: bottomY))
+        context?.addLine(to: CGPoint(x: rightX - wAngle, y: bottomY))
         
         //右下角垂直线
-        CGContextMoveToPoint(context, rightX, bottomY+linewidthAngle/2)
-        CGContextAddLineToPoint(context, rightX, bottomY - hAngle)
+        context?.move(to: CGPoint(x: rightX, y: bottomY+linewidthAngle/2))
+        context?.addLine(to: CGPoint(x: rightX, y: bottomY - hAngle))
         
-        CGContextStrokePath(context)
+        context?.strokePath()
     }
     
     func getScanRectForAnimation() -> CGRect
     {
         let XRetangleLeft = viewStyle.xScanRetangleOffset
-        var sizeRetangle = CGSizeMake(self.frame.size.width - XRetangleLeft*2, self.frame.size.width - XRetangleLeft*2)
+        var sizeRetangle = CGSize(width: self.frame.size.width - XRetangleLeft*2, height: self.frame.size.width - XRetangleLeft*2)
         
         if viewStyle.whRatio != 1
         {
@@ -345,22 +345,22 @@ public class LBXScanView: UIView
             let hInt:Int = Int(h)
             h = CGFloat(hInt)
             
-            sizeRetangle = CGSizeMake(w, h)
+            sizeRetangle = CGSize(width: w, height: h)
         }
         
         //扫码区域Y轴最小坐标
         let YMinRetangle = self.frame.size.height / 2.0 - sizeRetangle.height/2.0 - viewStyle.centerUpOffset
         //扫码区域坐标
-        let cropRect =  CGRectMake(XRetangleLeft, YMinRetangle, sizeRetangle.width, sizeRetangle.height)
+        let cropRect =  CGRect(x: XRetangleLeft, y: YMinRetangle, width: sizeRetangle.width, height: sizeRetangle.height)
         
         return cropRect;
     }
 
     //根据矩形区域，获取识别区域
-    static func getScanRectWithPreView(preView:UIView, style:LBXScanViewStyle) -> CGRect
+    static func getScanRectWithPreView(_ preView:UIView, style:LBXScanViewStyle) -> CGRect
     {
         let XRetangleLeft = style.xScanRetangleOffset;
-        var sizeRetangle = CGSizeMake(preView.frame.size.width - XRetangleLeft*2, preView.frame.size.width - XRetangleLeft*2)
+        var sizeRetangle = CGSize(width: preView.frame.size.width - XRetangleLeft*2, height: preView.frame.size.width - XRetangleLeft*2)
         
         if style.whRatio != 1
         {
@@ -370,13 +370,13 @@ public class LBXScanView: UIView
             let hInt:Int = Int(h)
             h = CGFloat(hInt)
             
-            sizeRetangle = CGSizeMake(w, h)
+            sizeRetangle = CGSize(width: w, height: h)
         }
         
         //扫码区域Y轴最小坐标
         let YMinRetangle = preView.frame.size.height / 2.0 - sizeRetangle.height/2.0 - style.centerUpOffset
         //扫码区域坐标
-        let cropRect =  CGRectMake(XRetangleLeft, YMinRetangle, sizeRetangle.width, sizeRetangle.height)
+        let cropRect =  CGRect(x: XRetangleLeft, y: YMinRetangle, width: sizeRetangle.width, height: sizeRetangle.height)
         
         
         //计算兴趣区域
@@ -390,19 +390,19 @@ public class LBXScanView: UIView
         if p1 < p2 {
             let fixHeight = size.width * 1920.0 / 1080.0;
             let fixPadding = (fixHeight - size.height)/2;
-            rectOfInterest = CGRectMake((cropRect.origin.y + fixPadding)/fixHeight,
-                cropRect.origin.x/size.width,
-                cropRect.size.height/fixHeight,
-                cropRect.size.width/size.width)
+            rectOfInterest = CGRect(x: (cropRect.origin.y + fixPadding)/fixHeight,
+                y: cropRect.origin.x/size.width,
+                width: cropRect.size.height/fixHeight,
+                height: cropRect.size.width/size.width)
             
             
         } else {
             let fixWidth = size.height * 1080.0 / 1920.0;
             let fixPadding = (fixWidth - size.width)/2;
-            rectOfInterest = CGRectMake(cropRect.origin.y/size.height,
-                (cropRect.origin.x + fixPadding)/fixWidth,
-                cropRect.size.height/size.height,
-                cropRect.size.width/fixWidth)
+            rectOfInterest = CGRect(x: cropRect.origin.y/size.height,
+                y: (cropRect.origin.x + fixPadding)/fixWidth,
+                width: cropRect.size.height/size.height,
+                height: cropRect.size.width/fixWidth)
         }
         return rectOfInterest
     }
@@ -411,7 +411,7 @@ public class LBXScanView: UIView
     {
         let XRetangleLeft = viewStyle.xScanRetangleOffset
         
-        var sizeRetangle = CGSizeMake(self.frame.size.width - XRetangleLeft*2, self.frame.size.width - XRetangleLeft*2)
+        var sizeRetangle = CGSize(width: self.frame.size.width - XRetangleLeft*2, height: self.frame.size.width - XRetangleLeft*2)
         
         let w = sizeRetangle.width;
         var h = w / viewStyle.whRatio;
@@ -420,12 +420,12 @@ public class LBXScanView: UIView
         let hInt:Int = Int(h)
         h = CGFloat(hInt)
         
-        sizeRetangle = CGSizeMake(w, h)
+        sizeRetangle = CGSize(width: w, height: h)
         
         return sizeRetangle
     }
     
-    func deviceStartReadying(readyStr:String)
+    func deviceStartReadying(_ readyStr:String)
     {
         let XRetangleLeft = viewStyle.xScanRetangleOffset
         
@@ -437,21 +437,21 @@ public class LBXScanView: UIView
         //设备启动状态提示
         if (activityView == nil)
         {
-            self.activityView = UIActivityIndicatorView(frame: CGRectMake(0, 0, 30, 30))
+            self.activityView = UIActivityIndicatorView(frame: CGRect(x: 0, y: 0, width: 30, height: 30))
             
-            activityView?.center = CGPointMake(XRetangleLeft +  sizeRetangle.width/2 - 50, YMinRetangle + sizeRetangle.height/2)
-            activityView?.activityIndicatorViewStyle = UIActivityIndicatorViewStyle.WhiteLarge
+            activityView?.center = CGPoint(x: XRetangleLeft +  sizeRetangle.width/2 - 50, y: YMinRetangle + sizeRetangle.height/2)
+            activityView?.activityIndicatorViewStyle = UIActivityIndicatorViewStyle.whiteLarge
             
             addSubview(activityView!)
             
             
-            let labelReadyRect = CGRectMake(activityView!.frame.origin.x + activityView!.frame.size.width + 10, activityView!.frame.origin.y, 100, 30);
+            let labelReadyRect = CGRect(x: activityView!.frame.origin.x + activityView!.frame.size.width + 10, y: activityView!.frame.origin.y, width: 100, height: 30);
             //print("%@",NSStringFromCGRect(labelReadyRect))
             self.labelReadying = UILabel(frame: labelReadyRect)
             labelReadying?.text = readyStr
-            labelReadying?.backgroundColor = UIColor.clearColor()
-            labelReadying?.textColor = UIColor.whiteColor()
-            labelReadying?.font = UIFont.systemFontOfSize(18.0)
+            labelReadying?.backgroundColor = UIColor.clear
+            labelReadying?.textColor = UIColor.white
+            labelReadying?.font = UIFont.systemFont(ofSize: 18.0)
             addSubview(labelReadying!)
         }
         

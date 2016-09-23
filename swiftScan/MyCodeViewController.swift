@@ -27,10 +27,10 @@ class MyCodeViewController: UIViewController {
         
     }
     
-    override func viewDidAppear(animated: Bool) {
+    override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         
-        self.view.backgroundColor = UIColor.whiteColor()
+        self.view.backgroundColor = UIColor.white
         
         drawCodeShowView()
         
@@ -44,36 +44,36 @@ class MyCodeViewController: UIViewController {
     {
         //二维码
         
-        let rect = CGRectMake( (CGRectGetWidth(self.view.frame)-CGRectGetWidth(self.view.frame)*5/6)/2, 100, CGRectGetWidth(self.view.frame)*5/6, CGRectGetWidth(self.view.frame)*5/6)
+        let rect = CGRect( x: (self.view.frame.width-self.view.frame.width*5/6)/2, y: 100, width: self.view.frame.width*5/6, height: self.view.frame.width*5/6)
         qrView.frame = rect
         self.view.addSubview(qrView)
         
-        qrView.backgroundColor = UIColor.whiteColor()
-        qrView.layer.shadowOffset = CGSizeMake(0, 2);
+        qrView.backgroundColor = UIColor.white
+        qrView.layer.shadowOffset = CGSize(width: 0, height: 2);
         qrView.layer.shadowRadius = 2;
-        qrView.layer.shadowColor = UIColor.blackColor().CGColor
+        qrView.layer.shadowColor = UIColor.black.cgColor
         qrView.layer.shadowOpacity = 0.5;
         
-        qrImgView.bounds = CGRectMake(0, 0, CGRectGetWidth(qrView.frame)-12, CGRectGetWidth(qrView.frame)-12)
-        qrImgView.center = CGPointMake(CGRectGetWidth(qrView.frame)/2, CGRectGetHeight(qrView.frame)/2);
+        qrImgView.bounds = CGRect(x: 0, y: 0, width: qrView.frame.width-12, height: qrView.frame.width-12)
+        qrImgView.center = CGPoint(x: qrView.frame.width/2, y: qrView.frame.height/2);
         qrView .addSubview(qrImgView)
         
         
         
         //条形码
-        tView.frame = CGRectMake( (CGRectGetWidth(self.view.frame)-CGRectGetWidth(self.view.frame)*5/6)/2,
-            CGRectGetMaxY(rect)+20,
-            CGRectGetWidth(self.view.frame)*5/6,
-            CGRectGetWidth(self.view.frame)*5/6*0.5)
+        tView.frame = CGRect( x: (self.view.frame.width-self.view.frame.width*5/6)/2,
+            y: rect.maxY+20,
+            width: self.view.frame.width*5/6,
+            height: self.view.frame.width*5/6*0.5)
         self.view .addSubview(tView)
-        tView.layer.shadowOffset = CGSizeMake(0, 2);
+        tView.layer.shadowOffset = CGSize(width: 0, height: 2);
         tView.layer.shadowRadius = 2;
-        tView.layer.shadowColor = UIColor.blackColor().CGColor
+        tView.layer.shadowColor = UIColor.black.cgColor
         tView.layer.shadowOpacity = 0.5;
         
         
-        tImgView.bounds = CGRectMake(0, 0, CGRectGetWidth(tView.frame)-12, CGRectGetHeight(tView.frame)-12);
-        tImgView.center = CGPointMake(CGRectGetWidth(tView.frame)/2, CGRectGetHeight(tView.frame)/2);
+        tImgView.bounds = CGRect(x: 0, y: 0, width: tView.frame.width-12, height: tView.frame.height-12);
+        tImgView.center = CGPoint(x: tView.frame.width/2, y: tView.frame.height/2);
         tView .addSubview(tImgView)
         
     }
@@ -83,16 +83,16 @@ class MyCodeViewController: UIViewController {
        // qrView.hidden = false
        // tView.hidden = true
         
-        let qrImg = LBXScanWrapper.createCode("CIQRCodeGenerator",codeString:"lbxia20091227@foxmail.com", size: qrImgView.bounds.size, qrColor: UIColor.blackColor(), bkColor: UIColor.whiteColor())
+        let qrImg = LBXScanWrapper.createCode("CIQRCodeGenerator",codeString:"lbxia20091227@foxmail.com", size: qrImgView.bounds.size, qrColor: UIColor.black, bkColor: UIColor.white)
         
         let logoImg = UIImage(named: "logo.JPG")
-        qrImgView.image = LBXScanWrapper.addImageLogo(qrImg!, logoImg: logoImg!, logoSize: CGSizeMake(30, 30))
+        qrImgView.image = LBXScanWrapper.addImageLogo(qrImg!, logoImg: logoImg!, logoSize: CGSize(width: 30, height: 30))
     }
     
     func createCode128()
     {
         
-        let qrImg = LBXScanWrapper.createCode128("005103906002", size: qrImgView.bounds.size, qrColor: UIColor.blackColor(), bkColor: UIColor.whiteColor())
+        let qrImg = LBXScanWrapper.createCode128("005103906002", size: qrImgView.bounds.size, qrColor: UIColor.black, bkColor: UIColor.white)
         
        
         tImgView.image = qrImg
