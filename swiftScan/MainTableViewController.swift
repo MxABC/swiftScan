@@ -28,16 +28,10 @@ class MainTableViewController: UITableViewController,UIImagePickerControllerDele
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Uncomment the following line to preserve selection between presentations
-        // self.clearsSelectionOnViewWillAppear = false
-
-        // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-        // self.navigationItem.rightBarButtonItem = self.editButtonItem()
         
         self.title = "swift 扫一扫"
         
-       self.tableView.registerClass(UITableViewCell.self, forCellReuseIdentifier: "reuseIdentifier")
+       self.tableView.register(UITableViewCell.self, forCellReuseIdentifier: "reuseIdentifier")
     }
 
     override func didReceiveMemoryWarning() {
@@ -47,19 +41,19 @@ class MainTableViewController: UITableViewController,UIImagePickerControllerDele
 
     // MARK: - Table view data source
 
-    override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+     func numberOfSectionsInTableView(tableView: UITableView) -> Int {
         // #warning Incomplete implementation, return the number of sections
         return 1
     }
 
-    override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
         return arrayItems.count
     }
 
     
-    override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier("reuseIdentifier", forIndexPath: indexPath)
+     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "reuseIdentifier", for: indexPath as IndexPath)
 
         // Configure the cell...
         cell.textLabel?.text = arrayItems[indexPath.row].first
@@ -67,18 +61,15 @@ class MainTableViewController: UITableViewController,UIImagePickerControllerDele
 
         return cell
     }
-    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         
         //objc_msgSend对应方法好像没有
         let sel = NSSelectorFromString(arrayItems[indexPath.row].last!)
-        if(respondsToSelector(sel))
-        {
-            performSelector(sel)
-            
-        }
+        
+      
         
         
-        tableView.deselectRowAtIndexPath(indexPath, animated: true)
+        tableView.deselectRow(at: indexPath as IndexPath, animated: true)
 
     }
     
@@ -104,7 +95,7 @@ class MainTableViewController: UITableViewController,UIImagePickerControllerDele
         style.centerUpOffset = 60;
         style.xScanRetangleOffset = 30;
         
-        if UIScreen.mainScreen().bounds.size.height <= 480
+        if UIScreen.main.bounds.size.height <= 480
         {
             //3.5inch 显示的扫码缩小
             style.centerUpOffset = 40;
@@ -139,14 +130,14 @@ class MainTableViewController: UITableViewController,UIImagePickerControllerDele
     
     func createImageWithColor(color:UIColor)->UIImage
     {
-        let rect=CGRectMake(0.0, 0.0, 1.0, 1.0);
+        let rect=CGRect(x: 0.0, y: 0.0, width: 1.0, height: 1.0);
         UIGraphicsBeginImageContext(rect.size);
         let context = UIGraphicsGetCurrentContext();
-        CGContextSetFillColorWithColor(context, color.CGColor);
-        CGContextFillRect(context, rect);
+        context!.setFillColor(color.cgColor);
+        context!.fill(rect);
         let theImage = UIGraphicsGetImageFromCurrentImageContext();
         UIGraphicsEndImageContext();
-        return theImage;
+        return theImage!;
     }
     
     //MARK: -------条形码扫码界面 ---------
@@ -166,7 +157,7 @@ class MainTableViewController: UITableViewController,UIImagePickerControllerDele
         style.anmiationStyle = LBXScanViewAnimationStyle.LineStill;
         
         
-        style.animationImage = createImageWithColor(UIColor.redColor())
+        style.animationImage = createImageWithColor(color: UIColor.red)
         //非正方形
         //设置矩形宽高比
         style.whRatio = 4.3/2.18;
@@ -364,19 +355,19 @@ class MainTableViewController: UITableViewController,UIImagePickerControllerDele
     {
         let picker = UIImagePickerController()
         
-        picker.sourceType = UIImagePickerControllerSourceType.PhotoLibrary
+        picker.sourceType = UIImagePickerControllerSourceType.photoLibrary
         
         picker.delegate = self;
         
         picker.allowsEditing = true
         
-        presentViewController(picker, animated: true, completion: nil)
+        present(picker, animated: true, completion: nil)
     }
     
     //MARK: -----相册选择图片识别二维码 （条形码没有找到系统方法）
     func imagePickerController(picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : AnyObject])
     {
-        picker.dismissViewControllerAnimated(true, completion: nil)
+        picker.dismiss(animated: true, completion: nil)
         
         var image:UIImage? = info[UIImagePickerControllerEditedImage] as? UIImage
         
@@ -392,31 +383,31 @@ class MainTableViewController: UITableViewController,UIImagePickerControllerDele
         
         if(image != nil)
         {
-            let arrayResult = LBXScanWrapper.recognizeQRImage(image!)
+            let arrayResult = LBXScanWrapper.recognizeQRImage(image: image!)
             if arrayResult.count > 0
             {
                 let result = arrayResult[0];
                 
-                showMsg(result.strBarCodeType, message: result.strScanned)
+                showMsg(title: result.strBarCodeType, message: result.strScanned)
                 
                 return
             }
         }
-        showMsg("", message: "识别失败")       
+        showMsg(title: "", message: "识别失败")       
     }
     
     func showMsg(title:String?,message:String?)
     {
-        let alertController = UIAlertController(title: title, message:message, preferredStyle: UIAlertControllerStyle.Alert)
+        let alertController = UIAlertController(title: title, message:message, preferredStyle: UIAlertControllerStyle.alert)
         
-        let alertAction = UIAlertAction(title:  "知道了", style: UIAlertActionStyle.Default) { (alertAction) -> Void in
+        let alertAction = UIAlertAction(title:  "知道了", style: UIAlertActionStyle.default) { (alertAction) -> Void in
             
            
         }
         
         alertController.addAction(alertAction)
         
-        presentViewController(alertController, animated: true, completion: nil)
+        present(alertController, animated: true, completion: nil)
     }
 
     func myCode()

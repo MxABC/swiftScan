@@ -7,7 +7,6 @@
 //
 
 import UIKit
-import swiftScan
 
 class QQScanViewController: LBXScanViewController {
     
@@ -41,16 +40,15 @@ class QQScanViewController: LBXScanViewController {
         super.viewDidLoad()
         
         //需要识别后的图像
-        setNeedCodeImage(true)
+        setNeedCodeImage(needCodeImg: true)
         
         //框向上移动10个像素
         scanStyle?.centerUpOffset += 10
-    
-
+ 
         // Do any additional setup after loading the view.
     }
     
-    override func viewDidAppear(animated: Bool) {
+    override func viewDidAppear(_ animated: Bool) {
         
         super.viewDidAppear(animated)
         
@@ -81,9 +79,9 @@ class QQScanViewController: LBXScanViewController {
             return;
         }
         
-        let yMax = CGRectGetMaxY(self.view.frame) - CGRectGetMinY(self.view.frame)
+        let yMax = self.view.frame.maxY - self.view.frame.minY
         
-        bottomItemsView = UIView(frame:CGRectMake( 0.0, yMax-100,self.view.frame.size.width, 100 ) )
+        bottomItemsView = UIView(frame:CGRect(x: 0.0, y: yMax-100,width: self.view.frame.size.width, height: 100 ) )
         
         
         bottomItemsView!.backgroundColor = UIColor(red: 0.0, green: 0.0, blue: 0.0, alpha: 0.6)
@@ -91,29 +89,29 @@ class QQScanViewController: LBXScanViewController {
         self.view .addSubview(bottomItemsView!)
         
         
-        let size = CGSizeMake(65, 87);
+        let size = CGSize(width: 65, height: 87);
         
         self.btnFlash = UIButton()
-        btnFlash.bounds = CGRectMake(0, 0, size.width, size.height)
-        btnFlash.center = CGPointMake(CGRectGetWidth(bottomItemsView!.frame)/2, CGRectGetHeight(bottomItemsView!.frame)/2)
-        btnFlash.setImage(UIImage(named: "CodeScan.bundle/qrcode_scan_btn_flash_nor"), forState:UIControlState.Normal)
-        btnFlash.addTarget(self, action: #selector(QQScanViewController.openOrCloseFlash), forControlEvents: UIControlEvents.TouchUpInside)
+        btnFlash.bounds = CGRect(x: 0, y: 0, width: size.width, height: size.height)
+        btnFlash.center = CGPoint(x: bottomItemsView!.frame.width/2, y: bottomItemsView!.frame.height/2)
+        btnFlash.setImage(UIImage(named: "CodeScan.bundle/qrcode_scan_btn_flash_nor"), for:UIControlState.normal)
+        btnFlash.addTarget(self, action: #selector(QQScanViewController.openOrCloseFlash), for: UIControlEvents.touchUpInside)
         
         
         self.btnPhoto = UIButton()
         btnPhoto.bounds = btnFlash.bounds
-        btnPhoto.center = CGPointMake(CGRectGetWidth(bottomItemsView!.frame)/4, CGRectGetHeight(bottomItemsView!.frame)/2)
-        btnPhoto.setImage(UIImage(named: "CodeScan.bundle/qrcode_scan_btn_photo_nor"), forState: UIControlState.Normal)
-        btnPhoto.setImage(UIImage(named: "CodeScan.bundle/qrcode_scan_btn_photo_down"), forState: UIControlState.Highlighted)
-        btnPhoto.addTarget(self, action: Selector("openPhotoAlbum"), forControlEvents: UIControlEvents.TouchUpInside)
+        btnPhoto.center = CGPoint(x: bottomItemsView!.frame.width/4, y: bottomItemsView!.frame.height/2)
+        btnPhoto.setImage(UIImage(named: "CodeScan.bundle/qrcode_scan_btn_photo_nor"), for: UIControlState.normal)
+        btnPhoto.setImage(UIImage(named: "CodeScan.bundle/qrcode_scan_btn_photo_down"), for: UIControlState.highlighted)
+        btnPhoto.addTarget(self, action: Selector(("openPhotoAlbum")), for: UIControlEvents.touchUpInside)
         
         
         self.btnMyQR = UIButton()
         btnMyQR.bounds = btnFlash.bounds;
-        btnMyQR.center = CGPointMake(CGRectGetWidth(bottomItemsView!.frame) * 3/4, CGRectGetHeight(bottomItemsView!.frame)/2);
-        btnMyQR.setImage(UIImage(named: "CodeScan.bundle/qrcode_scan_btn_myqrcode_nor"), forState: UIControlState.Normal)
-        btnMyQR.setImage(UIImage(named: "CodeScan.bundle/qrcode_scan_btn_myqrcode_down"), forState: UIControlState.Highlighted)
-        btnMyQR.addTarget(self, action: #selector(QQScanViewController.myCode), forControlEvents: UIControlEvents.TouchUpInside)
+        btnMyQR.center = CGPoint(x: bottomItemsView!.frame.width * 3/4, y: bottomItemsView!.frame.height/2);
+        btnMyQR.setImage(UIImage(named: "CodeScan.bundle/qrcode_scan_btn_myqrcode_nor"), for: UIControlState.normal)
+        btnMyQR.setImage(UIImage(named: "CodeScan.bundle/qrcode_scan_btn_myqrcode_down"), for: UIControlState.highlighted)
+        btnMyQR.addTarget(self, action: #selector(QQScanViewController.myCode), for: UIControlEvents.touchUpInside)
         
         bottomItemsView?.addSubview(btnFlash)
         bottomItemsView?.addSubview(btnPhoto)
@@ -132,11 +130,11 @@ class QQScanViewController: LBXScanViewController {
         
         if isOpenedFlash
         {
-            btnFlash.setImage(UIImage(named: "CodeScan.bundle/qrcode_scan_btn_flash_down"), forState:UIControlState.Normal)
+            btnFlash.setImage(UIImage(named: "CodeScan.bundle/qrcode_scan_btn_flash_down"), for:UIControlState.normal)
         }
         else
         {
-            btnFlash.setImage(UIImage(named: "CodeScan.bundle/qrcode_scan_btn_flash_nor"), forState:UIControlState.Normal)
+            btnFlash.setImage(UIImage(named: "CodeScan.bundle/qrcode_scan_btn_flash_nor"), for:UIControlState.normal)
         }
     }
     
