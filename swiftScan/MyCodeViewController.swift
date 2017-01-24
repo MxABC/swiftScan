@@ -7,7 +7,7 @@
 //
 
 import UIKit
-import swiftScan
+
 
 class MyCodeViewController: UIViewController {
 

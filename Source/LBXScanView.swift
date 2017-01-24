@@ -1,6 +1,6 @@
 //
 //  LBXScanView.swift
-//  swiftScan
+//  swiftScan https://github.com/MxABC/swiftScan
 //
 //  Created by xialibing on 15/12/8.
 //  Copyright © 2015年 xialibing. All rights reserved.
@@ -211,10 +211,22 @@ open class LBXScanView: UIView
         let context = UIGraphicsGetCurrentContext()!
         
         
-        //非扫码区域半透明
+        if let components = viewStyle.color_NotRecoginitonArea.cgColor.components
+        {
+            let red_notRecoginitonArea:CGFloat    = components[0]
+            let green_notRecoginitonArea:CGFloat  = components[1]
+            let blue_notRecoginitonArea:CGFloat   = components[2]
+            let alpa_notRecoginitonArea:CGFloat   = components[3]
+            //
+            //非扫码区域半透明
             //设置非识别区域颜色
-            context.setFillColor(red: viewStyle.red_notRecoginitonArea, green: viewStyle.green_notRecoginitonArea,
-                blue: viewStyle.blue_notRecoginitonArea, alpha: viewStyle.alpa_notRecoginitonArea)
+            context.setFillColor(red: red_notRecoginitonArea, green: green_notRecoginitonArea,
+                                 blue: blue_notRecoginitonArea, alpha: alpa_notRecoginitonArea)
+            
+        }
+        
+        
+      
             //填充矩形
             //扫码区域上面填充
         var rect = CGRect(x: 0, y: 0, width: self.frame.size.width, height: YMinRetangle)

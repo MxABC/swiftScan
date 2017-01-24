@@ -1,6 +1,6 @@
 //
 //  LBXScanViewController.swift
-//  swiftScan
+//  swiftScan https://github.com/MxABC/swiftScan
 //
 //  Created by lbxia on 15/12/8.
 //  Copyright © 2015年 xialibing. All rights reserved.

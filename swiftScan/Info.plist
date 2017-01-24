@@ -2,58 +2,6 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
-<!-- 🖼 Photo Library -->
-<key>NSPhotoLibraryUsageDescription</key>
-<string>请点击“允许”以允许访问</string>
-
-<!-- 📷 Camera -->
-<key>NSCameraUsageDescription</key>
-<string>请点击“允许”以允许访问</string>
-
-<!-- 🎤 Microphone -->
-<key>NSMicrophoneUsageDescription</key>
-<string>请点击“允许”以允许访问</string>
-
-<!-- 📍 Location -->
-<key>NSLocationUsageDescription</key>
-<string>请点击“允许”以允许访问</string>
-
-<!-- 📍 Location When In Use -->
-<key>NSLocationWhenInUseUsageDescription</key>
-<string>请点击“允许”以允许访问</string>
-
-<!-- 📍 Location Always -->
-<key>NSLocationAlwaysUsageDescription</key>
-<string>请点击“允许”以允许访问</string>
-
-<!-- 📆 Calendars -->
-<key>NSCalendarsUsageDescription</key>
-<string>请点击“允许”以允许访问</string>
-
-<!-- ⏰ Reminders -->
-<key>NSRemindersUsageDescription</key>
-<string>请点击“允许”以允许访问</string>
-
-<!-- 🏊 Motion -->
-<key>NSMotionUsageDescription</key>
-<string>请点击“允许”以允许访问</string>
-
-<!-- 💊 Health Update -->
-<key>NSHealthUpdateUsageDescription</key>
-<string>请点击“允许”以允许访问</string>
-
-<!-- 💊 Health Share -->
-<key>NSHealthShareUsageDescription</key>
-<string>请点击“允许”以允许访问</string>
-
-<!-- ᛒ🔵 Bluetooth Peripheral -->
-<key>NSBluetoothPeripheralUsageDescription</key>
-<string>请点击“允许”以允许访问</string>
-
-<!-- 🎵 Media Library -->
-<key>NSAppleMusicUsageDescription</key>
-<string>请点击“允许”以允许访问</string>
-
 	<key>CFBundleDevelopmentRegion</key>
 	<string>en</string>
 	<key>CFBundleExecutable</key>
@@ -74,6 +22,32 @@
 	<string>1</string>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
+	<key>NSAppleMusicUsageDescription</key>
+	<string>请点击“允许”以允许访问</string>
+	<key>NSBluetoothPeripheralUsageDescription</key>
+	<string>请点击“允许”以允许访问</string>
+	<key>NSCalendarsUsageDescription</key>
+	<string>请点击“允许”以允许访问</string>
+	<key>NSCameraUsageDescription</key>
+	<string>请点击“允许”以允许访问</string>
+	<key>NSHealthShareUsageDescription</key>
+	<string>请点击“允许”以允许访问</string>
+	<key>NSHealthUpdateUsageDescription</key>
+	<string>请点击“允许”以允许访问</string>
+	<key>NSLocationAlwaysUsageDescription</key>
+	<string>请点击“允许”以允许访问</string>
+	<key>NSLocationUsageDescription</key>
+	<string>请点击“允许”以允许访问</string>
+	<key>NSLocationWhenInUseUsageDescription</key>
+	<string>请点击“允许”以允许访问</string>
+	<key>NSMicrophoneUsageDescription</key>
+	<string>请点击“允许”以允许访问</string>
+	<key>NSMotionUsageDescription</key>
+	<string>请点击“允许”以允许访问</string>
+	<key>NSPhotoLibraryUsageDescription</key>
+	<string>请点击“允许”以允许访问</string>
+	<key>NSRemindersUsageDescription</key>
+	<string>请点击“允许”以允许访问</string>
 	<key>UILaunchStoryboardName</key>
 	<string>LaunchScreen</string>
 	<key>UIMainStoryboardFile</key>

@@ -61,7 +61,9 @@ class QQScanViewController: LBXScanViewController {
         
         for result:LBXScanResult in arrayResult
         {
-            print("%@",result.strScanned)
+            if let str = result.strScanned {
+                print(str)
+            }
         }
         
         let result:LBXScanResult = arrayResult[0]
@@ -70,7 +72,6 @@ class QQScanViewController: LBXScanViewController {
         vc.codeResult = result
         navigationController?.pushViewController(vc, animated: true)
     }
-
     
     func drawBottomItems()
     {

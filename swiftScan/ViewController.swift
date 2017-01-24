@@ -90,11 +90,9 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
             style.centerUpOffset = 40;
             style.xScanRetangleOffset = 20;
         }
+    
         
-        style.red_notRecoginitonArea = 0.4
-        style.green_notRecoginitonArea = 0.4
-        style.blue_notRecoginitonArea = 0.4
-        style.alpa_notRecoginitonArea = 0.4
+        style.color_NotRecoginitonArea = UIColor(red: 0.4, green: 0.4, blue: 0.4, alpha: 0.4)
         
         
         style.photoframeAngleStyle = LBXScanViewPhotoframeAngleStyle.Inner;
@@ -295,10 +293,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         style.colorRetangleLine = UIColor(red: 247.0/255.0, green: 202.0/255.0, blue: 15.0/255.0, alpha: 1.0)
         
         //非矩形框区域颜色
-        style.red_notRecoginitonArea = 247.0/255.0;
-        style.green_notRecoginitonArea = 202.0/255.0;
-        style.blue_notRecoginitonArea = 15.0/255.0;
-        style.alpa_notRecoginitonArea = 0.2;
+        style.color_NotRecoginitonArea = UIColor(red: 247.0/255.0, green: 202.0/255.0, blue: 15.0/255.0, alpha: 0.2)
         
         let vc = LBXScanViewController();
         vc.scanStyle = style
@@ -348,7 +343,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         
         picker.delegate = self;
         
-        picker.allowsEditing = true
+//        picker.allowsEditing = true
         
         present(picker, animated: true, completion: nil)
     }
