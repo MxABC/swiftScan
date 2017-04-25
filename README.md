@@ -1,5 +1,5 @@
 
-# iOS 二维码、条形码 Swift 版本
+# iOS qrCode、barCode Swift Version
 
 
 ### Objective-c Version: **[LBXScan](https://github.com/MxABC/LBXScan)**
