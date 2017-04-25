@@ -51,3 +51,14 @@ download and copy the Source folder to your project
 ## View effect
 
 
+![image](https://github.com/MxABC/swiftScan/blob/master/ScreenShots/page1.jpg)
+![image](https://github.com/MxABC/swiftScan/blob/master/ScreenShots/page2.jpg)
+![image](https://github.com/MxABC/swiftScan/blob/master/ScreenShots/page3.jpg)
+![image](https://github.com/MxABC/swiftScan/blob/master/ScreenShots/page4.jpg)
+![image](https://github.com/MxABC/swiftScan/blob/master/ScreenShots/page5.jpg)
+![image](https://github.com/MxABC/swiftScan/blob/master/ScreenShots/page6.jpg)
+![image](https://github.com/MxABC/swiftScan/blob/master/ScreenShots/page7.jpg)
+![image](https://github.com/MxABC/swiftScan/blob/master/ScreenShots/page8.jpg)
+![image](https://github.com/MxABC/swiftScan/blob/master/ScreenShots/page9.jpg)
+![image](https://github.com/MxABC/swiftScan/blob/master/ScreenShots/page10.jpg)
+![image](https://github.com/MxABC/swiftScan/blob/master/ScreenShots/page11.jpg)
