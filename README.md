@@ -39,7 +39,7 @@
 source 'https://github.com/CocoaPods/Specs.git'
 platform :ios, '8.0'
 use_frameworks!
-pod 'swiftScan', :git => 'https://github.com/MxABC/swiftScan.git', :tag => '1.0.9'
+pod 'swiftScan', '~> 1.0.9'
 ```
 
 
