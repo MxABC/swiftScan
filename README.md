@@ -2,11 +2,8 @@
 # iOS 二维码、条形码 Swift 版本
 
 
-###objective-c Version <img src="https://github.com/MxABC/LBXScan/blob/master/DemoTests/objectiveCIcon.jpg" height="55" width="40">
-Objective-c版本: **[LBXScan](https://github.com/MxABC/LBXScan)**
+### Objective-c版本: **[LBXScan](https://github.com/MxABC/LBXScan)**
 
-### xcode
-测试程序:Xcode 8.2.1
 
 
 ## 介绍
