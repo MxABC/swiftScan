@@ -1,6 +1,6 @@
 //
 //  LBXScanViewStyle.swift
-//  swiftScan https://github.com/MxABC/swiftScan
+//  swiftScan
 //
 //  Created by xialibing on 15/12/8.
 //  Copyright © 2015年 xialibing. All rights reserved.
