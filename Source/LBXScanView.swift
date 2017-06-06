@@ -1,6 +1,6 @@
 //
 //  LBXScanView.swift
-//  swiftScan https://github.com/MxABC/swiftScan
+//  swiftScan
 //
 //  Created by xialibing on 15/12/8.
 //  Copyright © 2015年 xialibing. All rights reserved.
@@ -99,7 +99,7 @@ open class LBXScanView: UIView
         }
         
         
-        print("LBXScanView deinit")
+//        print("LBXScanView deinit")
     }
     
     
@@ -121,7 +121,7 @@ open class LBXScanView: UIView
         {
         case LBXScanViewAnimationStyle.LineMove:
             
-            print(NSStringFromCGRect(cropRect))
+//            print(NSStringFromCGRect(cropRect))
             
             scanLineAnimation!.startAnimatingWithRect(animationRect: cropRect, parentView: self, image:viewStyle.animationImage )
             break
@@ -206,27 +206,14 @@ open class LBXScanView: UIView
         let XRetangleRight = self.frame.size.width - XRetangleLeft
         
         
-        print("frame:%@",NSStringFromCGRect(self.frame))
+//        print("frame:%@",NSStringFromCGRect(self.frame))
         
         let context = UIGraphicsGetCurrentContext()!
         
         
-        if let components = viewStyle.color_NotRecoginitonArea.cgColor.components
-        {
-            let red_notRecoginitonArea:CGFloat    = components[0]
-            let green_notRecoginitonArea:CGFloat  = components[1]
-            let blue_notRecoginitonArea:CGFloat   = components[2]
-            let alpa_notRecoginitonArea:CGFloat   = components[3]
-            //
-            //非扫码区域半透明
+        //非扫码区域半透明
             //设置非识别区域颜色
-            context.setFillColor(red: red_notRecoginitonArea, green: green_notRecoginitonArea,
-                                 blue: blue_notRecoginitonArea, alpha: alpa_notRecoginitonArea)
-            
-        }
-        
-        
-      
+        context.setFillColor(viewStyle.color_NotRecoginitonArea.cgColor)
             //填充矩形
             //扫码区域上面填充
         var rect = CGRect(x: 0, y: 0, width: self.frame.size.width, height: YMinRetangle)

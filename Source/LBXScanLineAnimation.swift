@@ -1,6 +1,6 @@
 //
 //  LBXScanLineAnimation.swift
-//  swiftScan https://github.com/MxABC/swiftScan
+//  swiftScan
 //
 //  Created by lbxia on 15/12/9.
 //  Copyright © 2015年 xialibing. All rights reserved.
@@ -77,7 +77,7 @@ class LBXScanLineAnimation: UIImageView {
     
     deinit
     {
-        print("LBXScanLineAnimation deinit")
+//        print("LBXScanLineAnimation deinit")
         stopStepAnimating()
     }
 

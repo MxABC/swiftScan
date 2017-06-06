@@ -8,7 +8,7 @@
 
 import UIKit
 
-class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSource,UIImagePickerControllerDelegate,UINavigationControllerDelegate {
+class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSource,UIImagePickerControllerDelegate,UINavigationControllerDelegate,LBXScanViewControllerDelegate {
     var tableView: UITableView!
     
     
@@ -206,6 +206,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         
         let vc = LBXScanViewController();
         vc.scanStyle = style
+        vc.scanResultDelegate = self
         self.navigationController?.pushViewController(vc, animated: true)
     }
     
@@ -398,6 +399,10 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     {
         let vc = MyCodeViewController()
         self.navigationController?.pushViewController(vc, animated: true)
+    }
+    
+    func scanFinished(scanResult: LBXScanResult, error: String?){
+        NSLog("scanResult:\(scanResult)")
     }
     
 }
