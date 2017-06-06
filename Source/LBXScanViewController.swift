@@ -17,6 +17,7 @@ protocol LBXScanViewControllerDelegate {
 
 open class LBXScanViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     
+ //返回扫码结果，也可以通过继承本控制器，改写该handleCodeResult方法即可
    var scanResultDelegate: LBXScanViewControllerDelegate?
     
    open var scanObj: LBXScanWrapper?
@@ -128,19 +129,29 @@ open class LBXScanViewController: UIViewController, UIImagePickerControllerDeleg
    
     
     /**
-     处理扫码结果，如果是继承本控制器的，可以重写该方法,作出相应地处理
+     处理扫码结果，如果是继承本控制器的，可以重写该方法,作出相应地处理，或者设置delegate作出相应处理
      */
     open func handleCodeResult(arrayResult:[LBXScanResult])
     {
-//        for result:LBXScanResult in arrayResult
-//        {
-//            print("result.strScanned:\(String(describing: result.strScanned))")
-//        }
         
-        self.navigationController? .popViewController(animated: true)
-        let result:LBXScanResult = arrayResult[0]
-        
-        scanResultDelegate?.scanFinished(scanResult: result, error: nil)
+        if let delegate = scanResultDelegate  {
+            
+            self.navigationController? .popViewController(animated: true)
+            let result:LBXScanResult = arrayResult[0]
+            
+            delegate.scanFinished(scanResult: result, error: nil)
+
+        }else{
+            
+            for result:LBXScanResult in arrayResult
+            {
+                print("%@",result.strScanned ?? <#default value#>)
+            }
+            
+            let result:LBXScanResult = arrayResult[0]
+            
+            showMsg(title: result.strBarCodeType, message: result.strScanned)
+        }
     }
     
     override open func viewWillDisappear(_ animated: Bool) {
