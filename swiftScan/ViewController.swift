@@ -344,13 +344,13 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         
         picker.delegate = self;
         
-//        picker.allowsEditing = true
+        picker.allowsEditing = true
         
         present(picker, animated: true, completion: nil)
     }
     
     //MARK: -----相册选择图片识别二维码 （条形码没有找到系统方法）
-    private func imagePickerController(picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : AnyObject])
+    public func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any])
     {
         picker.dismiss(animated: true, completion: nil)
         
