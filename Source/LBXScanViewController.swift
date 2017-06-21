@@ -10,15 +10,15 @@ import UIKit
 import Foundation
 import AVFoundation
 
-protocol LBXScanViewControllerDelegate {
-    func scanFinished(scanResult: LBXScanResult, error: String?)
+public protocol LBXScanViewControllerDelegate {
+     func scanFinished(scanResult: LBXScanResult, error: String?)
 }
 
 
 open class LBXScanViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     
  //返回扫码结果，也可以通过继承本控制器，改写该handleCodeResult方法即可
-   var scanResultDelegate: LBXScanViewControllerDelegate?
+   open var scanResultDelegate: LBXScanViewControllerDelegate?
     
    open var scanObj: LBXScanWrapper?
     
