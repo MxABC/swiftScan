@@ -42,6 +42,12 @@ use_frameworks!
 pod 'swiftScan', '~> 1.1.0'
 ```
 
+### Installation with Carthage
+
+```ruby
+github "ceeyang/swiftScan" "new-version"
+```
+
 
 ### manually
 download and copy the Source folder to your project
