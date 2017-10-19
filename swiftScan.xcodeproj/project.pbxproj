@@ -16,7 +16,6 @@
 		488928E81C1A7BE4005A8F83 /* LBXScanWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 488928E21C1A7BE4005A8F83 /* LBXScanWrapper.swift */; };
 		48B143C41C17C98B00B2E7D5 /* MainTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48B143C31C17C98B00B2E7D5 /* MainTableViewController.swift */; };
 		48B143CA1C1809E700B2E7D5 /* CodeScan.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 48B143C91C1809E700B2E7D5 /* CodeScan.bundle */; };
-		48B789571C195944003BC426 /* README.md in Sources */ = {isa = PBXBuildFile; fileRef = 48B789561C195944003BC426 /* README.md */; };
 		48D3BBD11C70104100823F87 /* LBXPermissions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48D3BBD01C70104100823F87 /* LBXPermissions.swift */; };
 		73FF0B8E1CF545FE0083F169 /* ScanResultController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 73FF0B8A1CF545FE0083F169 /* ScanResultController.xib */; };
 		73FF0B8F1CF545FE0083F169 /* ScanResultController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73FF0B8B1CF545FE0083F169 /* ScanResultController.swift */; };
@@ -28,27 +27,7 @@
 		7D42B9B71C05EE9A0084D045 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7D42B9B61C05EE9A0084D045 /* Assets.xcassets */; };
 		7D42B9BA1C05EE9A0084D045 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7D42B9B81C05EE9A0084D045 /* LaunchScreen.storyboard */; };
 		7DA82E091C19CE5E0028B5DB /* logo.JPG in Resources */ = {isa = PBXBuildFile; fileRef = 7DA82E081C19CE5E0028B5DB /* logo.JPG */; };
-		D6DC96F81F6D0C0200E1CCEB /* SwiftScanner.h in Headers */ = {isa = PBXBuildFile; fileRef = D6DC96F61F6D0C0200E1CCEB /* SwiftScanner.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		D6DC96FB1F6D0C0200E1CCEB /* SwiftScanner.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D6DC96F41F6D0C0200E1CCEB /* SwiftScanner.framework */; };
-		D6DC96FC1F6D0C0200E1CCEB /* SwiftScanner.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = D6DC96F41F6D0C0200E1CCEB /* SwiftScanner.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		D6DC97011F6D0C1300E1CCEB /* LBXPermissions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48D3BBD01C70104100823F87 /* LBXPermissions.swift */; };
-		D6DC97021F6D0C1300E1CCEB /* LBXScanLineAnimation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 488928DD1C1A7BE4005A8F83 /* LBXScanLineAnimation.swift */; };
-		D6DC97031F6D0C1300E1CCEB /* LBXScanNetAnimation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 488928DE1C1A7BE4005A8F83 /* LBXScanNetAnimation.swift */; };
-		D6DC97041F6D0C1300E1CCEB /* LBXScanView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 488928DF1C1A7BE4005A8F83 /* LBXScanView.swift */; };
-		D6DC97051F6D0C1300E1CCEB /* LBXScanViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 488928E01C1A7BE4005A8F83 /* LBXScanViewController.swift */; };
-		D6DC97061F6D0C1300E1CCEB /* LBXScanViewStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 488928E11C1A7BE4005A8F83 /* LBXScanViewStyle.swift */; };
-		D6DC97071F6D0C1300E1CCEB /* LBXScanWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 488928E21C1A7BE4005A8F83 /* LBXScanWrapper.swift */; };
 /* End PBXBuildFile section */
-
-/* Begin PBXContainerItemProxy section */
-		D6DC96F91F6D0C0200E1CCEB /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 7D42B9A41C05EE9A0084D045 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = D6DC96F31F6D0C0200E1CCEB;
-			remoteInfo = SwiftScanner;
-		};
-/* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
 		D6DC97001F6D0C0200E1CCEB /* Embed Frameworks */ = {
@@ -57,7 +36,6 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				D6DC96FC1F6D0C0200E1CCEB /* SwiftScanner.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -74,7 +52,6 @@
 		488928E21C1A7BE4005A8F83 /* LBXScanWrapper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LBXScanWrapper.swift; sourceTree = "<group>"; };
 		48B143C31C17C98B00B2E7D5 /* MainTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainTableViewController.swift; sourceTree = "<group>"; };
 		48B143C91C1809E700B2E7D5 /* CodeScan.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = CodeScan.bundle; sourceTree = "<group>"; };
-		48B789561C195944003BC426 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		48D3BBD01C70104100823F87 /* LBXPermissions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LBXPermissions.swift; sourceTree = "<group>"; };
 		73FF0B8A1CF545FE0083F169 /* ScanResultController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ScanResultController.xib; sourceTree = "<group>"; };
 		73FF0B8B1CF545FE0083F169 /* ScanResultController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScanResultController.swift; sourceTree = "<group>"; };
@@ -90,21 +67,12 @@
 		7D46320C1C18683A00D70CF1 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Main.strings"; sourceTree = "<group>"; };
 		7D46320D1C18683A00D70CF1 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/LaunchScreen.strings"; sourceTree = "<group>"; };
 		7DA82E081C19CE5E0028B5DB /* logo.JPG */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = logo.JPG; sourceTree = "<group>"; };
-		D6DC96F41F6D0C0200E1CCEB /* SwiftScanner.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = SwiftScanner.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		D6DC96F61F6D0C0200E1CCEB /* SwiftScanner.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SwiftScanner.h; sourceTree = "<group>"; };
 		D6DC96F71F6D0C0200E1CCEB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
 		7D42B9A91C05EE9A0084D045 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				D6DC96FB1F6D0C0200E1CCEB /* SwiftScanner.framework in Frameworks */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		D6DC96F01F6D0C0200E1CCEB /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -132,7 +100,6 @@
 			isa = PBXGroup;
 			children = (
 				488928AD1C1A6F4D005A8F83 /* swiftScan.podspec */,
-				48B789561C195944003BC426 /* README.md */,
 				488928DC1C1A7BE4005A8F83 /* Source */,
 				7D42B9AE1C05EE9A0084D045 /* swiftScan */,
 				D6DC96F51F6D0C0200E1CCEB /* SwiftScanner */,
@@ -144,7 +111,6 @@
 			isa = PBXGroup;
 			children = (
 				7D42B9AC1C05EE9A0084D045 /* swiftScan.app */,
-				D6DC96F41F6D0C0200E1CCEB /* SwiftScanner.framework */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -180,17 +146,6 @@
 		};
 /* End PBXGroup section */
 
-/* Begin PBXHeadersBuildPhase section */
-		D6DC96F11F6D0C0200E1CCEB /* Headers */ = {
-			isa = PBXHeadersBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				D6DC96F81F6D0C0200E1CCEB /* SwiftScanner.h in Headers */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-/* End PBXHeadersBuildPhase section */
-
 /* Begin PBXNativeTarget section */
 		7D42B9AB1C05EE9A0084D045 /* swiftScan */ = {
 			isa = PBXNativeTarget;
@@ -204,30 +159,11 @@
 			buildRules = (
 			);
 			dependencies = (
-				D6DC96FA1F6D0C0200E1CCEB /* PBXTargetDependency */,
 			);
 			name = swiftScan;
 			productName = swiftScan;
 			productReference = 7D42B9AC1C05EE9A0084D045 /* swiftScan.app */;
 			productType = "com.apple.product-type.application";
-		};
-		D6DC96F31F6D0C0200E1CCEB /* SwiftScanner */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = D6DC96FD1F6D0C0200E1CCEB /* Build configuration list for PBXNativeTarget "SwiftScanner" */;
-			buildPhases = (
-				D6DC96EF1F6D0C0200E1CCEB /* Sources */,
-				D6DC96F01F6D0C0200E1CCEB /* Frameworks */,
-				D6DC96F11F6D0C0200E1CCEB /* Headers */,
-				D6DC96F21F6D0C0200E1CCEB /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-			);
-			name = SwiftScanner;
-			productName = SwiftScanner;
-			productReference = D6DC96F41F6D0C0200E1CCEB /* SwiftScanner.framework */;
-			productType = "com.apple.product-type.framework";
 		};
 /* End PBXNativeTarget section */
 
@@ -241,13 +177,9 @@
 				TargetAttributes = {
 					7D42B9AB1C05EE9A0084D045 = {
 						CreatedOnToolsVersion = 7.1;
-						DevelopmentTeam = Y8MK4UJH8L;
+						DevelopmentTeam = KKT5X966GB;
 						LastSwiftMigration = 0820;
-					};
-					D6DC96F31F6D0C0200E1CCEB = {
-						CreatedOnToolsVersion = 8.3.3;
-						DevelopmentTeam = Y8MK4UJH8L;
-						ProvisioningStyle = Automatic;
+						ProvisioningStyle = Manual;
 					};
 				};
 			};
@@ -265,7 +197,6 @@
 			projectRoot = "";
 			targets = (
 				7D42B9AB1C05EE9A0084D045 /* swiftScan */,
-				D6DC96F31F6D0C0200E1CCEB /* SwiftScanner */,
 			);
 		};
 /* End PBXProject section */
@@ -285,13 +216,6 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		D6DC96F21F6D0C0200E1CCEB /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
@@ -301,7 +225,6 @@
 			files = (
 				488928E61C1A7BE4005A8F83 /* LBXScanViewController.swift in Sources */,
 				73FF0B911CF545FE0083F169 /* QQScanViewController.swift in Sources */,
-				48B789571C195944003BC426 /* README.md in Sources */,
 				48B143C41C17C98B00B2E7D5 /* MainTableViewController.swift in Sources */,
 				7D42B9B21C05EE9A0084D045 /* ViewController.swift in Sources */,
 				488928E51C1A7BE4005A8F83 /* LBXScanView.swift in Sources */,
@@ -316,29 +239,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		D6DC96EF1F6D0C0200E1CCEB /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				D6DC97011F6D0C1300E1CCEB /* LBXPermissions.swift in Sources */,
-				D6DC97021F6D0C1300E1CCEB /* LBXScanLineAnimation.swift in Sources */,
-				D6DC97031F6D0C1300E1CCEB /* LBXScanNetAnimation.swift in Sources */,
-				D6DC97041F6D0C1300E1CCEB /* LBXScanView.swift in Sources */,
-				D6DC97051F6D0C1300E1CCEB /* LBXScanViewController.swift in Sources */,
-				D6DC97061F6D0C1300E1CCEB /* LBXScanViewStyle.swift in Sources */,
-				D6DC97071F6D0C1300E1CCEB /* LBXScanWrapper.swift in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXSourcesBuildPhase section */
-
-/* Begin PBXTargetDependency section */
-		D6DC96FA1F6D0C0200E1CCEB /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = D6DC96F31F6D0C0200E1CCEB /* SwiftScanner */;
-			targetProxy = D6DC96F91F6D0C0200E1CCEB /* PBXContainerItemProxy */;
-		};
-/* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
 		7D42B9B31C05EE9A0084D045 /* Main.storyboard */ = {
@@ -452,14 +353,16 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				DEVELOPMENT_TEAM = Y8MK4UJH8L;
+				CODE_SIGN_STYLE = Manual;
+				DEVELOPMENT_TEAM = KKT5X966GB;
 				INFOPLIST_FILE = swiftScan/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.lbx.test0091.ceeyang;
+				PRODUCT_BUNDLE_IDENTIFIER = com.yunqueyi.Doctor;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "";
-				SWIFT_VERSION = 3.0;
+				PROVISIONING_PROFILE = "5afb03a3-32bd-412b-9db2-5fa2d3271415";
+				PROVISIONING_PROFILE_SPECIFIER = dev_pro;
+				SWIFT_VERSION = 4.0;
 			};
 			name = Debug;
 		};
@@ -470,76 +373,16 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				DEVELOPMENT_TEAM = Y8MK4UJH8L;
+				CODE_SIGN_STYLE = Manual;
+				DEVELOPMENT_TEAM = KKT5X966GB;
 				INFOPLIST_FILE = swiftScan/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.lbx.test0091.ceeyang;
+				PRODUCT_BUNDLE_IDENTIFIER = com.yunqueyi.Doctor;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "";
-				SWIFT_VERSION = 3.0;
-			};
-			name = Release;
-		};
-		D6DC96FE1F6D0C0200E1CCEB /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				CLANG_ANALYZER_NONNULL = YES;
-				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
-				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
-				CLANG_WARN_INFINITE_RECURSION = YES;
-				CLANG_WARN_SUSPICIOUS_MOVE = YES;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				CURRENT_PROJECT_VERSION = 1;
-				DEFINES_MODULE = YES;
-				DEVELOPMENT_TEAM = Y8MK4UJH8L;
-				DYLIB_COMPATIBILITY_VERSION = 1;
-				DYLIB_CURRENT_VERSION = 1;
-				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				INFOPLIST_FILE = SwiftScanner/Info.plist;
-				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.ceeyang.SwiftScanner;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SKIP_INSTALL = YES;
-				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
-				SWIFT_VERSION = 3.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				VERSIONING_SYSTEM = "apple-generic";
-				VERSION_INFO_PREFIX = "";
-			};
-			name = Debug;
-		};
-		D6DC96FF1F6D0C0200E1CCEB /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				CLANG_ANALYZER_NONNULL = YES;
-				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
-				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
-				CLANG_WARN_INFINITE_RECURSION = YES;
-				CLANG_WARN_SUSPICIOUS_MOVE = YES;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				CURRENT_PROJECT_VERSION = 1;
-				DEFINES_MODULE = YES;
-				DEVELOPMENT_TEAM = Y8MK4UJH8L;
-				DYLIB_COMPATIBILITY_VERSION = 1;
-				DYLIB_CURRENT_VERSION = 1;
-				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				INFOPLIST_FILE = SwiftScanner/Info.plist;
-				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.ceeyang.SwiftScanner;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SKIP_INSTALL = YES;
-				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
-				SWIFT_VERSION = 3.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				VERSIONING_SYSTEM = "apple-generic";
-				VERSION_INFO_PREFIX = "";
+				PROVISIONING_PROFILE = "5afb03a3-32bd-412b-9db2-5fa2d3271415";
+				PROVISIONING_PROFILE_SPECIFIER = dev_pro;
+				SWIFT_VERSION = 4.0;
 			};
 			name = Release;
 		};
@@ -563,14 +406,6 @@
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
-		};
-		D6DC96FD1F6D0C0200E1CCEB /* Build configuration list for PBXNativeTarget "SwiftScanner" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				D6DC96FE1F6D0C0200E1CCEB /* Debug */,
-				D6DC96FF1F6D0C0200E1CCEB /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
 		};
 /* End XCConfigurationList section */
 	};

@@ -40,19 +40,19 @@ class ScanResultController: UIViewController {
         
         if codeImg.image != nil
         {
-            var rect = LBXScanWrapper.getConcreteCodeRectFromImage(srcCodeImage: codeImg.image!, codeResult: codeResult!)
-            
-            if !rect.isEmpty
-            {
-                zoomRect(rect: &rect, srcImg: codeImg.image!)
-                
-                let img2 = LBXScanWrapper.getConcreteCodeImage(srcCodeImage: codeImg.image!, rect: rect)
-                
-                if (img2 != nil)
-                {
-                    concreteCodeImg.image = img2
-                }
-            }
+//            var rect = LBXScanWrapper.getConcreteCodeRectFromImage(srcCodeImage: codeImg.image!, codeResult: codeResult!)
+//
+//            if !rect.isEmpty
+//            {
+//                zoomRect(rect: &rect, srcImg: codeImg.image!)
+//
+//                let img2 = LBXScanWrapper.getConcreteCodeImage(srcCodeImage: codeImg.image!, rect: rect)
+//
+//                if (img2 != nil)
+//                {
+//                    concreteCodeImg.image = img2
+//                }
+//            }
             
         }
     }

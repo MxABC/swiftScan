@@ -30,7 +30,7 @@ class LBXScanLineAnimation: UIImageView {
         
     }
     
-    func stepAnimation()
+    @objc func stepAnimation()
     {
         if (!isAnimationing) {
             return;

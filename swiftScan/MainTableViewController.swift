@@ -32,13 +32,10 @@ class MainTableViewController: UITableViewController,UIImagePickerControllerDele
         self.title = "swift 扫一扫"
         
        self.tableView.register(UITableViewCell.self, forCellReuseIdentifier: "reuseIdentifier")
+        self.tableView.delegate = self
+        self.tableView.dataSource = self
     }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
-
+    
     // MARK: - Table view data source
 
      func numberOfSectionsInTableView(tableView: UITableView) -> Int {
@@ -66,7 +63,8 @@ class MainTableViewController: UITableViewController,UIImagePickerControllerDele
         //objc_msgSend对应方法好像没有
         let sel = NSSelectorFromString(arrayItems[indexPath.row].last!)
         
-      
+        
+        self.InnerStyle()
         
         
         tableView.deselectRow(at: indexPath as IndexPath, animated: true)

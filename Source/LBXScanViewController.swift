@@ -25,15 +25,19 @@ open class LBXScanViewController: UIViewController, UIImagePickerControllerDeleg
    open var scanStyle: LBXScanViewStyle? = LBXScanViewStyle()
     
    open var qRScanView: LBXScanView?
+
     
     //启动区域识别功能
    open var isOpenInterestRect = false
     
     //识别码的类型
-    var arrayCodeType:[String]?
+   public var arrayCodeType:[AVMetadataObject.ObjectType]?
     
     //是否需要识别后的当前图像
-    var isNeedCodeImage = false
+   public  var isNeedCodeImage = false
+    
+    //相机启动提示文字
+    public var readyString:String! = "loading"
 
     override open func viewDidLoad() {
         super.viewDidLoad()
@@ -68,7 +72,7 @@ open class LBXScanViewController: UIViewController, UIImagePickerControllerDeleg
         
     }
     
-    open func startScan()
+    @objc open func startScan()
     {
         if(!LBXPermissions .isGetCameraPermission())
         {
@@ -86,12 +90,12 @@ open class LBXScanViewController: UIViewController, UIImagePickerControllerDeleg
             }
             
             //识别各种码，
-            //let arrayCode = LBXScanWrapper.defaultMetaDataObjectTypes()
+//            let arrayCode = LBXScanWrapper.defaultMetaDataObjectTypes()
             
             //指定识别几种码
             if arrayCodeType == nil
             {
-                arrayCodeType = [AVMetadataObjectTypeQRCode,AVMetadataObjectTypeEAN13Code,AVMetadataObjectTypeCode128Code]
+                arrayCodeType = [AVMetadataObject.ObjectType.qr,AVMetadataObject.ObjectType.ean13,AVMetadataObject.ObjectType.code128]
             }
             
             scanObj = LBXScanWrapper(videoPreView: self.view,objType:arrayCodeType!, isCaptureImg: isNeedCodeImage,cropRect:cropRect, success: { [weak self] (arrayResult) -> Void in
@@ -123,7 +127,7 @@ open class LBXScanViewController: UIViewController, UIImagePickerControllerDeleg
             qRScanView = LBXScanView(frame: self.view.frame,vstyle:scanStyle! )
             self.view.addSubview(qRScanView!)
         }
-        qRScanView?.deviceStartReadying(readyStr: NSLocalizedString("Loading...", comment: "Loading..."))
+        qRScanView?.deviceStartReadying(readyStr: readyString)
         
     }
    

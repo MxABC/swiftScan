@@ -104,7 +104,9 @@ class QQScanViewController: LBXScanViewController {
         btnPhoto.center = CGPoint(x: bottomItemsView!.frame.width/4, y: bottomItemsView!.frame.height/2)
         btnPhoto.setImage(UIImage(named: "CodeScan.bundle/qrcode_scan_btn_photo_nor"), for: UIControlState.normal)
         btnPhoto.setImage(UIImage(named: "CodeScan.bundle/qrcode_scan_btn_photo_down"), for: UIControlState.highlighted)
-        btnPhoto.addTarget(self, action: Selector(("openPhotoAlbum")), for: UIControlEvents.touchUpInside)
+//        btnPhoto.addTarget(self, action: Selector(("openPhotoAlbum")), for: UIControlEvents.touchUpInside)
+        
+        btnPhoto.addTarget(self, action: #selector(QQScanViewController.openLocalPhotoAlbum), for: UIControlEvents.touchUpInside)
         
         
         self.btnMyQR = UIButton()
@@ -122,8 +124,23 @@ class QQScanViewController: LBXScanViewController {
         
     }
     
+    @objc func openLocalPhotoAlbum()
+    {
+        let alertController = UIAlertController(title: "title", message:"使用首页功能", preferredStyle: UIAlertControllerStyle.alert)
+        
+        let alertAction = UIAlertAction(title:  "知道了", style: UIAlertActionStyle.default) { (alertAction) -> Void in
+            
+            
+        }
+        
+        alertController.addAction(alertAction)
+        
+        present(alertController, animated: true, completion: nil)
+    }
+
+    
     //开关闪光灯
-    func openOrCloseFlash()
+    @objc func openOrCloseFlash()
     {
         scanObj?.changeTorch();
         
@@ -139,7 +156,7 @@ class QQScanViewController: LBXScanViewController {
         }
     }
     
-    func myCode()
+    @objc func myCode()
     {
         let vc = MyCodeViewController()
         self.navigationController?.pushViewController(vc, animated: true)
@@ -147,3 +164,4 @@ class QQScanViewController: LBXScanViewController {
 
 
 }
+

@@ -54,10 +54,53 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
         //objc_msgSend对应方法好像没有
-                let sel = NSSelectorFromString(arrayItems[indexPath.row].last!)
-        if responds(to: sel) {
-            perform(sel)
+        
+//        InnerStyle()
+//        let sel = NSSelectorFromString(arrayItems[indexPath.row].last!)
+//        if responds(to: sel) {
+//            perform(sel)
+//        }
+        
+//        ["模拟qq扫码界面","qqStyle"],
+//        ["模仿支付宝扫码区域","ZhiFuBaoStyle"],
+//        ["模仿微信扫码区域","weixinStyle"],
+//        ["无边框，内嵌4个角","InnerStyle"],
+//        ["4个角在矩形框线上,网格动画","OnStyle"],
+//        ["自定义颜色","changeColor"],
+//        ["只识别框内","recoCropRect"],
+//        ["改变尺寸","changeSize"],
+//        ["条形码效果","notSquare"],
+//        ["二维码/条形码生成","myCode"],
+//        ["相册","openLocalPhotoAlbum"]
+        
+        switch indexPath.row {
+        case 0:
+            qqStyle();
+        case 1:
+            ZhiFuBaoStyle();
+        case 2:
+            weixinStyle();
+        case 3:
+            InnerStyle();
+        case 4:
+            OnStyle();
+        case 5:
+            changeColor();
+        case 6:
+            recoCropRect();
+        case 7:
+            changeSize();
+        case 8:
+            notSquare();
+        case 9:
+            myCode()
+        case 10:
+            openLocalPhotoAlbum();
+        default:
+            break;
         }
+        
+        
         tableView.deselectRow(at: indexPath as IndexPath, animated: true)
         
     }
@@ -179,6 +222,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         
         let vc = LBXScanViewController();
         vc.scanStyle = style
+        vc.scanResultDelegate = self
         self.navigationController?.pushViewController(vc, animated: true)
         
     }
@@ -298,6 +342,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         
         let vc = LBXScanViewController();
         vc.scanStyle = style
+        vc.readyString = "相机启动中..."
         
         self.navigationController?.pushViewController(vc, animated: true)
         
