@@ -384,9 +384,12 @@ open class LBXScanWrapper: NSObject,AVCaptureMetadataOutputObjectsDelegate {
     
     static func isSysIos8Later()->Bool
     {
-//        return Float(UIDevice.currentDevice().systemVersion)  >= 8.0 ? true:false
+//        return floor(NSFoundationVersionNumber) > NSFoundationVersionNumber_iOS_8_0
         
-        return floor(NSFoundationVersionNumber) > NSFoundationVersionNumber_iOS_8_0
+        if #available(iOS 8, *) {
+            return true;
+        }
+        return false
     }
 
     /**

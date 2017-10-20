@@ -74,12 +74,7 @@ open class LBXScanViewController: UIViewController, UIImagePickerControllerDeleg
     
     @objc open func startScan()
     {
-        if(!LBXPermissions .isGetCameraPermission())
-        {
-            showMsg(title: nil, message: NSLocalizedString("Please allow to access your album in \"Setting\"->\"Privacy\"->\"Photos\".", comment: "Photos access"))
-            //Please allow to access your album in "Setting"->"Privacy"->"Photos".
-            return
-        }
+   
         
         if (scanObj == nil)
         {
@@ -137,7 +132,6 @@ open class LBXScanViewController: UIViewController, UIImagePickerControllerDeleg
      */
     open func handleCodeResult(arrayResult:[LBXScanResult])
     {
-        
         if let delegate = scanResultDelegate  {
             
             self.navigationController? .popViewController(animated: true)
@@ -169,22 +163,18 @@ open class LBXScanViewController: UIViewController, UIImagePickerControllerDeleg
     
     open func openPhotoAlbum()
     {
-        if(!LBXPermissions.isGetPhotoPermission())
-        {
-            showMsg(title: nil, message: NSLocalizedString("Please allow to access your device's camera in \"Setting\"->\"Privacy\"->\"Camera\".", comment: "Camera access"))
-            //Please allow to access your device's camera in "Setting"->"Privacy"->"Camera".
-            return
+        LBXPermissions.authorizePhotoWith { [weak self] (granted) in
+            
+            let picker = UIImagePickerController()
+            
+            picker.sourceType = UIImagePickerControllerSourceType.photoLibrary
+            
+            picker.delegate = self;
+            
+            picker.allowsEditing = true
+            
+           self?.present(picker, animated: true, completion: nil)
         }
-        
-        let picker = UIImagePickerController()
-        
-        picker.sourceType = UIImagePickerControllerSourceType.photoLibrary
-        
-        picker.delegate = self;
-        
-        picker.allowsEditing = true
-        
-        present(picker, animated: true, completion: nil)
     }
     
     //MARK: -----相册选择图片识别二维码 （条形码没有找到系统方法）
@@ -214,11 +204,7 @@ open class LBXScanViewController: UIViewController, UIImagePickerControllerDeleg
     
     func showMsg(title:String?,message:String?)
     {
-        if LBXScanWrapper.isSysIos8Later()
-        {
         
-            //if #available(iOS 8.0, *)
-            
             let alertController = UIAlertController(title: nil, message:message, preferredStyle: UIAlertControllerStyle.alert)
             let alertAction = UIAlertAction(title: NSLocalizedString("OK", comment: "OK"), style: UIAlertActionStyle.default) { (alertAction) in
                 
@@ -230,7 +216,6 @@ open class LBXScanViewController: UIViewController, UIImagePickerControllerDeleg
             
             alertController.addAction(alertAction)
             present(alertController, animated: true, completion: nil)
-        }
     }
     deinit
     {
