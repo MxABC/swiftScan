@@ -55,51 +55,51 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         
         //objc_msgSend对应方法好像没有
         
-//        InnerStyle()
-//        let sel = NSSelectorFromString(arrayItems[indexPath.row].last!)
-//        if responds(to: sel) {
-//            perform(sel)
-//        }
-        
-//        ["模拟qq扫码界面","qqStyle"],
-//        ["模仿支付宝扫码区域","ZhiFuBaoStyle"],
-//        ["模仿微信扫码区域","weixinStyle"],
-//        ["无边框，内嵌4个角","InnerStyle"],
-//        ["4个角在矩形框线上,网格动画","OnStyle"],
-//        ["自定义颜色","changeColor"],
-//        ["只识别框内","recoCropRect"],
-//        ["改变尺寸","changeSize"],
-//        ["条形码效果","notSquare"],
-//        ["二维码/条形码生成","myCode"],
-//        ["相册","openLocalPhotoAlbum"]
-        
-        switch indexPath.row {
-        case 0:
-            qqStyle();
-        case 1:
-            ZhiFuBaoStyle();
-        case 2:
-            weixinStyle();
-        case 3:
-            InnerStyle();
-        case 4:
-            OnStyle();
-        case 5:
-            changeColor();
-        case 6:
-            recoCropRect();
-        case 7:
-            changeSize();
-        case 8:
-            notSquare();
-        case 9:
-            myCode()
-        case 10:
-            openLocalPhotoAlbum();
-        default:
-            break;
+        if indexPath.row == 10 {
+            openLocalPhotoAlbum()
+            return;
         }
         
+        LBXPermissions.authorizeCameraWith { [weak self] (granted) in
+            
+            if granted
+            {
+                if let strongSelf = self
+                {
+                    
+                    switch indexPath.row {
+                    case 0:
+                        strongSelf.qqStyle();
+                    case 1:
+                        strongSelf.ZhiFuBaoStyle();
+                    case 2:
+                        strongSelf.weixinStyle();
+                    case 3:
+                        strongSelf.InnerStyle();
+                    case 4:
+                        strongSelf.OnStyle();
+                    case 5:
+                        strongSelf.changeColor();
+                    case 6:
+                        strongSelf.recoCropRect();
+                    case 7:
+                        strongSelf.changeSize();
+                    case 8:
+                        strongSelf.notSquare();
+                    case 9:
+                        strongSelf.myCode()
+                    case 10:
+                        strongSelf.openLocalPhotoAlbum();
+                    default:
+                        break;
+                    }
+                }
+            }
+            else
+            {
+                LBXPermissions.jumpToSystemPrivacySetting()
+            }
+        }
         
         tableView.deselectRow(at: indexPath as IndexPath, animated: true)
         
@@ -383,15 +383,25 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     //MARK: -------- 相册
     func openLocalPhotoAlbum()
     {
-        let picker = UIImagePickerController()
         
-        picker.sourceType = UIImagePickerControllerSourceType.photoLibrary
-        
-        picker.delegate = self;
-        
-        picker.allowsEditing = true
-        
-        present(picker, animated: true, completion: nil)
+        LBXPermissions.authorizePhotoWith { [weak self] (granted) in
+            
+            if granted
+            {
+                if let strongSelf = self
+                {
+                    let picker = UIImagePickerController()
+                    picker.sourceType = UIImagePickerControllerSourceType.photoLibrary
+                    picker.delegate = self;
+                    picker.allowsEditing = true
+                   strongSelf.present(picker, animated: true, completion: nil)
+                }
+            }
+            else
+            {
+                LBXPermissions.jumpToSystemPrivacySetting()
+            }
+        }
     }
     
     //MARK: -----相册选择图片识别二维码 （条形码没有找到系统方法）

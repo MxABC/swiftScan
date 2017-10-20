@@ -24,20 +24,16 @@ class MyCodeViewController: UIViewController {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
-        
-    }
-    
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
-        
-        self.view.backgroundColor = UIColor.white
-        
+        view.backgroundColor = UIColor.white
+
         drawCodeShowView()
         
         createQR1()
         
         createCode128()
     }
+    
+ 
     
     //MARK: ------二维码、条形码显示位置
     func drawCodeShowView()

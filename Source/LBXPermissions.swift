@@ -58,13 +58,16 @@ class LBXPermissions: NSObject {
     //MARK:跳转到APP系统设置权限界面
     static func jumpToSystemPrivacySetting()
     {
-        let appSetting = URL(fileURLWithPath: UIApplicationOpenSettingsURLString)
+        let appSetting = URL(string:UIApplicationOpenSettingsURLString)
         
-        if #available(iOS 10, *) {
-            UIApplication.shared.open(appSetting, options: [:], completionHandler: nil)
-        }
-        else{
-            UIApplication.shared.openURL(appSetting)
+        if appSetting != nil
+        {
+            if #available(iOS 10, *) {
+                UIApplication.shared.open(appSetting!, options: [:], completionHandler: nil)
+            }
+            else{
+                UIApplication.shared.openURL(appSetting!)
+            }
         }
     }
     

@@ -75,7 +75,6 @@ open class LBXScanViewController: UIViewController, UIImagePickerControllerDeleg
     @objc open func startScan()
     {
    
-        
         if (scanObj == nil)
         {
             var cropRect = CGRect.zero
@@ -83,9 +82,6 @@ open class LBXScanViewController: UIViewController, UIImagePickerControllerDeleg
             {
                 cropRect = LBXScanView.getScanRectWithPreView(preView: self.view, style:scanStyle! )
             }
-            
-            //识别各种码，
-//            let arrayCode = LBXScanWrapper.defaultMetaDataObjectTypes()
             
             //指定识别几种码
             if arrayCodeType == nil
