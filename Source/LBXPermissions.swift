@@ -26,14 +26,11 @@ class LBXPermissions: NSObject {
             comletion(false)
         case PHAuthorizationStatus.notDetermined:
             PHPhotoLibrary.requestAuthorization({ (status) in
-                
                 DispatchQueue.main.async {
                     comletion(status == PHAuthorizationStatus.authorized ? true:false)
-                    
                 }
             })
         }
-      
     }
     
     //MARK: ---相机权限
@@ -52,9 +49,7 @@ class LBXPermissions: NSObject {
             comletion(false)
             break;
         case AVAuthorizationStatus.notDetermined:
-
             AVCaptureDevice.requestAccess(for: AVMediaType.video, completionHandler: { (granted:Bool) in
-                
                 DispatchQueue.main.async {
                     comletion(granted)
                 }
