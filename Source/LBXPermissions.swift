@@ -26,7 +26,11 @@ class LBXPermissions: NSObject {
             comletion(false)
         case PHAuthorizationStatus.notDetermined:
             PHPhotoLibrary.requestAuthorization({ (status) in
-                comletion(status == PHAuthorizationStatus.authorized ? true:false)
+                
+                DispatchQueue.main.async {
+                    comletion(status == PHAuthorizationStatus.authorized ? true:false)
+                    
+                }
             })
         }
       
@@ -50,7 +54,10 @@ class LBXPermissions: NSObject {
         case AVAuthorizationStatus.notDetermined:
 
             AVCaptureDevice.requestAccess(for: AVMediaType.video, completionHandler: { (granted:Bool) in
-                comletion(granted)
+                
+                DispatchQueue.main.async {
+                    comletion(granted)
+                }
             })
         }
     }
