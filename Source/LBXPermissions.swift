@@ -36,20 +36,20 @@ class LBXPermissions: NSObject {
     //MARK: ---相机权限
     static func authorizeCameraWith(comletion:@escaping (Bool)->Void )
     {
-        let granted = AVCaptureDevice.authorizationStatus(for: AVMediaType.video);
+        let granted = AVCaptureDevice.authorizationStatus(forMediaType: AVMediaTypeVideo);
         
         switch granted {
-        case AVAuthorizationStatus.authorized:
+        case .authorized:
             comletion(true)
             break;
-        case AVAuthorizationStatus.denied:
+        case .denied:
             comletion(false)
             break;
-        case AVAuthorizationStatus.restricted:
+        case .restricted:
             comletion(false)
             break;
-        case AVAuthorizationStatus.notDetermined:
-            AVCaptureDevice.requestAccess(for: AVMediaType.video, completionHandler: { (granted:Bool) in
+        case .notDetermined:
+            AVCaptureDevice.requestAccess(forMediaType: AVMediaTypeVideo, completionHandler: { (granted:Bool) in
                 DispatchQueue.main.async {
                     comletion(granted)
                 }
