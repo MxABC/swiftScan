@@ -86,7 +86,7 @@ open class LBXScanViewController: UIViewController, UIImagePickerControllerDeleg
             //指定识别几种码
             if arrayCodeType == nil
             {
-                arrayCodeType = [AVMetadataObject.ObjectType.qr,AVMetadataObject.ObjectType.ean13,AVMetadataObject.ObjectType.code128]
+                arrayCodeType = [AVMetadataObjectTypeQRCode as NSString,AVMetadataObjectTypeEAN13Code as NSString,AVMetadataObjectTypeCode128Code as NSString]
             }
             
             scanObj = LBXScanWrapper(videoPreView: self.view,objType:arrayCodeType!, isCaptureImg: isNeedCodeImage,cropRect:cropRect, success: { [weak self] (arrayResult) -> Void in
