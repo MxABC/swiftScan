@@ -34,7 +34,7 @@ public struct  LBXScanResult {
 
 open class LBXScanWrapper: NSObject,AVCaptureMetadataOutputObjectsDelegate {
     
-    let device = AVCaptureDevice.defaultDevice(withMediaType: AVMediaTypeVideo)
+    let device = AVCaptureDevice.default(for: AVMediaType.video)
     
     var input:AVCaptureDeviceInput?
     var output:AVCaptureMetadataOutput
@@ -64,7 +64,7 @@ open class LBXScanWrapper: NSObject,AVCaptureMetadataOutputObjectsDelegate {
      - parameter success:      返回识别信息
      - returns:
      */
-    init( videoPreView:UIView,objType:[AVMetadataObject.ObjectType] = [AVMetadataObjectTypeQRCode as NSString],isCaptureImg:Bool,cropRect:CGRect=CGRect.zero,success:@escaping ( ([LBXScanResult]) -> Void) )
+    init( videoPreView:UIView,objType:[AVMetadataObject.ObjectType] = [.qr],isCaptureImg:Bool,cropRect:CGRect=CGRect.zero,success:@escaping ( ([LBXScanResult]) -> Void) )
     {
         do{
             input = try AVCaptureDeviceInput(device: device!)
@@ -105,7 +105,7 @@ open class LBXScanWrapper: NSObject,AVCaptureMetadataOutputObjectsDelegate {
         let outputSettings:Dictionary = [AVVideoCodecJPEG:AVVideoCodecKey]
         stillImageOutput?.outputSettings = outputSettings
     
-        session.sessionPreset = AVCaptureSessionPresetHigh
+        session.sessionPreset = AVCaptureSession.Preset.high
         
         //参数设置
         output.setMetadataObjectsDelegate(self, queue: DispatchQueue.main)
@@ -121,7 +121,7 @@ open class LBXScanWrapper: NSObject,AVCaptureMetadataOutputObjectsDelegate {
         }
 
         previewLayer = AVCaptureVideoPreviewLayer(session: session)
-        previewLayer?.videoGravity = AVLayerVideoGravityResizeAspectFill
+        previewLayer?.videoGravity = AVLayerVideoGravity.resizeAspectFill
         
         var frame:CGRect = videoPreView.frame
         frame.origin = CGPoint.zero
@@ -197,7 +197,7 @@ open class LBXScanWrapper: NSObject,AVCaptureMetadataOutputObjectsDelegate {
                 //4个字典，分别 左上角-右上角-右下角-左下角的 坐标百分百，可以使用这个比例抠出码的图像
                 // let arrayRatio = code.corners
                 
-                arrayResult.append(LBXScanResult(str: codeContent, img: UIImage(), barCodeType: codeType, corner: code.corners as [AnyObject]?))
+                arrayResult.append(LBXScanResult(str: codeContent, img: UIImage(), barCodeType: codeType.rawValue, corner: code.corners as [AnyObject]?))
             }
         }
         
@@ -224,7 +224,7 @@ open class LBXScanWrapper: NSObject,AVCaptureMetadataOutputObjectsDelegate {
     //MARK: ----拍照
     open func captureImage()
     {
-        let stillImageConnection:AVCaptureConnection? = connectionWithMediaType(mediaType: AVMediaTypeVideo as AVMediaType, connections: (stillImageOutput?.connections)! as [AnyObject])
+        let stillImageConnection:AVCaptureConnection? = connectionWithMediaType(mediaType: AVMediaType.video as AVMediaType, connections: (stillImageOutput?.connections)! as [AnyObject])
         
         
         stillImageOutput?.captureStillImageAsynchronously(from: stillImageConnection!, completionHandler: { (imageDataSampleBuffer, error) -> Void in
@@ -258,7 +258,7 @@ open class LBXScanWrapper: NSObject,AVCaptureMetadataOutputObjectsDelegate {
                 if (port as AnyObject).isKind(of: AVCaptureInput.Port.self)
                 {
                     let portTmp:AVCaptureInput.Port = port as! AVCaptureInput.Port
-                    if portTmp.mediaType == (mediaType as String)
+                    if portTmp.mediaType == (mediaType)
                     {
                         return connectionTmp
                     }
@@ -355,24 +355,11 @@ open class LBXScanWrapper: NSObject,AVCaptureMetadataOutputObjectsDelegate {
     //MARK: ------获取系统默认支持的码的类型
     static func defaultMetaDataObjectTypes() ->[AVMetadataObject.ObjectType]
     {
-        var types =
-            [AVMetadataObjectTypeQRCode,
-             AVMetadataObjectTypeUPCECode,
-             AVMetadataObjectTypeCode39Code,
-             AVMetadataObjectTypeCode39Mod43Code,
-             AVMetadataObjectTypeEAN13Code,
-             AVMetadataObjectTypeEAN8Code,
-             AVMetadataObjectTypeCode93Code,
-             AVMetadataObjectTypeCode128Code,
-             AVMetadataObjectTypePDF417Code,
-             AVMetadataObjectTypeAztecCode
-        ]
+        var types:[AVMetadataObject.ObjectType] = [.qr, .upce,.code39,.code39Mod43,.ean13,.ean8,.code93, .code128, .pdf417,.aztec]
+        
         //if #available(iOS 8.0, *)
-       
-        types.append(AVMetadataObjectTypeInterleaved2of5Code)
-        types.append(AVMetadataObjectTypeITF14Code)
-        types.append(AVMetadataObjectTypeDataMatrixCode)
-        return types as [AVMetadataObject.ObjectType]
+        types += [.interleaved2of5, .itf14, .dataMatrix]
+        return types
     }
     
     
@@ -418,7 +405,7 @@ open class LBXScanWrapper: NSObject,AVCaptureMetadataOutputObjectsDelegate {
                     let scanResult = featureTmp.messageString
                     
                     
-                    let result = LBXScanResult(str: scanResult, img: image, barCodeType: AVMetadataObjectTypeQRCode,corner: nil)
+                    let result = LBXScanResult(str: scanResult, img: image, barCodeType: AVMetadataObject.ObjectType.qr.rawValue, corner: nil)
                     
                     returnResult.append(result)
                 }
