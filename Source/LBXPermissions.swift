@@ -13,7 +13,7 @@ import AssetsLibrary
 
 
 
-class LBXPermissions: NSObject {
+public class LBXPermissions: NSObject {
 
     //MARK: ----获取相册权限
     static func authorizePhotoWith(comletion:@escaping (Bool)->Void )
