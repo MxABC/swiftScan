@@ -347,7 +347,7 @@ class MainTableViewController: UITableViewController,UIImagePickerControllerDele
     {
         let picker = UIImagePickerController()
         
-        picker.sourceType = UIImagePickerControllerSourceType.photoLibrary
+        picker.sourceType = UIImagePickerController.SourceType.photoLibrary
         
         picker.delegate = self;
         
@@ -361,11 +361,11 @@ class MainTableViewController: UITableViewController,UIImagePickerControllerDele
     {
         picker.dismiss(animated: true, completion: nil)
         
-        var image:UIImage? = info[UIImagePickerControllerEditedImage] as? UIImage
+        var image:UIImage? = info[UIImagePickerController.InfoKey.editedImage.rawValue] as? UIImage
         
         if (image == nil )
         {
-            image = info[UIImagePickerControllerOriginalImage] as? UIImage
+            image = info[UIImagePickerController.InfoKey.originalImage.rawValue] as? UIImage
         }
         
         if(image == nil)
@@ -390,9 +390,9 @@ class MainTableViewController: UITableViewController,UIImagePickerControllerDele
     
     func showMsg(title:String?,message:String?)
     {
-        let alertController = UIAlertController(title: title, message:message, preferredStyle: UIAlertControllerStyle.alert)
+        let alertController = UIAlertController(title: title, message:message, preferredStyle: UIAlertController.Style.alert)
         
-        let alertAction = UIAlertAction(title:  "知道了", style: UIAlertActionStyle.default) { (alertAction) -> Void in
+        let alertAction = UIAlertAction(title:  "知道了", style: UIAlertAction.Style.default) { (alertAction) -> Void in
             
            
         }

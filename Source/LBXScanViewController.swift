@@ -163,7 +163,7 @@ open class LBXScanViewController: UIViewController, UIImagePickerControllerDeleg
             
             let picker = UIImagePickerController()
             
-            picker.sourceType = UIImagePickerControllerSourceType.photoLibrary
+            picker.sourceType = UIImagePickerController.SourceType.photoLibrary
             
             picker.delegate = self;
             
@@ -178,11 +178,11 @@ open class LBXScanViewController: UIViewController, UIImagePickerControllerDeleg
     {
         picker.dismiss(animated: true, completion: nil)
         
-        var image:UIImage? = info[UIImagePickerControllerEditedImage] as? UIImage
+        var image:UIImage? = info[UIImagePickerController.InfoKey.editedImage.rawValue] as? UIImage
         
         if (image == nil )
         {
-            image = info[UIImagePickerControllerOriginalImage] as? UIImage
+            image = info[UIImagePickerController.InfoKey.originalImage.rawValue] as? UIImage
         }
         
         if(image != nil)
@@ -201,8 +201,8 @@ open class LBXScanViewController: UIViewController, UIImagePickerControllerDeleg
     func showMsg(title:String?,message:String?)
     {
         
-            let alertController = UIAlertController(title: nil, message:message, preferredStyle: UIAlertControllerStyle.alert)
-            let alertAction = UIAlertAction(title: NSLocalizedString("OK", comment: "OK"), style: UIAlertActionStyle.default) { (alertAction) in
+        let alertController = UIAlertController(title: nil, message:message, preferredStyle: UIAlertController.Style.alert)
+        let alertAction = UIAlertAction(title: NSLocalizedString("OK", comment: "OK"), style: UIAlertAction.Style.default) { (alertAction) in
                 
 //                if let strongSelf = self
 //                {
