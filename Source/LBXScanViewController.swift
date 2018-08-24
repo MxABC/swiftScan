@@ -10,7 +10,7 @@ import UIKit
 import Foundation
 import AVFoundation
 
-public protocol LBXScanViewControllerDelegate {
+public protocol LBXScanViewControllerDelegate: class {
      func scanFinished(scanResult: LBXScanResult, error: String?)
 }
 
@@ -18,7 +18,7 @@ public protocol LBXScanViewControllerDelegate {
 open class LBXScanViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     
  //返回扫码结果，也可以通过继承本控制器，改写该handleCodeResult方法即可
-   open var scanResultDelegate: LBXScanViewControllerDelegate?
+   open weak var scanResultDelegate: LBXScanViewControllerDelegate?
     
    open var scanObj: LBXScanWrapper?
     
@@ -209,7 +209,7 @@ open class LBXScanViewController: UIViewController, UIImagePickerControllerDeleg
 //                    strongSelf.startScan()
 //                }
             }
-            
+        
             alertController.addAction(alertAction)
             present(alertController, animated: true, completion: nil)
     }
