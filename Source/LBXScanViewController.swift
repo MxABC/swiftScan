@@ -69,33 +69,33 @@ open class LBXScanViewController: UIViewController, UIImagePickerControllerDeleg
         drawScanView()
        
         perform(#selector(LBXScanViewController.startScan), with: nil, afterDelay: 0.3)
-        
+
     }
-    
+
     @objc open func startScan()
     {
-   
+
         if (scanObj == nil)
         {
             var cropRect = CGRect.zero
             if isOpenInterestRect
             {
-                cropRect = LBXScanView.getScanRectWithPreView(preView: self.view, style:scanStyle! )
+                cropRect = LBXScanView.getScanRectWithPreView(preView: self.view, style: scanStyle! )
             }
-            
+
             //指定识别几种码
             if arrayCodeType == nil
             {
-                arrayCodeType = [AVMetadataObject.ObjectType.qr ,AVMetadataObject.ObjectType.ean13 ,AVMetadataObject.ObjectType.code128]
+                arrayCodeType = [AVMetadataObject.ObjectType.qr, AVMetadataObject.ObjectType.ean13, AVMetadataObject.ObjectType.code128]
             }
-            
-            scanObj = LBXScanWrapper(videoPreView: self.view,objType:arrayCodeType!, isCaptureImg: isNeedCodeImage,cropRect:cropRect, success: { [weak self] (arrayResult) -> Void in
-                
+
+            scanObj = try? LBXScanWrapper(videoPreView: self.view, objType: arrayCodeType!, isCaptureImg: isNeedCodeImage, cropRect: cropRect, success: { [weak self] (arrayResult) -> Void in
+
                 if let strongSelf = self
                 {
                     //停止扫描动画
                     strongSelf.qRScanView?.stopScanAnimation()
-                    
+
                     strongSelf.handleCodeResult(arrayResult: arrayResult)
                 }
              })

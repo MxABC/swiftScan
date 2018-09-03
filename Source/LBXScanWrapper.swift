@@ -32,13 +32,13 @@ public struct  LBXScanResult {
 
 
 
-open class LBXScanWrapper: NSObject,AVCaptureMetadataOutputObjectsDelegate {
-    
-    let device = AVCaptureDevice.default(for: AVMediaType.video)
-    
-    var input:AVCaptureDeviceInput?
-    var output:AVCaptureMetadataOutput
-    
+open class LBXScanWrapper: NSObject, AVCaptureMetadataOutputObjectsDelegate {
+
+    let device: AVCaptureDevice
+
+    var input: AVCaptureDeviceInput
+    var output: AVCaptureMetadataOutput
+
     let session = AVCaptureSession()
     var previewLayer:AVCaptureVideoPreviewLayer?
     var stillImageOutput:AVCaptureStillImageOutput?
@@ -64,44 +64,49 @@ open class LBXScanWrapper: NSObject,AVCaptureMetadataOutputObjectsDelegate {
      - parameter success:      返回识别信息
      - returns:
      */
-    init( videoPreView:UIView,objType:[AVMetadataObject.ObjectType] = [.qr],isCaptureImg:Bool,cropRect:CGRect=CGRect.zero,success:@escaping ( ([LBXScanResult]) -> Void) )
-    {
-        do{
-            input = try AVCaptureDeviceInput(device: device!)
-        }
-        catch let error as NSError {
-            print("AVCaptureDeviceInput(): \(error)")
-        }
+    init(videoPreView: UIView, objType: [AVMetadataObject.ObjectType] = [.qr], isCaptureImg: Bool, cropRect: CGRect=CGRect.zero, success:@escaping ( ([LBXScanResult]) -> Void) )
+        throws {
+
+            guard let device = AVCaptureDevice.default(for: AVMediaType.video) else {
+                throw ScannerError.noCaptureDevice
+            }
+            self.device = device
+
+            do {
+                input = try AVCaptureDeviceInput(device: device)
+            } catch let error as NSError {
+                throw error
+            }
+
+            successBlock = success
+
+            // Output
+            output = AVCaptureMetadataOutput()
         
-        successBlock = success
-        
-        // Output
-        output = AVCaptureMetadataOutput()
-        
-        isNeedCaptureImage = isCaptureImg
+            isNeedCaptureImage = isCaptureImg
         
         stillImageOutput = AVCaptureStillImageOutput();
-        
-        super.init()
-        
+
+            super.init()
+
         if device == nil
         {
             return
-        }
+            }
         
         if session.canAddInput(input!)
         {
             session.addInput(input!)
-        }
+            }
         if session.canAddOutput(output)
         {
-            session.addOutput(output)
-        }
+                session.addOutput(output)
+            }
         if session.canAddOutput(stillImageOutput!)
         {
-            session.addOutput(stillImageOutput!)
-        }
-        
+                session.addOutput(stillImageOutput!)
+            }
+
         let outputSettings:Dictionary = [AVVideoCodecJPEG:AVVideoCodecKey]
         stillImageOutput?.outputSettings = outputSettings
     
