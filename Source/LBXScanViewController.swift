@@ -41,6 +41,7 @@ open class LBXScanViewController: UIViewController, UIImagePickerControllerDeleg
         super.viewDidLoad()
         self.view.backgroundColor = UIColor.black
         self.edgesForExtendedLayout = UIRectEdge(rawValue: 0)
+
     }
 
     open func setNeedCodeImage(needCodeImg: Bool) {
@@ -61,8 +62,17 @@ open class LBXScanViewController: UIViewController, UIImagePickerControllerDeleg
 
         drawScanView()
 
-        perform(#selector(LBXScanViewController.startScan), with: nil, afterDelay: 0.3)
-
+        LBXPermissions.authorizeCameraWith { (granted) in
+            if granted {
+                DispatchQueue.main.asyncAfter(deadline: .now() + 0.3, execute: {
+                    self.startScan()
+                })
+            } else {
+                self.requireUserConfirmation {
+                    LBXPermissions.jumpToSystemPrivacySetting()
+                }
+            }
+        }
     }
 
     @objc open func startScan() {
@@ -141,7 +151,7 @@ open class LBXScanViewController: UIViewController, UIImagePickerControllerDeleg
     }
 
     open func openPhotoAlbum() {
-        LBXPermissions.authorizePhotoWith { [weak self] (granted) in
+        LBXPermissions.authorizePhotoWith { [weak self] (_) in
 
             let picker = UIImagePickerController()
 
@@ -179,7 +189,7 @@ open class LBXScanViewController: UIViewController, UIImagePickerControllerDeleg
     func showMsg(title: String?, message: String?) {
 
         let alertController = UIAlertController(title: nil, message: message, preferredStyle: UIAlertControllerStyle.alert)
-        let alertAction = UIAlertAction(title: NSLocalizedString("OK", comment: "OK"), style: UIAlertActionStyle.default) { (alertAction) in
+        let alertAction = UIAlertAction(title: NSLocalizedString("OK", comment: "OK"), style: UIAlertActionStyle.default) { (_) in
 
             //                if let strongSelf = self
             //                {
@@ -192,6 +202,15 @@ open class LBXScanViewController: UIViewController, UIImagePickerControllerDeleg
     }
     deinit {
         //        print("LBXScanViewController deinit")
+    }
+
+    private func requireUserConfirmation(when confirmed: @escaping () -> Void) {
+        let alertController = UIAlertController(title: "去开启相机权限", message: nil, preferredStyle: UIAlertControllerStyle.alert)
+        alertController.addAction(UIAlertAction(title: "好的", style: UIAlertActionStyle.default, handler: { (_) in
+            confirmed()
+        }))
+        alertController.addAction(UIAlertAction(title: "取消", style: UIAlertActionStyle.default, handler: nil))
+        present(alertController, animated: true, completion: nil)
     }
 
 }

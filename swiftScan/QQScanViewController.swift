@@ -117,7 +117,7 @@ class QQScanViewController: LBXScanViewController {
     @objc func openLocalPhotoAlbum() {
         let alertController = UIAlertController(title: "title", message: "使用首页功能", preferredStyle: UIAlertControllerStyle.alert)
 
-        let alertAction = UIAlertAction(title: "知道了", style: UIAlertActionStyle.default) { (alertAction) -> Void in
+        let alertAction = UIAlertAction(title: "知道了", style: UIAlertActionStyle.default) { (_) -> Void in
 
         }
 

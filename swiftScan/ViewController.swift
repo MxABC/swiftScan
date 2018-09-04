@@ -56,41 +56,31 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
             return
         }
 
-        LBXPermissions.authorizeCameraWith { [weak self] (granted) in
-
-            if granted {
-                if let strongSelf = self {
-
-                    switch indexPath.row {
-                    case 0:
-                        strongSelf.qqStyle()
-                    case 1:
-                        strongSelf.ZhiFuBaoStyle()
-                    case 2:
-                        strongSelf.weixinStyle()
-                    case 3:
-                        strongSelf.InnerStyle()
-                    case 4:
-                        strongSelf.OnStyle()
-                    case 5:
-                        strongSelf.changeColor()
-                    case 6:
-                        strongSelf.recoCropRect()
-                    case 7:
-                        strongSelf.changeSize()
-                    case 8:
-                        strongSelf.notSquare()
-                    case 9:
-                        strongSelf.myCode()
-                    case 10:
-                        strongSelf.openLocalPhotoAlbum()
-                    default:
-                        break
-                    }
-                }
-            } else {
-                LBXPermissions.jumpToSystemPrivacySetting()
-            }
+        switch indexPath.row {
+        case 0:
+            self.qqStyle()
+        case 1:
+            self.ZhiFuBaoStyle()
+        case 2:
+            self.weixinStyle()
+        case 3:
+            self.InnerStyle()
+        case 4:
+            self.OnStyle()
+        case 5:
+            self.changeColor()
+        case 6:
+            self.recoCropRect()
+        case 7:
+            self.changeSize()
+        case 8:
+            self.notSquare()
+        case 9:
+            self.myCode()
+        case 10:
+            self.openLocalPhotoAlbum()
+        default:
+            break
         }
 
         tableView.deselectRow(at: indexPath as IndexPath, animated: true)
@@ -387,7 +377,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     func showMsg(title: String?, message: String?) {
         let alertController = UIAlertController(title: title, message: message, preferredStyle: UIAlertControllerStyle.alert)
 
-        let alertAction = UIAlertAction(title: "知道了", style: UIAlertActionStyle.default) { (alertAction) -> Void in
+        let alertAction = UIAlertAction(title: "知道了", style: UIAlertActionStyle.default) { (_) -> Void in
 
         }
 
