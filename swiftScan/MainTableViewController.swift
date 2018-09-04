@@ -348,7 +348,7 @@ class MainTableViewController: UITableViewController, UIImagePickerControllerDel
     func showMsg(title: String?, message: String?) {
         let alertController = UIAlertController(title: title, message: message, preferredStyle: UIAlertControllerStyle.alert)
 
-        let alertAction = UIAlertAction(title: "知道了", style: UIAlertActionStyle.default) { (alertAction) -> Void in
+        let alertAction = UIAlertAction(title: "知道了", style: UIAlertActionStyle.default) { (_) -> Void in
 
         }
 

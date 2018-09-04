@@ -54,7 +54,7 @@ class LBXScanLineAnimation: UIImageView {
 
             self.frame = frame
 
-        }, completion: { (value: Bool) -> Void in
+        }, completion: { (_: Bool) -> Void in
 
             self.perform(#selector(LBXScanLineAnimation.stepAnimation), with: nil, afterDelay: 0.3)
         })

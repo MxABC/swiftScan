@@ -204,7 +204,7 @@ open class LBXScanWrapper: NSObject, AVCaptureMetadataOutputObjectsDelegate {
     open func captureImage() {
         let stillImageConnection: AVCaptureConnection? = connectionWithMediaType(mediaType: AVMediaType.video as AVMediaType, connections: (stillImageOutput?.connections)! as [AnyObject])
 
-        stillImageOutput?.captureStillImageAsynchronously(from: stillImageConnection!, completionHandler: { (imageDataSampleBuffer, error) -> Void in
+        stillImageOutput?.captureStillImageAsynchronously(from: stillImageConnection!, completionHandler: { (imageDataSampleBuffer, _) -> Void in
 
             self.stop()
             if imageDataSampleBuffer != nil {

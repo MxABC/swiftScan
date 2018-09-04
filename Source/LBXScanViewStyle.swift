@@ -50,7 +50,7 @@ public struct LBXScanViewStyle {
      */
     public var colorRetangleLine = UIColor.white
 
-    // MARK: -矩形框(扫码区域)周围4个角
+    // MARK: - 矩形框(扫码区域)周围4个角
 
     /**
      @brief  扫码区域的4个角类型
