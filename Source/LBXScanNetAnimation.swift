@@ -13,8 +13,6 @@ class LBXScanNetAnimation: UIImageView {
     var isAnimationing = false
     var animationRect:CGRect = CGRect.zero
 
-    
-    
     static public func instance()->LBXScanNetAnimation
     {
         return LBXScanNetAnimation()
@@ -34,9 +32,6 @@ class LBXScanNetAnimation: UIImageView {
         {
            stepAnimation()
         }
-       
-       
-        
     }
     
     @objc func stepAnimation()

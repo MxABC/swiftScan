@@ -10,15 +10,20 @@ import UIKit
 import Foundation
 import AVFoundation
 
-public protocol LBXScanViewControllerDelegate {
+public protocol LBXScanViewControllerDelegate: class {
      func scanFinished(scanResult: LBXScanResult, error: String?)
 }
 
+public protocol QRRectDelegate {
+    func drawwed()
+}
 
 open class LBXScanViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     
  //返回扫码结果，也可以通过继承本控制器，改写该handleCodeResult方法即可
-   open var scanResultDelegate: LBXScanViewControllerDelegate?
+   open weak var scanResultDelegate: LBXScanViewControllerDelegate?
+    
+    open var delegate: QRRectDelegate?
     
    open var scanObj: LBXScanWrapper?
     
@@ -67,9 +72,8 @@ open class LBXScanViewController: UIViewController, UIImagePickerControllerDeleg
         super.viewDidAppear(animated)
         
         drawScanView()
-       
-        perform(#selector(LBXScanViewController.startScan), with: nil, afterDelay: 0.3)
         
+        perform(#selector(LBXScanViewController.startScan), with: nil, afterDelay: 0.3)
     }
     
     @objc open func startScan()
@@ -86,7 +90,7 @@ open class LBXScanViewController: UIViewController, UIImagePickerControllerDeleg
             //指定识别几种码
             if arrayCodeType == nil
             {
-                arrayCodeType = [AVMetadataObject.ObjectType.qr ,AVMetadataObject.ObjectType.ean13 ,AVMetadataObject.ObjectType.code128]
+                arrayCodeType = [AVMetadataObjectTypeQRCode as NSString ,AVMetadataObjectTypeEAN13Code as NSString ,AVMetadataObjectTypeCode128Code as NSString]
             }
             
             scanObj = LBXScanWrapper(videoPreView: self.view,objType:arrayCodeType!, isCaptureImg: isNeedCodeImage,cropRect:cropRect, success: { [weak self] (arrayResult) -> Void in
@@ -117,6 +121,7 @@ open class LBXScanViewController: UIViewController, UIImagePickerControllerDeleg
         {
             qRScanView = LBXScanView(frame: self.view.frame,vstyle:scanStyle! )
             self.view.addSubview(qRScanView!)
+            delegate?.drawwed()
         }
         qRScanView?.deviceStartReadying(readyStr: readyString)
         
@@ -209,7 +214,7 @@ open class LBXScanViewController: UIViewController, UIImagePickerControllerDeleg
 //                    strongSelf.startScan()
 //                }
             }
-            
+        
             alertController.addAction(alertAction)
             present(alertController, animated: true, completion: nil)
     }
@@ -217,10 +222,4 @@ open class LBXScanViewController: UIViewController, UIImagePickerControllerDeleg
     {
 //        print("LBXScanViewController deinit")
     }
-    
 }
-
-
-
-
-

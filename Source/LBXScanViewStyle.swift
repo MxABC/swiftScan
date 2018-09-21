@@ -94,22 +94,4 @@ public struct LBXScanViewStyle
     {
         
     }
-    
-
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
