@@ -309,9 +309,11 @@ class MainTableViewController: UITableViewController, UIImagePickerControllerDel
     func openLocalPhotoAlbum() {
         let picker = UIImagePickerController()
 
-        picker.sourceType = UIImagePickerControllerSourceType.photoLibrary
-
-        picker.delegate = self
+        
+        picker.sourceType = UIImagePickerController.SourceType.photoLibrary
+        
+        picker.delegate = self;
+        
 
         picker.allowsEditing = true
 
@@ -321,11 +323,12 @@ class MainTableViewController: UITableViewController, UIImagePickerControllerDel
     // MARK: - ----相册选择图片识别二维码 （条形码没有找到系统方法）
     func imagePickerController(picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String: AnyObject]) {
         picker.dismiss(animated: true, completion: nil)
-
-        var image: UIImage? = info[UIImagePickerControllerEditedImage] as? UIImage
-
-        if (image == nil ) {
-            image = info[UIImagePickerControllerOriginalImage] as? UIImage
+        
+        var image:UIImage? = info[UIImagePickerController.InfoKey.editedImage.rawValue] as? UIImage
+        
+        if (image == nil )
+        {
+            image = info[UIImagePickerController.InfoKey.originalImage.rawValue] as? UIImage
         }
 
         if(image == nil) {
@@ -345,11 +348,13 @@ class MainTableViewController: UITableViewController, UIImagePickerControllerDel
         showMsg(title: "", message: "识别失败")
     }
 
-    func showMsg(title: String?, message: String?) {
-        let alertController = UIAlertController(title: title, message: message, preferredStyle: UIAlertControllerStyle.alert)
-
-        let alertAction = UIAlertAction(title: "知道了", style: UIAlertActionStyle.default) { (_) -> Void in
-
+    
+    func showMsg(title:String?,message:String?)
+    {
+        let alertController = UIAlertController(title: title, message:message, preferredStyle: UIAlertController.Style.alert)
+        
+        let alertAction = UIAlertAction(title:  "知道了", style: UIAlertAction.Style.default) { (alertAction) -> Void in
+            
         }
 
         alertController.addAction(alertAction)

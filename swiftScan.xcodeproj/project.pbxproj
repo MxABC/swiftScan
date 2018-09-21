@@ -360,9 +360,11 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.yunqueyi.Doctor;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "";
-				PROVISIONING_PROFILE_SPECIFIER = "";
-				SWIFT_VERSION = 4.0;
+
+				PROVISIONING_PROFILE = "5afb03a3-32bd-412b-9db2-5fa2d3271415";
+				PROVISIONING_PROFILE_SPECIFIER = dev_pro;
+				SWIFT_VERSION = 4.2;
+
 			};
 			name = Debug;
 		};
@@ -380,9 +382,11 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.yunqueyi.Doctor;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "";
-				PROVISIONING_PROFILE_SPECIFIER = "";
-				SWIFT_VERSION = 4.0;
+
+				PROVISIONING_PROFILE = "5afb03a3-32bd-412b-9db2-5fa2d3271415";
+				PROVISIONING_PROFILE_SPECIFIER = dev_pro;
+				SWIFT_VERSION = 4.2;
+
 			};
 			name = Release;
 		};
