@@ -188,8 +188,10 @@
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
 			knownRegions = (
+				English,
 				en,
 				Base,
+				"zh-Hans",
 			);
 			mainGroup = 7D42B9A31C05EE9A0084D045;
 			productRefGroup = 7D42B9AD1C05EE9A0084D045 /* Products */;
@@ -304,7 +306,7 @@
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
-				SWIFT_VERSION = 3.0;
+				SWIFT_VERSION = 4.2;
 			};
 			name = Debug;
 		};
@@ -341,7 +343,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
-				SWIFT_VERSION = 3.0;
+				SWIFT_VERSION = 4.2;
 				VALIDATE_PRODUCT = YES;
 			};
 			name = Release;
@@ -360,11 +362,9 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.yunqueyi.Doctor;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-
 				PROVISIONING_PROFILE = "5afb03a3-32bd-412b-9db2-5fa2d3271415";
 				PROVISIONING_PROFILE_SPECIFIER = dev_pro;
 				SWIFT_VERSION = 4.2;
-
 			};
 			name = Debug;
 		};
@@ -382,11 +382,9 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.yunqueyi.Doctor;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-
 				PROVISIONING_PROFILE = "5afb03a3-32bd-412b-9db2-5fa2d3271415";
 				PROVISIONING_PROFILE_SPECIFIER = dev_pro;
 				SWIFT_VERSION = 4.2;
-
 			};
 			name = Release;
 		};
