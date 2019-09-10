@@ -16,60 +16,54 @@ import AssetsLibrary
 class LBXPermissions: NSObject {
 
     //MARK: ----获取相册权限
-    static func authorizePhotoWith(comletion:@escaping (Bool)->Void )
-    {
+    static func authorizePhotoWith(comletion: @escaping (Bool) -> Void) {
         let granted = PHPhotoLibrary.authorizationStatus()
         switch granted {
         case PHAuthorizationStatus.authorized:
             comletion(true)
-        case PHAuthorizationStatus.denied,PHAuthorizationStatus.restricted:
+        case PHAuthorizationStatus.denied, PHAuthorizationStatus.restricted:
             comletion(false)
         case PHAuthorizationStatus.notDetermined:
-            PHPhotoLibrary.requestAuthorization({ (status) in
+            PHPhotoLibrary.requestAuthorization({ status in
                 DispatchQueue.main.async {
-                    comletion(status == PHAuthorizationStatus.authorized ? true:false)
+                    comletion(status == PHAuthorizationStatus.authorized)
                 }
             })
+        @unknown default:
+            comletion(false)
         }
     }
     
     //MARK: ---相机权限
-    static func authorizeCameraWith(comletion:@escaping (Bool)->Void )
-    {
-        let granted = AVCaptureDevice.authorizationStatus(for: AVMediaType.video);
-        
+    static func authorizeCameraWith(completion: @escaping (Bool) -> Void) {
+        let granted = AVCaptureDevice.authorizationStatus(for: AVMediaType.video)
         switch granted {
         case .authorized:
-            comletion(true)
-            break;
+            completion(true)
         case .denied:
-            comletion(false)
-            break;
+            completion(false)
         case .restricted:
-            comletion(false)
-            break;
+            completion(false)
         case .notDetermined:
-            AVCaptureDevice.requestAccess(for: AVMediaType.video, completionHandler: { (granted:Bool) in
+            AVCaptureDevice.requestAccess(for: AVMediaType.video, completionHandler: { (granted: Bool) in
                 DispatchQueue.main.async {
-                    comletion(granted)
+                    completion(granted)
                 }
             })
+        @unknown default:
+            completion(false)
         }
     }
     
-    //MARK:跳转到APP系统设置权限界面
-    static func jumpToSystemPrivacySetting()
-    {
-        let appSetting = URL(string:UIApplication.openSettingsURLString)
-        
-        if appSetting != nil
-        {
-            if #available(iOS 10, *) {
-                UIApplication.shared.open(appSetting!, options: [:], completionHandler: nil)
-            }
-            else{
-                UIApplication.shared.openURL(appSetting!)
-            }
+    //MARK: 跳转到APP系统设置权限界面
+    static func jumpToSystemPrivacySetting() {
+        guard let appSetting = URL(string: UIApplication.openSettingsURLString) else {
+            return
+        }
+        if #available(iOS 10, *) {
+            UIApplication.shared.open(appSetting, options: [:], completionHandler: nil)
+        } else {
+            UIApplication.shared.openURL(appSetting)
         }
     }
     
