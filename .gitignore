@@ -31,3 +31,4 @@ DerivedData
 # Carthage/Checkouts
 
 Carthage/Build
+swiftScan/.DS_Store

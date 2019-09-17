@@ -99,37 +99,23 @@ class QQScanViewController: LBXScanViewController {
         btnPhoto.setImage(UIImage(named: "CodeScan.bundle/qrcode_scan_btn_photo_down"), for: UIControl.State.highlighted)
 //        btnPhoto.addTarget(self, action: Selector(("openPhotoAlbum")), for: UIControlEvents.touchUpInside)
 
-        btnPhoto.addTarget(self, action: #selector(QQScanViewController.openLocalPhotoAlbum), for: UIControl.Event.touchUpInside)
+        btnPhoto.addTarget(self, action: #selector(openPhotoAlbum), for: UIControl.Event.touchUpInside)
         
         self.btnMyQR = UIButton()
         btnMyQR.bounds = btnFlash.bounds;
         btnMyQR.center = CGPoint(x: bottomItemsView!.frame.width * 3/4, y: bottomItemsView!.frame.height/2);
         btnMyQR.setImage(UIImage(named: "CodeScan.bundle/qrcode_scan_btn_myqrcode_nor"), for: UIControl.State.normal)
         btnMyQR.setImage(UIImage(named: "CodeScan.bundle/qrcode_scan_btn_myqrcode_down"), for: UIControl.State.highlighted)
-        btnMyQR.addTarget(self, action: #selector(QQScanViewController.myCode), for: UIControl.Event.touchUpInside)
+        btnMyQR.addTarget(self, action: #selector(myCode), for: UIControl.Event.touchUpInside)
         
 
         bottomItemsView?.addSubview(btnFlash)
         bottomItemsView?.addSubview(btnPhoto)
         bottomItemsView?.addSubview(btnMyQR)
 
-        self.view .addSubview(bottomItemsView!)
-
+        view.addSubview(bottomItemsView!)
     }
     
-    @objc func openLocalPhotoAlbum()
-    {
-        let alertController = UIAlertController(title: "title", message:"使用首页功能", preferredStyle: UIAlertController.Style.alert)
-        
-        let alertAction = UIAlertAction(title:  "知道了", style: UIAlertAction.Style.default) { (alertAction) -> Void in
-
-        }
-
-        alertController.addAction(alertAction)
-
-        present(alertController, animated: true, completion: nil)
-    }
-
     //开关闪光灯
     @objc func openOrCloseFlash() {
         scanObj?.changeTorch()
