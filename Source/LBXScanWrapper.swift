@@ -33,7 +33,7 @@ public struct LBXScanResult {
 
 
 
-open class LBXScanWrapper: NSObject,AVCaptureMetadataOutputObjectsDelegate {
+open class LBXScanWrapper: NSObject, AVCaptureMetadataOutputObjectsDelegate {
     
     let device = AVCaptureDevice.default(for: AVMediaType.video)
     var input: AVCaptureDeviceInput?
@@ -65,7 +65,7 @@ open class LBXScanWrapper: NSObject,AVCaptureMetadataOutputObjectsDelegate {
      - returns:
      */
     init(videoPreView: UIView,
-         objType: [AVMetadataObject.ObjectType] = [(AVMetadataObject.ObjectType.qr as NSString) as AVMetadataObject.ObjectType],
+         objType: [AVMetadataObject.ObjectType] = [.qr, .ean13, .ean8, .code128],
          isCaptureImg: Bool,
          cropRect: CGRect = .zero,
          success: @escaping (([LBXScanResult]) -> Void)) {
@@ -107,10 +107,7 @@ open class LBXScanWrapper: NSObject,AVCaptureMetadataOutputObjectsDelegate {
 
         // 参数设置
         output.setMetadataObjectsDelegate(self, queue: DispatchQueue.main)
-
         output.metadataObjectTypes = objType
-
-        //        output.metadataObjectTypes = [AVMetadataObjectTypeQRCode,AVMetadataObjectTypeEAN13Code, AVMetadataObjectTypeEAN8Code, AVMetadataObjectTypeCode128Code]
 
         if !cropRect.equalTo(CGRect.zero) {
             // 启动相机后，直接修改该参数无效
