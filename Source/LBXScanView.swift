@@ -265,25 +265,6 @@ open class LBXScanView: UIView {
         context.strokePath()
     }
     
-    func getScanRectForAnimation() -> CGRect {
-        let XRetangleLeft = viewStyle.xScanRetangleOffset
-        var sizeRetangle = CGSize(width: frame.size.width - XRetangleLeft * 2, height: frame.size.width - XRetangleLeft * 2)
-
-        if viewStyle.whRatio != 1 {
-            let w = sizeRetangle.width
-            var h = w / viewStyle.whRatio
-            h = CGFloat(Int(h))
-            sizeRetangle = CGSize(width: w, height: h)
-        }
-
-        // 扫码区域Y轴最小坐标
-        let YMinRetangle = frame.size.height / 2.0 - sizeRetangle.height / 2.0 - viewStyle.centerUpOffset
-        // 扫码区域坐标
-        let cropRect = CGRect(x: XRetangleLeft, y: YMinRetangle, width: sizeRetangle.width, height: sizeRetangle.height)
-
-        return cropRect
-    }
-
     // 根据矩形区域，获取识别区域
     static func getScanRectWithPreView(preView: UIView, style: LBXScanViewStyle) -> CGRect {
         let XRetangleLeft = style.xScanRetangleOffset
@@ -366,7 +347,6 @@ open class LBXScanView: UIView {
                                         y: activityView!.frame.origin.y,
                                         width: 100,
                                         height: 30)
-            // print("%@",NSStringFromCGRect(labelReadyRect))
             labelReadying = UILabel(frame: labelReadyRect)
             labelReadying?.text = readyStr
             labelReadying?.backgroundColor = UIColor.clear
@@ -390,4 +370,29 @@ open class LBXScanView: UIView {
         }
     }
 
+}
+
+//MARK: - 公开方法
+public extension LBXScanView {
+    
+    /// 获取扫描动画的Rect
+    func getScanRectForAnimation() -> CGRect {
+        let XRetangleLeft = viewStyle.xScanRetangleOffset
+        var sizeRetangle = CGSize(width: frame.size.width - XRetangleLeft * 2,
+                                  height: frame.size.width - XRetangleLeft * 2)
+        
+        if viewStyle.whRatio != 1 {
+            let w = sizeRetangle.width
+            let h = w / viewStyle.whRatio
+            sizeRetangle = CGSize(width: w, height: CGFloat(Int(h)))
+        }
+        
+        // 扫码区域Y轴最小坐标
+        let YMinRetangle = frame.size.height / 2.0 - sizeRetangle.height / 2.0 - viewStyle.centerUpOffset
+        // 扫码区域坐标
+        let cropRect = CGRect(x: XRetangleLeft, y: YMinRetangle, width: sizeRetangle.width, height: sizeRetangle.height)
+        
+        return cropRect
+    }
+    
 }

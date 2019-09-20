@@ -29,7 +29,7 @@ public struct LBXScanViewStyle {
     // MARK: - 中心位置矩形框
 
     /// 是否需要绘制扫码矩形框，默认YES
-    public var isNeedShowRetangle: Bool = true
+    public var isNeedShowRetangle = true
 
     /// 默认扫码区域为正方形，如果扫码区域不是正方形，设置宽高比
     public var whRatio: CGFloat = 1.0
@@ -68,7 +68,7 @@ public struct LBXScanViewStyle {
 
     //MARK: - 非识别区域颜色, 默认 RGBA (0,0,0,0.5)，范围（0--1）
 
-    public var color_NotRecoginitonArea: UIColor = UIColor(red: 0.0, green: 0.0, blue: 0.0, alpha: 0.5)
+    public var color_NotRecoginitonArea = UIColor(red: 0.0, green: 0.0, blue: 0.0, alpha: 0.5)
 
     public init() { }
     

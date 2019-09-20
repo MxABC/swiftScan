@@ -44,10 +44,10 @@
 	<string>请点击“允许”以允许访问</string>
 	<key>NSMotionUsageDescription</key>
 	<string>请点击“允许”以允许访问</string>
-	<key>NSPhotoLibraryUsageDescription</key>
-	<string>请点击“允许”以允许访问</string>
 	<key>NSPhotoLibraryAddUsageDescription</key>
 	<string>请允许访问您的相册</string>
+	<key>NSPhotoLibraryUsageDescription</key>
+	<string>请点击“允许”以允许访问</string>
 	<key>NSRemindersUsageDescription</key>
 	<string>请点击“允许”以允许访问</string>
 	<key>UILaunchStoryboardName</key>
