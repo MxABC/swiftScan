@@ -73,7 +73,7 @@ class MyCodeViewController: UIViewController {
         let qrImg = LBXScanWrapper.createCode(codeType: "CIQRCodeGenerator", codeString: "lbxia20091227@foxmail.com", size: qrImgView.bounds.size, qrColor: UIColor.black, bkColor: UIColor.white)
 
         let logoImg = UIImage(named: "logo.JPG")
-        qrImgView.image = LBXScanWrapper.addImageLogo(srcImg: qrImg!, logoImg: logoImg!, logoSize: CGSize(width: 30, height: 30))
+        qrImgView.image = qrImg?.addLogo(logoImg: logoImg!, logoSize: CGSize(width: 30, height: 30))
     }
 
     func createCode128() {

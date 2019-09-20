@@ -27,6 +27,7 @@
 		7D42B9B71C05EE9A0084D045 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7D42B9B61C05EE9A0084D045 /* Assets.xcassets */; };
 		7D42B9BA1C05EE9A0084D045 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7D42B9B81C05EE9A0084D045 /* LaunchScreen.storyboard */; };
 		7DA82E091C19CE5E0028B5DB /* logo.JPG in Resources */ = {isa = PBXBuildFile; fileRef = 7DA82E081C19CE5E0028B5DB /* logo.JPG */; };
+		94128A462334D1EA00D6179E /* UIImage+swiftScan.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94128A452334D1EA00D6179E /* UIImage+swiftScan.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -67,6 +68,7 @@
 		7D46320C1C18683A00D70CF1 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Main.strings"; sourceTree = "<group>"; };
 		7D46320D1C18683A00D70CF1 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/LaunchScreen.strings"; sourceTree = "<group>"; };
 		7DA82E081C19CE5E0028B5DB /* logo.JPG */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = logo.JPG; sourceTree = "<group>"; };
+		94128A452334D1EA00D6179E /* UIImage+swiftScan.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage+swiftScan.swift"; sourceTree = "<group>"; };
 		D6DC96F61F6D0C0200E1CCEB /* SwiftScanner.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SwiftScanner.h; sourceTree = "<group>"; };
 		D6DC96F71F6D0C0200E1CCEB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -85,6 +87,7 @@
 		488928DC1C1A7BE4005A8F83 /* Source */ = {
 			isa = PBXGroup;
 			children = (
+				94128A442334D18200D6179E /* Extension */,
 				48D3BBD01C70104100823F87 /* LBXPermissions.swift */,
 				488928DD1C1A7BE4005A8F83 /* LBXScanLineAnimation.swift */,
 				488928DE1C1A7BE4005A8F83 /* LBXScanNetAnimation.swift */,
@@ -133,6 +136,14 @@
 				48B143C31C17C98B00B2E7D5 /* MainTableViewController.swift */,
 			);
 			path = swiftScan;
+			sourceTree = "<group>";
+		};
+		94128A442334D18200D6179E /* Extension */ = {
+			isa = PBXGroup;
+			children = (
+				94128A452334D1EA00D6179E /* UIImage+swiftScan.swift */,
+			);
+			path = Extension;
 			sourceTree = "<group>";
 		};
 		D6DC96F51F6D0C0200E1CCEB /* SwiftScanner */ = {
@@ -230,6 +241,7 @@
 				7D42B9B21C05EE9A0084D045 /* ViewController.swift in Sources */,
 				488928E51C1A7BE4005A8F83 /* LBXScanView.swift in Sources */,
 				488928E81C1A7BE4005A8F83 /* LBXScanWrapper.swift in Sources */,
+				94128A462334D1EA00D6179E /* UIImage+swiftScan.swift in Sources */,
 				7D42B9B01C05EE9A0084D045 /* AppDelegate.swift in Sources */,
 				73FF0B901CF545FE0083F169 /* MyCodeViewController.swift in Sources */,
 				488928E71C1A7BE4005A8F83 /* LBXScanViewStyle.swift in Sources */,
