@@ -42,10 +42,9 @@
 
 
 ```ruby
-source 'https://github.com/CocoaPods/Specs.git'
 platform :ios, '8.0'
 use_frameworks!
-pod 'swiftScan', '~> 1.1.2'
+pod 'swiftScan', :git => 'https://github.com/MxABC/swiftScan.git'
 ```
 
 
