@@ -264,27 +264,12 @@ open class LBXScanWrapper: NSObject, AVCaptureMetadataOutputObjectsDelegate {
         setTorch(torch: torch)
     }
     
-    //MARK: ------获取系统默认支持的码的类型
-    static func defaultMetaDataObjectTypes() -> [AVMetadataObject.ObjectType] {
-        var types =
-            [
-                AVMetadataObject.ObjectType.qr,
-                AVMetadataObject.ObjectType.upce,
-                AVMetadataObject.ObjectType.code39,
-                AVMetadataObject.ObjectType.code39Mod43,
-                AVMetadataObject.ObjectType.ean13,
-                AVMetadataObject.ObjectType.ean8,
-                AVMetadataObject.ObjectType.code93,
-                AVMetadataObject.ObjectType.code128,
-                AVMetadataObject.ObjectType.pdf417,
-                AVMetadataObject.ObjectType.aztec,
-            ]
-        // if #available(iOS 8.0, *)
-
-        types.append(AVMetadataObject.ObjectType.interleaved2of5)
-        types.append(AVMetadataObject.ObjectType.itf14)
-        types.append(AVMetadataObject.ObjectType.dataMatrix)
-        return types
+    // 获取系统默认支持的码的类型
+    static var defaultMetaDataObjectTypes: [AVMetadataObject.ObjectType] {
+        return [
+            .qr, .upce, .ean13, .ean8,  .itf14, .dataMatrix,
+            .code39, .code39Mod43, .code93, .code128, .pdf417, .aztec, .interleaved2of5
+        ]
     }
     
     /**
