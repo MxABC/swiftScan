@@ -173,10 +173,12 @@ open class LBXScanWrapper: NSObject,AVCaptureMetadataOutputObjectsDelegate {
             guard let code = current as? AVMetadataMachineReadableCodeObject else {
                 continue
             }
+            #if !targetEnvironment(simulator)
             arrayResult.append(LBXScanResult(str: code.stringValue,
                                              img: UIImage(),
                                              barCodeType: code.type.rawValue,
                                              corner: code.corners as [AnyObject]?))
+            #endif
         }
 
         if arrayResult.isEmpty {
