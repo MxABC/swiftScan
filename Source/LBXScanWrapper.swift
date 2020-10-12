@@ -55,6 +55,10 @@ open class LBXScanWrapper: NSObject,AVCaptureMetadataOutputObjectsDelegate {
     // 当前扫码结果是否处理
     var isNeedScanResult = true
     
+    //连续扫码
+    var supportContinuous = false
+    
+    
     /**
      初始化设备
      - parameter videoPreView: 视频显示UIView
@@ -173,16 +177,25 @@ open class LBXScanWrapper: NSObject,AVCaptureMetadataOutputObjectsDelegate {
             guard let code = current as? AVMetadataMachineReadableCodeObject else {
                 continue
             }
+            
+            #if !targetEnvironment(simulator)
+            
             arrayResult.append(LBXScanResult(str: code.stringValue,
                                              img: UIImage(),
                                              barCodeType: code.type.rawValue,
                                              corner: code.corners as [AnyObject]?))
+            #endif
         }
 
-        if arrayResult.isEmpty {
+        if arrayResult.isEmpty || supportContinuous {
             isNeedScanResult = true
-        } else {
-            if isNeedCaptureImage {
+        }
+        if !arrayResult.isEmpty {
+            
+            if supportContinuous {
+                successBlock(arrayResult)
+            }
+            else if isNeedCaptureImage {
                 captureImage()
             } else {
                 stop()

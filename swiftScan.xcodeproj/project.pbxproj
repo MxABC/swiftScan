@@ -177,7 +177,7 @@
 				TargetAttributes = {
 					7D42B9AB1C05EE9A0084D045 = {
 						CreatedOnToolsVersion = 7.1;
-						DevelopmentTeam = LM3HW8FY8K;
+						DevelopmentTeam = 8LQ7CL73D8;
 						LastSwiftMigration = 0820;
 						ProvisioningStyle = Automatic;
 					};
@@ -378,11 +378,11 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = LM3HW8FY8K;
+				DEVELOPMENT_TEAM = 8LQ7CL73D8;
 				INFOPLIST_FILE = swiftScan/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.51shaoxi.github.swiftScan;
+				PRODUCT_BUNDLE_IDENTIFIER = com.lbx.hk2019235;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "5afb03a3-32bd-412b-9db2-5fa2d3271415";
 				PROVISIONING_PROFILE_SPECIFIER = "";

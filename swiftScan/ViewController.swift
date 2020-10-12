@@ -24,6 +24,8 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         ["二维码/条形码生成", "myCode"],
         ["相册", "openLocalPhotoAlbum"]
     ]
+    
+    var isSupportContinuous = false;
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -55,6 +57,8 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
             openLocalPhotoAlbum()
             return
         }
+        
+        isSupportContinuous = false;
 
         switch indexPath.row {
         case 0:
@@ -128,6 +132,12 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         let vc = LBXScanViewController()
 
         vc.scanStyle = style
+        vc.isSupportContinuous = true;
+        
+        isSupportContinuous = true;
+        
+        vc.scanResultDelegate = self
+
         self.navigationController?.pushViewController(vc, animated: true)
 
     }
@@ -167,6 +177,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         style.xScanRetangleOffset = 30
 
         let vc = LBXScanViewController()
+        vc.scanResultDelegate = self
 
         vc.scanStyle = style
         self.navigationController?.pushViewController(vc, animated: true)
@@ -242,6 +253,8 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         vc.scanStyle = style
 
         vc.isOpenInterestRect = true
+        vc.scanResultDelegate = self
+
         //TODO:待设置框内识别
         self.navigationController?.pushViewController(vc, animated: true)
 
@@ -265,6 +278,8 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
 
         let vc = LBXScanViewController()
         vc.scanStyle = style
+        vc.scanResultDelegate = self
+
         self.navigationController?.pushViewController(vc, animated: true)
 
     }
@@ -296,6 +311,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         let vc = LBXScanViewController()
         vc.scanStyle = style
         vc.readyString = "相机启动中..."
+        vc.scanResultDelegate = self
 
         self.navigationController?.pushViewController(vc, animated: true)
 
@@ -323,6 +339,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         style.animationImage = UIImage(named: "CodeScan.bundle/qrcode_scan_light_green")
         let vc = LBXScanViewController()
         vc.scanStyle = style
+        vc.scanResultDelegate = self
 
         self.navigationController?.pushViewController(vc, animated: true)
 
@@ -399,6 +416,18 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
 
     func scanFinished(scanResult: LBXScanResult, error: String?) {
         NSLog("scanResult:\(scanResult)")
+        
+        
+        
+        if !isSupportContinuous {
+            
+            DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(400)) {
+                let vc = ScanResultController()
+                vc.codeResult = scanResult
+                self.navigationController?.pushViewController(vc, animated: true)
+            }
+        }
+        
     }
 
 }

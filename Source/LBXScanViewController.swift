@@ -33,6 +33,9 @@ open class LBXScanViewController: UIViewController {
 
     // 启动区域识别功能
     open var isOpenInterestRect = false
+    
+    //连续扫码
+    open var isSupportContinuous = false;
 
     // 识别码的类型
     public var arrayCodeType: [AVMetadataObject.ObjectType]?
@@ -94,7 +97,11 @@ open class LBXScanViewController: UIViewController {
                                          strongSelf.qRScanView?.stopScanAnimation()
                                          strongSelf.handleCodeResult(arrayResult: arrayResult)
             })
+            
+            
         }
+        
+        scanObj?.supportContinuous = isSupportContinuous;
 
         // 结束相机等待提示
         qRScanView?.deviceStopReadying()
@@ -123,7 +130,12 @@ open class LBXScanViewController: UIViewController {
         guard let delegate = scanResultDelegate else {
             fatalError("you must set scanResultDelegate or override this method without super keyword")
         }
-        navigationController?.popViewController(animated: true)
+        
+        if !isSupportContinuous {
+            navigationController?.popViewController(animated: true)
+
+        }
+        
         if let result = arrayResult.first {
             delegate.scanFinished(scanResult: result, error: nil)
         } else {
