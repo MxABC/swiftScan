@@ -184,7 +184,7 @@ open class LBXScanView: UIView {
         if viewStyle.isNeedShowRetangle {
             // 中间画矩形(正方形)
             context.setStrokeColor(viewStyle.colorRetangleLine.cgColor)
-            context.setLineWidth(1)
+            context.setLineWidth(viewStyle.widthRetangleLine)
             context.addRect(CGRect(x: XRetangleLeft, y: YMinRetangle, width: sizeRetangle.width, height: sizeRetangle.height))
 
             // CGContextMoveToPoint(context, XRetangleLeft, YMinRetangle);
