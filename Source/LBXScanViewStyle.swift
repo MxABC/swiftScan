@@ -42,6 +42,9 @@ public struct LBXScanViewStyle {
 
     /// 矩形框线条颜色，默认白色
     public var colorRetangleLine = UIColor.white
+    
+    /// 矩形框线条宽度，默认1
+    public var widthRetangleLine: CGFloat = 1.0
 
     //MARK: - 矩形框(扫码区域)周围4个角
 
