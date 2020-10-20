@@ -90,15 +90,15 @@ open class LBXScanViewController: UIViewController {
                                      isCaptureImg: isNeedCodeImage,
                                      cropRect: cropRect,
                                      success: { [weak self] (arrayResult) -> Void in
-                                         guard let strongSelf = self else {
-                                             return
-                                         }
-                                         // 停止扫描动画
-                                         strongSelf.qRScanView?.stopScanAnimation()
-                                         strongSelf.handleCodeResult(arrayResult: arrayResult)
-            })
-            
-            
+                                        guard let strongSelf = self else {
+                                            return
+                                        }
+                                        if !strongSelf.isSupportContinuous {
+                                            // 停止扫描动画
+                                            strongSelf.qRScanView?.stopScanAnimation()
+                                        }
+                                        strongSelf.handleCodeResult(arrayResult: arrayResult)
+                                     })
         }
         
         scanObj?.supportContinuous = isSupportContinuous;
