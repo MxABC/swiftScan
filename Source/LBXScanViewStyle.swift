@@ -76,3 +76,31 @@ public struct LBXScanViewStyle {
     public init() { }
     
 }
+
+
+
+public enum LBXError: Error, RawRepresentable {
+    public typealias RawValue = String
+
+    public init?(rawValue: String) {
+        switch rawValue {
+        case "nr":
+            self = .noResult
+        default:
+            self = .none
+        }
+    }
+    
+    public var rawValue: RawValue {
+        switch self {
+        case .noResult:
+            return "No scan result"
+        default:
+            return "Unknown"
+        }
+    }
+    
+    case noResult
+    case none
+    
+}
