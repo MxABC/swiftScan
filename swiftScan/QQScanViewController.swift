@@ -53,19 +53,26 @@ class QQScanViewController: LBXScanViewController {
         drawBottomItems()
     }
 
-    override func handleCodeResult(arrayResult: [LBXScanResult]) {
-
-        for result: LBXScanResult in arrayResult {
-            if let str = result.strScanned {
-                print(str)
+    
+    override func handleCodeResult(reslut: Result<[LBXScanResult], LBXError>) {
+        switch reslut {
+        case .success(let array):
+            for result: LBXScanResult in array {
+                if let str = result.strScanned {
+                    print(str)
+                }
+            }
+            let vc = ScanResultController()
+            vc.codeResult = array.first!
+            navigationController?.pushViewController(vc, animated: true)
+        default:
+            let alert = UIAlertController(title: "no scan result", message: nil, preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title: "OK", style: .cancel, handler: { (_) in
+            }))
+            if !(self.navigationController?.visibleViewController?.isKind(of: UIAlertController.self))! {
+                self.present(alert, animated: true, completion: nil)
             }
         }
-
-        let result: LBXScanResult = arrayResult[0]
-
-        let vc = ScanResultController()
-        vc.codeResult = result
-        navigationController?.pushViewController(vc, animated: true)
     }
 
     func drawBottomItems() {

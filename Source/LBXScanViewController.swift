@@ -97,7 +97,11 @@ open class LBXScanViewController: UIViewController {
                                             // 停止扫描动画
                                             strongSelf.qRScanView?.stopScanAnimation()
                                         }
-                                        strongSelf.handleCodeResult(arrayResult: arrayResult)
+                                        if !arrayResult.isEmpty {
+                                            strongSelf.handleCodeResult(reslut: .success(arrayResult))
+                                        } else {
+                                            strongSelf.handleCodeResult(reslut: .failure(.noResult))
+                                        }
                                      })
         }
         
@@ -126,7 +130,7 @@ open class LBXScanViewController: UIViewController {
     /**
      处理扫码结果，如果是继承本控制器的，可以重写该方法,作出相应地处理，或者设置delegate作出相应处理
      */
-    open func handleCodeResult(arrayResult: [LBXScanResult]) {
+    open func handleCodeResult(reslut: Result<[LBXScanResult], LBXError>) {
         guard let delegate = scanResultDelegate else {
             fatalError("you must set scanResultDelegate or override this method without super keyword")
         }
@@ -136,11 +140,17 @@ open class LBXScanViewController: UIViewController {
 
         }
         
-        if let result = arrayResult.first {
-            delegate.scanFinished(scanResult: result, error: nil)
-        } else {
+        switch reslut {
+        case .success(let array):
+            if let result = array.first {
+                delegate.scanFinished(scanResult: result, error: nil)
+            } else {
+                let result = LBXScanResult(str: nil, img: nil, barCodeType: nil, corner: nil)
+                delegate.scanFinished(scanResult: result, error: "no scan result")
+            }
+        case .failure(let error):
             let result = LBXScanResult(str: nil, img: nil, barCodeType: nil, corner: nil)
-            delegate.scanFinished(scanResult: result, error: "no scan result")
+            delegate.scanFinished(scanResult: result, error: error.rawValue)
         }
     }
     
@@ -176,7 +186,9 @@ extension LBXScanViewController: UIImagePickerControllerDelegate, UINavigationCo
         }
         let arrayResult = LBXScanWrapper.recognizeQRImage(image: image)
         if !arrayResult.isEmpty {
-            handleCodeResult(arrayResult: arrayResult)
+            handleCodeResult(reslut: .success(arrayResult))
+        } else {
+            handleCodeResult(reslut: .failure(.noResult))
         }
     }
     
