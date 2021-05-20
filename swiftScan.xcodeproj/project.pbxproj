@@ -27,6 +27,7 @@
 		7D42B9B71C05EE9A0084D045 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7D42B9B61C05EE9A0084D045 /* Assets.xcassets */; };
 		7D42B9BA1C05EE9A0084D045 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7D42B9B81C05EE9A0084D045 /* LaunchScreen.storyboard */; };
 		7DA82E091C19CE5E0028B5DB /* logo.JPG in Resources */ = {isa = PBXBuildFile; fileRef = 7DA82E081C19CE5E0028B5DB /* logo.JPG */; };
+		CE3CAD792656BE61007EFD9D /* UIDevice+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE3CAD782656BE61007EFD9D /* UIDevice+Extensions.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -67,6 +68,7 @@
 		7D46320C1C18683A00D70CF1 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Main.strings"; sourceTree = "<group>"; };
 		7D46320D1C18683A00D70CF1 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/LaunchScreen.strings"; sourceTree = "<group>"; };
 		7DA82E081C19CE5E0028B5DB /* logo.JPG */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = logo.JPG; sourceTree = "<group>"; };
+		CE3CAD782656BE61007EFD9D /* UIDevice+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIDevice+Extensions.swift"; sourceTree = "<group>"; };
 		D6DC96F61F6D0C0200E1CCEB /* SwiftScanner.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SwiftScanner.h; sourceTree = "<group>"; };
 		D6DC96F71F6D0C0200E1CCEB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -85,6 +87,7 @@
 		488928DC1C1A7BE4005A8F83 /* Source */ = {
 			isa = PBXGroup;
 			children = (
+				CE3CAD772656BE32007EFD9D /* Extensions */,
 				48D3BBD01C70104100823F87 /* LBXPermissions.swift */,
 				488928DD1C1A7BE4005A8F83 /* LBXScanLineAnimation.swift */,
 				488928DE1C1A7BE4005A8F83 /* LBXScanNetAnimation.swift */,
@@ -133,6 +136,14 @@
 				48B143C31C17C98B00B2E7D5 /* MainTableViewController.swift */,
 			);
 			path = swiftScan;
+			sourceTree = "<group>";
+		};
+		CE3CAD772656BE32007EFD9D /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				CE3CAD782656BE61007EFD9D /* UIDevice+Extensions.swift */,
+			);
+			path = Extensions;
 			sourceTree = "<group>";
 		};
 		D6DC96F51F6D0C0200E1CCEB /* SwiftScanner */ = {
@@ -237,6 +248,7 @@
 				73FF0B8F1CF545FE0083F169 /* ScanResultController.swift in Sources */,
 				488928E31C1A7BE4005A8F83 /* LBXScanLineAnimation.swift in Sources */,
 				48D3BBD11C70104100823F87 /* LBXPermissions.swift in Sources */,
+				CE3CAD792656BE61007EFD9D /* UIDevice+Extensions.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
