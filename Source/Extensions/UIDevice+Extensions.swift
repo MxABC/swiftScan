@@ -6,7 +6,7 @@
 //  Copyright © 2021 xialibing. All rights reserved.
 //
 
-import Foundation
+import UIKit
 
 extension UIDevice {
     var isSimulator: Bool {
