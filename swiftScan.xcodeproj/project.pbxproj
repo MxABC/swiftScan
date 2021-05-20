@@ -87,7 +87,7 @@
 		488928DC1C1A7BE4005A8F83 /* Source */ = {
 			isa = PBXGroup;
 			children = (
-				CE3CAD772656BE32007EFD9D /* Extensions */,
+				CE3CAE9B2656C2E7007EFD9D /* Extensions */,
 				48D3BBD01C70104100823F87 /* LBXPermissions.swift */,
 				488928DD1C1A7BE4005A8F83 /* LBXScanLineAnimation.swift */,
 				488928DE1C1A7BE4005A8F83 /* LBXScanNetAnimation.swift */,
@@ -138,12 +138,12 @@
 			path = swiftScan;
 			sourceTree = "<group>";
 		};
-		CE3CAD772656BE32007EFD9D /* Extensions */ = {
+		CE3CAE9B2656C2E7007EFD9D /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
 				CE3CAD782656BE61007EFD9D /* UIDevice+Extensions.swift */,
 			);
-			path = Extensions;
+			name = Extensions;
 			sourceTree = "<group>";
 		};
 		D6DC96F51F6D0C0200E1CCEB /* SwiftScanner */ = {
