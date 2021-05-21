@@ -21,7 +21,7 @@ class QQScanViewController: LBXScanViewController {
     var isOpenedFlash: Bool = false
     
     /**
-     @brief  闪关灯开启状态
+     @brief  缩放倍数
      */
     var scale:CGFloat = 0
 
