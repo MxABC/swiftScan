@@ -72,6 +72,9 @@ open class LBXScanViewController: UIViewController {
     }
 
     @objc open func startScan() {
+        
+        if UIDevice.current.isSimulator { return }
+        
         if scanObj == nil {
             var cropRect = CGRect.zero
             if isOpenInterestRect {
