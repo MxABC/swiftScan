@@ -19,6 +19,11 @@ class QQScanViewController: LBXScanViewController {
      @brief  闪关灯开启状态
      */
     var isOpenedFlash: Bool = false
+    
+    /**
+     @brief  闪关灯开启状态
+     */
+    var scale:CGFloat = 0
 
 // MARK: - 底部几个功能：开启闪光灯、相册、我的二维码
 
@@ -114,6 +119,10 @@ class QQScanViewController: LBXScanViewController {
         bottomItemsView?.addSubview(btnMyQR)
 
         view.addSubview(bottomItemsView!)
+        
+        //此处通过手势调整
+        let pinchGest:UIPinchGestureRecognizer = UIPinchGestureRecognizer.init(target: self, action: #selector(handlePinches(pinchGest:)))
+        self.view.addGestureRecognizer(pinchGest)
     }
     
     //开关闪光灯
@@ -136,6 +145,23 @@ class QQScanViewController: LBXScanViewController {
     @objc func myCode() {
         let vc = MyCodeViewController()
         self.navigationController?.pushViewController(vc, animated: true)
+    }
+    
+    @objc func handlePinches(pinchGest:UIPinchGestureRecognizer){
+        
+        var currentScale:CGFloat = self.scale + pinchGest.scale - 1.0;
+        if (currentScale > 2) {
+            currentScale = 2;
+        }
+        if (currentScale < 0) {
+            currentScale = 0;
+        }
+        //调整焦距缩放倍数
+        scanObj?.adjustFocal(value: currentScale)
+        
+        if pinchGest.state == .ended || pinchGest.state == .cancelled{
+            self.scale = currentScale
+        }
     }
 
 }

@@ -273,6 +273,16 @@ open class LBXScanWrapper: NSObject,AVCaptureMetadataOutputObjectsDelegate {
         }
     }
     
+    ///调整焦距
+    open func adjustFocal(value:CGFloat){
+        let videoConnection:AVCaptureConnection = (self.stillImageOutput.connection(with: .video))!
+        self.previewLayer?.setAffineTransform(CGAffineTransform(scaleX: 1+value, y: 1+value))
+        do {
+            try self.input?.device.lockForConfiguration()
+        } catch {}
+        videoConnection.videoScaleAndCropFactor = 1+value
+        self.input?.device.unlockForConfiguration()
+    }
     
     /// 闪光灯打开或关闭
     open func changeTorch() {
