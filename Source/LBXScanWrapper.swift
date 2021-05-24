@@ -280,6 +280,17 @@ open class LBXScanWrapper: NSObject,AVCaptureMetadataOutputObjectsDelegate {
         setTorch(torch: torch)
     }
     
+    ///调整焦距
+    open func adjustFocal(value:CGFloat){
+        let videoConnection:AVCaptureConnection = (self.stillImageOutput.connection(with: .video))!
+        self.previewLayer?.setAffineTransform(CGAffineTransform(scaleX: 1+value, y: 1+value))
+        do {
+            try self.input?.device.lockForConfiguration()
+        } catch {}
+        videoConnection.videoScaleAndCropFactor = 1+value
+        self.input?.device.unlockForConfiguration()
+    }
+    
     //MARK: ------获取系统默认支持的码的类型
     static func defaultMetaDataObjectTypes() -> [AVMetadataObject.ObjectType] {
         var types =
