@@ -68,6 +68,14 @@ class QQScanViewController: LBXScanViewController {
         vc.codeResult = result
         navigationController?.pushViewController(vc, animated: true)
     }
+    
+    override func ambientLightValueDidChange(value: Double) {
+        if value < 0 {
+            scanObj?.setTorch(torch: true)
+            isOpenedFlash = true
+            btnFlash.setImage(UIImage(named: "CodeScan.bundle/qrcode_scan_btn_flash_down"), for:UIControl.State.normal)
+        }
+    }
 
     func drawBottomItems() {
         if (bottomItemsView != nil) {

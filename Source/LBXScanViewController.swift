@@ -84,21 +84,18 @@ open class LBXScanViewController: UIViewController {
                                  AVMetadataObject.ObjectType.ean13 as NSString,
                                  AVMetadataObject.ObjectType.code128 as NSString] as [AVMetadataObject.ObjectType]
             }
-
-            scanObj = LBXScanWrapper(videoPreView: view,
-                                     objType: arrayCodeType!,
-                                     isCaptureImg: isNeedCodeImage,
-                                     cropRect: cropRect,
-                                     success: { [weak self] (arrayResult) -> Void in
-                                        guard let strongSelf = self else {
-                                            return
-                                        }
-                                        if !strongSelf.isSupportContinuous {
-                                            // 停止扫描动画
-                                            strongSelf.qRScanView?.stopScanAnimation()
-                                        }
-                                        strongSelf.handleCodeResult(arrayResult: arrayResult)
-                                     })
+            
+            scanObj = LBXScanWrapper(videoPreView: view, objType: arrayCodeType!, isCaptureImg: isNeedCodeImage, cropRect: cropRect, success: { [weak self] (arrayResult) -> Void in
+                guard let strongSelf = self else { return }
+                if !strongSelf.isSupportContinuous {
+                    // 停止扫描动画
+                    strongSelf.qRScanView?.stopScanAnimation()
+                }
+                strongSelf.handleCodeResult(arrayResult: arrayResult)
+            }, ambientLightValueClosure: { [weak self] value in
+                guard let strongSelf = self else { return }
+                strongSelf.ambientLightValueDidChange(value: value)
+            })
         }
         
         scanObj?.supportContinuous = isSupportContinuous;
@@ -143,6 +140,8 @@ open class LBXScanViewController: UIViewController {
             delegate.scanFinished(scanResult: result, error: "no scan result")
         }
     }
+    
+    open func ambientLightValueDidChange(value: Double) {}
     
     open override func viewWillDisappear(_ animated: Bool) {
         NSObject.cancelPreviousPerformRequests(withTarget: self)
