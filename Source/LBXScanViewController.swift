@@ -46,6 +46,9 @@ open class LBXScanViewController: UIViewController {
     // 相机启动提示文字
     public var readyString: String! = "loading"
 
+    /// 没有从图片中识别到二维码
+    public var scanImageFailure: (() -> Void)?
+    
     open override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -176,6 +179,8 @@ extension LBXScanViewController: UIImagePickerControllerDelegate, UINavigationCo
         let arrayResult = LBXScanWrapper.recognizeQRImage(image: image)
         if !arrayResult.isEmpty {
             handleCodeResult(arrayResult: arrayResult)
+        } else {
+            scanImageFailure?()
         }
     }
     
