@@ -33,11 +33,12 @@ public struct LBXScanResult {
 
 
 
-open class LBXScanWrapper: NSObject,AVCaptureMetadataOutputObjectsDelegate {
+open class LBXScanWrapper: NSObject, AVCaptureMetadataOutputObjectsDelegate, AVCaptureVideoDataOutputSampleBufferDelegate {
     
     let device = AVCaptureDevice.default(for: AVMediaType.video)
     var input: AVCaptureDeviceInput?
     var output: AVCaptureMetadataOutput
+    var videoDataOutput: AVCaptureVideoDataOutput
 
     let session = AVCaptureSession()
     var previewLayer: AVCaptureVideoPreviewLayer?
@@ -58,6 +59,8 @@ open class LBXScanWrapper: NSObject,AVCaptureMetadataOutputObjectsDelegate {
     //连续扫码
     var supportContinuous = false
     
+    /// 自动开启闪光灯后回调
+    var ambientLightValueClosure: ((Double) -> Void)?
     
     /**
      初始化设备
@@ -72,10 +75,13 @@ open class LBXScanWrapper: NSObject,AVCaptureMetadataOutputObjectsDelegate {
          objType: [AVMetadataObject.ObjectType] = [(AVMetadataObject.ObjectType.qr as NSString) as AVMetadataObject.ObjectType],
          isCaptureImg: Bool,
          cropRect: CGRect = .zero,
-         success: @escaping (([LBXScanResult]) -> Void)) {
+         success: @escaping (([LBXScanResult]) -> Void),
+         ambientLightValueClosure: ((Double) -> Void)? = nil) {
         
+        self.ambientLightValueClosure = ambientLightValueClosure
         successBlock = success
         output = AVCaptureMetadataOutput()
+        videoDataOutput = AVCaptureVideoDataOutput()
         isNeedCaptureImage = isCaptureImg
         stillImageOutput = AVCaptureStillImageOutput()
 
@@ -103,6 +109,11 @@ open class LBXScanWrapper: NSObject,AVCaptureMetadataOutputObjectsDelegate {
 
         if session.canAddOutput(stillImageOutput) {
             session.addOutput(stillImageOutput)
+        }
+        
+        if session.canAddOutput(videoDataOutput) {
+            session.addOutput(videoDataOutput)
+            videoDataOutput.setSampleBufferDelegate(self, queue: DispatchQueue.main)
         }
 
         stillImageOutput.outputSettings = [AVVideoCodecJPEG: AVVideoCodecKey]
@@ -145,6 +156,19 @@ open class LBXScanWrapper: NSObject,AVCaptureMetadataOutputObjectsDelegate {
                                didOutput metadataObjects: [AVMetadataObject],
                                from connection: AVCaptureConnection) {
         captureOutput(output, didOutputMetadataObjects: metadataObjects, from: connection)
+    }
+    
+    public func captureOutput(_ output: AVCaptureOutput, didOutput sampleBuffer: CMSampleBuffer, from connection: AVCaptureConnection) {
+        
+        if let metadata = CMCopyDictionaryOfAttachments(allocator: nil, target: sampleBuffer, attachmentMode: kCMAttachmentMode_ShouldPropagate) as? [String: Any] {
+            let exifKey = kCGImagePropertyExifDictionary as String
+            if let exifMetadata = metadata[exifKey] as? [String: Any] {
+                let brightlessKey = kCGImagePropertyExifBrightnessValue as String
+                if let brightlessVal: Double = exifMetadata[brightlessKey] as? Double {
+                    ambientLightValueClosure?(brightlessVal)
+                }
+            }
+        }
     }
     
     func start() {

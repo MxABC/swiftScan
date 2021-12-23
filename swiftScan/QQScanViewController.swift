@@ -42,6 +42,7 @@ class QQScanViewController: LBXScanViewController {
 
         //框向上移动10个像素
         scanStyle?.centerUpOffset += 10
+        scanStyle?.scanBgImage = UIImage.init(named: "scan_border")
 
         // Do any additional setup after loading the view.
     }
@@ -66,6 +67,14 @@ class QQScanViewController: LBXScanViewController {
         let vc = ScanResultController()
         vc.codeResult = result
         navigationController?.pushViewController(vc, animated: true)
+    }
+    
+    override func ambientLightValueDidChange(value: Double) {
+        if value < 0 {
+            scanObj?.setTorch(torch: true)
+            isOpenedFlash = true
+            btnFlash.setImage(UIImage(named: "CodeScan.bundle/qrcode_scan_btn_flash_down"), for:UIControl.State.normal)
+        }
     }
 
     func drawBottomItems() {

@@ -181,7 +181,7 @@ open class LBXScanView: UIView {
         // 执行绘画
         context.strokePath()
         
-        if viewStyle.isNeedShowRetangle {
+        if viewStyle.isNeedShowRetangle && viewStyle.scanBgImage == nil {
             // 中间画矩形(正方形)
             context.setStrokeColor(viewStyle.colorRetangleLine.cgColor)
             context.setLineWidth(viewStyle.widthRetangleLine)
@@ -196,71 +196,78 @@ open class LBXScanView: UIView {
         scanRetangleRect = CGRect(x: XRetangleLeft, y: YMinRetangle, width: sizeRetangle.width, height: sizeRetangle.height)
         
         
-        // 画矩形框4格外围相框角
+        if let bgImage = viewStyle.scanBgImage {
+            let imgV = UIImageView.init(image: bgImage)
+            let scanFrame = getScanRectForAnimation()
+            imgV.frame = CGRect(x: scanFrame.origin.x - 5, y: scanFrame.origin.y - 5, width: scanFrame.size.width + 10, height: scanFrame.size.height + 10)
+            self.addSubview(imgV)
+        } else {
+            // 画矩形框4格外围相框角
 
-        // 相框角的宽度和高度
-        let wAngle = viewStyle.photoframeAngleW
-        let hAngle = viewStyle.photoframeAngleH
+            // 相框角的宽度和高度
+            let wAngle = viewStyle.photoframeAngleW
+            let hAngle = viewStyle.photoframeAngleH
 
-        // 4个角的 线的宽度
-        let linewidthAngle = viewStyle.photoframeLineW // 经验参数：6和4
+            // 4个角的 线的宽度
+            let linewidthAngle = viewStyle.photoframeLineW // 经验参数：6和4
 
-        // 画扫码矩形以及周边半透明黑色坐标参数
-        var diffAngle = linewidthAngle / 3
-        diffAngle = linewidthAngle / 2 // 框外面4个角，与框有缝隙
-        diffAngle = linewidthAngle / 2 // 框4个角 在线上加4个角效果
-        diffAngle = 0 // 与矩形框重合
-        
-        switch viewStyle.photoframeAngleStyle {
-        case .Outer: diffAngle = linewidthAngle / 3 // 框外面4个角，与框紧密联系在一起
-        case .On: diffAngle = 0
-        case .Inner: diffAngle = -viewStyle.photoframeLineW / 2
+            // 画扫码矩形以及周边半透明黑色坐标参数
+            var diffAngle = linewidthAngle / 3
+            diffAngle = linewidthAngle / 2 // 框外面4个角，与框有缝隙
+            diffAngle = linewidthAngle / 2 // 框4个角 在线上加4个角效果
+            diffAngle = 0 // 与矩形框重合
+            
+            switch viewStyle.photoframeAngleStyle {
+            case .Outer: diffAngle = linewidthAngle / 3 // 框外面4个角，与框紧密联系在一起
+            case .On: diffAngle = 0
+            case .Inner: diffAngle = -viewStyle.photoframeLineW / 2
+            }
+            
+            context.setStrokeColor(viewStyle.colorAngle.cgColor)
+            context.setFillColor(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0)
+
+            // Draw them with a 2.0 stroke width so they are a bit more visible.
+            context.setLineWidth(linewidthAngle)
+            
+            
+            //
+            let leftX = XRetangleLeft - diffAngle
+            let topY = YMinRetangle - diffAngle
+            let rightX = XRetangleRight + diffAngle
+            let bottomY = YMaxRetangle + diffAngle
+
+            // 左上角水平线
+            context.move(to: CGPoint(x: leftX - linewidthAngle / 2, y: topY))
+            context.addLine(to: CGPoint(x: leftX + wAngle, y: topY))
+            
+            // 左上角垂直线
+            context.move(to: CGPoint(x: leftX, y: topY - linewidthAngle / 2))
+            context.addLine(to: CGPoint(x: leftX, y: topY + hAngle))
+            
+            // 左下角水平线
+            context.move(to: CGPoint(x: leftX - linewidthAngle / 2, y: bottomY))
+            context.addLine(to: CGPoint(x: leftX + wAngle, y: bottomY))
+            
+            // 左下角垂直线
+            context.move(to: CGPoint(x: leftX, y: bottomY + linewidthAngle / 2))
+            context.addLine(to: CGPoint(x: leftX, y: bottomY - hAngle))
+
+            // 右上角水平线
+            context.move(to: CGPoint(x: rightX + linewidthAngle / 2, y: topY))
+            context.addLine(to: CGPoint(x: rightX - wAngle, y: topY))
+            
+            // 右上角垂直线
+            context.move(to: CGPoint(x: rightX, y: topY - linewidthAngle / 2))
+            context.addLine(to: CGPoint(x: rightX, y: topY + hAngle))
+
+            // 右下角水平线
+            context.move(to: CGPoint(x: rightX + linewidthAngle / 2, y: bottomY))
+            context.addLine(to: CGPoint(x: rightX - wAngle, y: bottomY))
+
+            // 右下角垂直线
+            context.move(to: CGPoint(x: rightX, y: bottomY + linewidthAngle / 2))
+            context.addLine(to: CGPoint(x: rightX, y: bottomY - hAngle))
         }
-        
-        context.setStrokeColor(viewStyle.colorAngle.cgColor)
-        context.setFillColor(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0)
-
-        // Draw them with a 2.0 stroke width so they are a bit more visible.
-        context.setLineWidth(linewidthAngle)
-        
-        
-        //
-        let leftX = XRetangleLeft - diffAngle
-        let topY = YMinRetangle - diffAngle
-        let rightX = XRetangleRight + diffAngle
-        let bottomY = YMaxRetangle + diffAngle
-
-        // 左上角水平线
-        context.move(to: CGPoint(x: leftX - linewidthAngle / 2, y: topY))
-        context.addLine(to: CGPoint(x: leftX + wAngle, y: topY))
-        
-        // 左上角垂直线
-        context.move(to: CGPoint(x: leftX, y: topY - linewidthAngle / 2))
-        context.addLine(to: CGPoint(x: leftX, y: topY + hAngle))
-        
-        // 左下角水平线
-        context.move(to: CGPoint(x: leftX - linewidthAngle / 2, y: bottomY))
-        context.addLine(to: CGPoint(x: leftX + wAngle, y: bottomY))
-        
-        // 左下角垂直线
-        context.move(to: CGPoint(x: leftX, y: bottomY + linewidthAngle / 2))
-        context.addLine(to: CGPoint(x: leftX, y: bottomY - hAngle))
-
-        // 右上角水平线
-        context.move(to: CGPoint(x: rightX + linewidthAngle / 2, y: topY))
-        context.addLine(to: CGPoint(x: rightX - wAngle, y: topY))
-        
-        // 右上角垂直线
-        context.move(to: CGPoint(x: rightX, y: topY - linewidthAngle / 2))
-        context.addLine(to: CGPoint(x: rightX, y: topY + hAngle))
-
-        // 右下角水平线
-        context.move(to: CGPoint(x: rightX + linewidthAngle / 2, y: bottomY))
-        context.addLine(to: CGPoint(x: rightX - wAngle, y: bottomY))
-
-        // 右下角垂直线
-        context.move(to: CGPoint(x: rightX, y: bottomY + linewidthAngle / 2))
-        context.addLine(to: CGPoint(x: rightX, y: bottomY - hAngle))
         
         context.strokePath()
     }

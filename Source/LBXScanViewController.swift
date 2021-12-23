@@ -46,6 +46,9 @@ open class LBXScanViewController: UIViewController {
     // 相机启动提示文字
     public var readyString: String! = "loading"
 
+    /// 没有从图片中识别到二维码
+    public var scanImageFailure: (() -> Void)?
+    
     open override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -84,21 +87,18 @@ open class LBXScanViewController: UIViewController {
                                  AVMetadataObject.ObjectType.ean13 as NSString,
                                  AVMetadataObject.ObjectType.code128 as NSString] as [AVMetadataObject.ObjectType]
             }
-
-            scanObj = LBXScanWrapper(videoPreView: view,
-                                     objType: arrayCodeType!,
-                                     isCaptureImg: isNeedCodeImage,
-                                     cropRect: cropRect,
-                                     success: { [weak self] (arrayResult) -> Void in
-                                        guard let strongSelf = self else {
-                                            return
-                                        }
-                                        if !strongSelf.isSupportContinuous {
-                                            // 停止扫描动画
-                                            strongSelf.qRScanView?.stopScanAnimation()
-                                        }
-                                        strongSelf.handleCodeResult(arrayResult: arrayResult)
-                                     })
+            
+            scanObj = LBXScanWrapper(videoPreView: view, objType: arrayCodeType!, isCaptureImg: isNeedCodeImage, cropRect: cropRect, success: { [weak self] (arrayResult) -> Void in
+                guard let strongSelf = self else { return }
+                if !strongSelf.isSupportContinuous {
+                    // 停止扫描动画
+                    strongSelf.qRScanView?.stopScanAnimation()
+                }
+                strongSelf.handleCodeResult(arrayResult: arrayResult)
+            }, ambientLightValueClosure: { [weak self] value in
+                guard let strongSelf = self else { return }
+                strongSelf.ambientLightValueDidChange(value: value)
+            })
         }
         
         scanObj?.supportContinuous = isSupportContinuous;
@@ -144,6 +144,8 @@ open class LBXScanViewController: UIViewController {
         }
     }
     
+    open func ambientLightValueDidChange(value: Double) {}
+    
     open override func viewWillDisappear(_ animated: Bool) {
         NSObject.cancelPreviousPerformRequests(withTarget: self)
         qRScanView?.stopScanAnimation()
@@ -177,6 +179,8 @@ extension LBXScanViewController: UIImagePickerControllerDelegate, UINavigationCo
         let arrayResult = LBXScanWrapper.recognizeQRImage(image: image)
         if !arrayResult.isEmpty {
             handleCodeResult(arrayResult: arrayResult)
+        } else {
+            scanImageFailure?()
         }
     }
     
