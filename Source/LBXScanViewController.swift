@@ -53,7 +53,7 @@ open class LBXScanViewController: UIViewController {
 
         // [self.view addSubview:_qRScanView];
         view.backgroundColor = UIColor.black
-        edgesForExtendedLayout = UIRectEdge(rawValue: 0)
+//        edgesForExtendedLayout = UIRectEdge(rawValue: 0)
     }
 
     open func setNeedCodeImage(needCodeImg: Bool) {
