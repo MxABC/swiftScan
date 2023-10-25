@@ -60,6 +60,9 @@ public struct LBXScanViewStyle {
     
     /// 扫码区域4个角的线条宽度,默认6，建议8到4之间
     public var photoframeLineW: CGFloat = 6
+    
+    /// 扫码区域四个角的圆角半径
+    public var photoframeAngleCornerRadius: CGFloat = 0.0
 
     //MARK: - 动画效果
 

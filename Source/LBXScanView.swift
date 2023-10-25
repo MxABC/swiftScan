@@ -230,37 +230,112 @@ open class LBXScanView: UIView {
         let rightX = XRetangleRight + diffAngle
         let bottomY = YMaxRetangle + diffAngle
 
-        // 左上角水平线
-        context.move(to: CGPoint(x: leftX - linewidthAngle / 2, y: topY))
-        context.addLine(to: CGPoint(x: leftX + wAngle, y: topY))
-        
-        // 左上角垂直线
-        context.move(to: CGPoint(x: leftX, y: topY - linewidthAngle / 2))
-        context.addLine(to: CGPoint(x: leftX, y: topY + hAngle))
-        
-        // 左下角水平线
-        context.move(to: CGPoint(x: leftX - linewidthAngle / 2, y: bottomY))
-        context.addLine(to: CGPoint(x: leftX + wAngle, y: bottomY))
-        
-        // 左下角垂直线
-        context.move(to: CGPoint(x: leftX, y: bottomY + linewidthAngle / 2))
-        context.addLine(to: CGPoint(x: leftX, y: bottomY - hAngle))
+        if viewStyle.photoframeAngleCornerRadius == 0 {
+            // 左上角水平线
+            context.move(to: CGPoint(x: leftX - linewidthAngle / 2, y: topY))
+            context.addLine(to: CGPoint(x: leftX + wAngle, y: topY))
+            
+            // 左上角垂直线
+            context.move(to: CGPoint(x: leftX, y: topY - linewidthAngle / 2))
+            context.addLine(to: CGPoint(x: leftX, y: topY + hAngle))
+            
+            // 左下角水平线
+            context.move(to: CGPoint(x: leftX - linewidthAngle / 2, y: bottomY))
+            context.addLine(to: CGPoint(x: leftX + wAngle, y: bottomY))
+            
+            // 左下角垂直线
+            context.move(to: CGPoint(x: leftX, y: bottomY + linewidthAngle / 2))
+            context.addLine(to: CGPoint(x: leftX, y: bottomY - hAngle))
 
-        // 右上角水平线
-        context.move(to: CGPoint(x: rightX + linewidthAngle / 2, y: topY))
-        context.addLine(to: CGPoint(x: rightX - wAngle, y: topY))
-        
-        // 右上角垂直线
-        context.move(to: CGPoint(x: rightX, y: topY - linewidthAngle / 2))
-        context.addLine(to: CGPoint(x: rightX, y: topY + hAngle))
+            // 右上角水平线
+            context.move(to: CGPoint(x: rightX + linewidthAngle / 2, y: topY))
+            context.addLine(to: CGPoint(x: rightX - wAngle, y: topY))
+            
+            // 右上角垂直线
+            context.move(to: CGPoint(x: rightX, y: topY - linewidthAngle / 2))
+            context.addLine(to: CGPoint(x: rightX, y: topY + hAngle))
 
-        // 右下角水平线
-        context.move(to: CGPoint(x: rightX + linewidthAngle / 2, y: bottomY))
-        context.addLine(to: CGPoint(x: rightX - wAngle, y: bottomY))
+            // 右下角水平线
+            context.move(to: CGPoint(x: rightX + linewidthAngle / 2, y: bottomY))
+            context.addLine(to: CGPoint(x: rightX - wAngle, y: bottomY))
 
-        // 右下角垂直线
-        context.move(to: CGPoint(x: rightX, y: bottomY + linewidthAngle / 2))
-        context.addLine(to: CGPoint(x: rightX, y: bottomY - hAngle))
+            // 右下角垂直线
+            context.move(to: CGPoint(x: rightX, y: bottomY + linewidthAngle / 2))
+            context.addLine(to: CGPoint(x: rightX, y: bottomY - hAngle))
+        } else {
+            let cornerRadius = viewStyle.photoframeAngleCornerRadius
+            
+            // 左上圆角
+            context.addArc(
+                center: CGPoint(x: leftX + cornerRadius, y: topY + cornerRadius),
+                radius: cornerRadius,
+                startAngle: CGFloat.pi,
+                endAngle: CGFloat.pi * 3 / 2,
+                clockwise: false
+            )
+            
+            // 左下圆角
+            context.move(to: CGPoint(x: leftX - linewidthAngle / 2 + cornerRadius, y: bottomY))
+            context.addArc(
+                center: CGPoint(x: leftX + cornerRadius, y: bottomY - cornerRadius),
+                radius: cornerRadius,
+                startAngle: CGFloat.pi / 2,
+                endAngle: CGFloat.pi,
+                clockwise: false
+            )
+            
+            // 右上圆角
+            context.move(to: CGPoint(x: rightX + linewidthAngle / 2 - cornerRadius, y: topY))
+            context.addArc(
+                center: CGPoint(x: rightX - cornerRadius, y: topY + cornerRadius),
+                radius: cornerRadius,
+                startAngle: CGFloat.pi * 3 / 2,
+                endAngle: CGFloat.pi * 2,
+                clockwise: false
+            )
+            
+            // 右下圆角
+            context.move(to: CGPoint(x: rightX, y: bottomY + linewidthAngle / 2 - cornerRadius))
+            context.addArc(
+                center: CGPoint(x: rightX - cornerRadius, y: bottomY - cornerRadius),
+                radius: cornerRadius,
+                startAngle: CGFloat.pi * 2,
+                endAngle: CGFloat.pi / 2,
+                clockwise: false
+            )
+            
+            // 左上角水平线
+            context.move(to: CGPoint(x: leftX - linewidthAngle / 2 + cornerRadius, y: topY))
+            context.addLine(to: CGPoint(x: leftX + wAngle, y: topY))
+            
+            // 左上角垂直线
+            context.move(to: CGPoint(x: leftX, y: topY - linewidthAngle / 2 + cornerRadius))
+            context.addLine(to: CGPoint(x: leftX, y: topY + hAngle))
+            
+            // 左下角水平线
+            context.move(to: CGPoint(x: leftX - linewidthAngle / 2 + cornerRadius, y: bottomY))
+            context.addLine(to: CGPoint(x: leftX + wAngle, y: bottomY))
+            
+            // 左下角垂直线
+            context.move(to: CGPoint(x: leftX, y: bottomY + linewidthAngle / 2 - cornerRadius))
+            context.addLine(to: CGPoint(x: leftX, y: bottomY - hAngle))
+
+            // 右上角水平线
+            context.move(to: CGPoint(x: rightX + linewidthAngle / 2 - cornerRadius, y: topY))
+            context.addLine(to: CGPoint(x: rightX - wAngle, y: topY))
+            
+            // 右上角垂直线
+            context.move(to: CGPoint(x: rightX, y: topY - linewidthAngle / 2 + cornerRadius))
+            context.addLine(to: CGPoint(x: rightX, y: topY + hAngle))
+
+            // 右下角水平线
+            context.move(to: CGPoint(x: rightX + linewidthAngle / 2 - cornerRadius, y: bottomY))
+            context.addLine(to: CGPoint(x: rightX - wAngle, y: bottomY))
+
+            // 右下角垂直线
+            context.move(to: CGPoint(x: rightX, y: bottomY + linewidthAngle / 2 - cornerRadius))
+            context.addLine(to: CGPoint(x: rightX, y: bottomY - hAngle))
+        }
         
         context.strokePath()
     }
